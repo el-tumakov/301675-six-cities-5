@@ -3,7 +3,7 @@ import React from "react";
 
 const MainScreen = (props) => {
   // eslint-disable-next-line react/prop-types
-  const rentOffersCount = props;
+  const {rentOffersCount} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -87,8 +87,8 @@ const MainScreen = (props) => {
                   <li className="places__option" tabIndex="0">Price: high to low</li>
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
-                <select className="places__sorting-type" id="places-sorting">
-                  <option className="places__option" value="popular" selected="">Popular</option>
+                <select className="places__sorting-type" id="places-sorting" defaultValue="popular">
+                  <option className="places__option" value="popular">Popular</option>
                   <option className="places__option" value="to-high">Price: low to high</option>
                   <option className="places__option" value="to-low">Price: high to low</option>
                   <option className="places__option" value="top-rated">Top rated first</option>
@@ -119,7 +119,7 @@ const MainScreen = (props) => {
                     </div>
                     <div className="place-card__rating rating">
                       <div className="place-card__stars rating__stars">
-                        <span style="width: 80%"></span>
+                        <span style={{width: `80%`}}></span>
                         <span className="visually-hidden">Rating</span>
                       </div>
                     </div>
@@ -151,7 +151,7 @@ const MainScreen = (props) => {
                     </div>
                     <div className="place-card__rating rating">
                       <div className="place-card__stars rating__stars">
-                        <span style="width: 80%"></span>
+                        <span style={{width: `80%`}}></span>
                         <span className="visually-hidden">Rating</span>
                       </div>
                     </div>
@@ -183,7 +183,7 @@ const MainScreen = (props) => {
                     </div>
                     <div className="place-card__rating rating">
                       <div className="place-card__stars rating__stars">
-                        <span style="width: 80%"></span>
+                        <span style={{width: `80%`}}></span>
                         <span className="visually-hidden">Rating</span>
                       </div>
                     </div>
@@ -218,7 +218,7 @@ const MainScreen = (props) => {
                     </div>
                     <div className="place-card__rating rating">
                       <div className="place-card__stars rating__stars">
-                        <span style="width: 100%"></span>
+                        <span style={{width: `100%`}}></span>
                         <span className="visually-hidden">Rating</span>
                       </div>
                     </div>
@@ -250,7 +250,7 @@ const MainScreen = (props) => {
                     </div>
                     <div className="place-card__rating rating">
                       <div className="place-card__stars rating__stars">
-                        <span style="width: 80%"></span>
+                        <span style={{width: `80%`}}></span>
                         <span className="visually-hidden">Rating</span>
                       </div>
                     </div>
