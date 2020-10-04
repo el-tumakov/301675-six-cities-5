@@ -1,8 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 
 const MainScreen = (props) => {
-  // eslint-disable-next-line react/prop-types
   const {rentOffersCount} = props;
 
   return (
@@ -270,6 +270,10 @@ const MainScreen = (props) => {
       </main>
     </div>
   );
+};
+
+MainScreen.propTypes = {
+  rentOffersCount: PropTypes.number.isRequired,
 };
 
 
