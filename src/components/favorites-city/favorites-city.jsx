@@ -28,7 +28,7 @@ const FavoritesCity = (props) => {
 
 FavoritesCity.propTypes = {
   city: PropTypes.string.isRequired,
-  favoritesOffersOfCity: PropTypes.object.isRequired,
+  favoritesOffersOfCity: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default FavoritesCity;
