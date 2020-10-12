@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {Link} from 'react-router-dom';
 
 class OfferCard extends PureComponent {
   constructor(props) {
@@ -9,6 +10,7 @@ class OfferCard extends PureComponent {
   render() {
     const {onActiveOffer, offer} = this.props;
     const {
+      id,
       photos,
       title,
       premium,
@@ -16,6 +18,8 @@ class OfferCard extends PureComponent {
       rating,
       price
     } = offer;
+
+    const offerLink = `/offer/${id}`;
 
     return (
       <article
@@ -31,9 +35,9 @@ class OfferCard extends PureComponent {
           : ``
         }
         <div className="cities__image-wrapper place-card__image-wrapper">
-          <a href="#">
+          <Link to={offerLink}>
             <img className="place-card__image" src={photos[0]} width="260" height="200" alt="Place image" />
-          </a>
+          </Link>
         </div>
         <div className="place-card__info">
           <div className="place-card__price-wrapper">
@@ -55,7 +59,7 @@ class OfferCard extends PureComponent {
             </div>
           </div>
           <h2 className="place-card__name">
-            <a href="#">{title}</a>
+            <Link to={offerLink}>{title}</Link>
           </h2>
           <p className="place-card__type">{type}</p>
         </div>
@@ -67,6 +71,7 @@ class OfferCard extends PureComponent {
 OfferCard.propTypes = {
   onActiveOffer: PropTypes.func.isRequired,
   offer: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     photos: PropTypes.arrayOf(PropTypes.string).isRequired,
     title: PropTypes.string.isRequired,
     premium: PropTypes.bool.isRequired,
