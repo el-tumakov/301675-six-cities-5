@@ -16,6 +16,7 @@ const getPhotos = () => {
 
 export default [
   {
+    id: 1,
     photos: getPhotos(),
     title: `Sed laoreet non odio a dapibus.`,
     description: `Donec eget nunc egestas, scelerisque risus id, cursus turpis. Sed sollicitudin ipsum id quam posuere, hendrerit faucibus lorem ultricies.`,
@@ -29,6 +30,7 @@ export default [
     owner: owners[0]
   },
   {
+    id: 2,
     photos: getPhotos(),
     title: `Proin tortor quam, rhoncus sed magna nec, interdum venenatis felis.`,
     description: `Duis non faucibus sapien, eget lacinia metus. Ut volutpat, purus in dapibus tempus, elit magna facilisis lectus, ut imperdiet massa risus eget magna.`,
@@ -42,6 +44,7 @@ export default [
     owner: owners[1]
   },
   {
+    id: 3,
     photos: getPhotos(),
     title: `Etiam dignissim diam enim, ut aliquam ipsum consequat nec.`,
     description: `Aenean lacus diam, dapibus sit amet magna quis, hendrerit sollicitudin magna. Ut aliquet tempor neque, sed dapibus eros mollis ut.`,
@@ -55,6 +58,7 @@ export default [
     owner: owners[2]
   },
   {
+    id: 4,
     photos: getPhotos(),
     title: `Cras interdum malesuada odio, at iaculis ipsum gravida eget.`,
     description: `Quisque quam felis, malesuada ac risus nec, tempus condimentum turpis. Etiam ut augue sodales, commodo magna eget, convallis dui.`,
