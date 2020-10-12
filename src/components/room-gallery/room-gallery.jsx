@@ -7,8 +7,8 @@ const RoomGallery = (props) => {
   return (
     <div className="property__gallery-container container">
       <div className="property__gallery">
-        {photos.map((photo) => (
-          <div key={photo} className="property__image-wrapper">
+        {photos.map((photo, i) => (
+          <div key={photo + i} className="property__image-wrapper">
             <img className="property__image" src={photo} alt="Photo studio" />
           </div>
         ))}
