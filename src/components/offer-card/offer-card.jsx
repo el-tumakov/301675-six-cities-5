@@ -20,7 +20,7 @@ class OfferCard extends PureComponent {
     return (
       <article
         className="cities__place-card place-card"
-        onMouseover={(evt) => {
+        onMouseOver={(evt) => {
           evt.preventDefault();
           onActiveOffer();
         }}>
