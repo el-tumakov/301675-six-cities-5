@@ -1,5 +1,5 @@
 import owners from "./owners";
-import {FEATURES, OFFERS_TYPE} from "../const";
+import {FEATURES, OFFERS_TYPE, CITIES} from "../const";
 
 const PHOTOS_COUNT = 6;
 const PHOTO_URL = `https://picsum.photos/200`;
@@ -27,7 +27,8 @@ export default [
     guests: 4,
     price: 50,
     features: FEATURES,
-    owner: owners[0]
+    owner: owners[0],
+    city: CITIES[3]
   },
   {
     id: 2,
@@ -41,7 +42,8 @@ export default [
     guests: 6,
     price: 80,
     features: FEATURES,
-    owner: owners[1]
+    owner: owners[1],
+    city: CITIES[3]
   },
   {
     id: 3,
@@ -55,7 +57,8 @@ export default [
     guests: 2,
     price: 30,
     features: FEATURES,
-    owner: owners[2]
+    owner: owners[2],
+    city: CITIES[4]
   },
   {
     id: 4,
@@ -69,6 +72,7 @@ export default [
     guests: 3,
     price: 60,
     features: FEATURES,
-    owner: owners[3]
+    owner: owners[3],
+    city: CITIES[4]
   }
 ];

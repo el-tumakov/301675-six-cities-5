@@ -17,3 +17,12 @@ export const OFFERS_TYPE = [
   `house`,
   `hotel`
 ];
+
+export const CITIES = [
+  `Paris`,
+  `Cologne`,
+  `Brussels`,
+  `Amsterdam`,
+  `Hamburg`,
+  `Dusseldorf`,
+];
