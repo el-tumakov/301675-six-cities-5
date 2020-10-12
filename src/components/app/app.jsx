@@ -8,7 +8,12 @@ import RoomScreen from "../room-screen/room-screen";
 
 
 const App = (props) => {
-  const {rentOffersCount, offers} = props;
+  const {
+    rentOffersCount,
+    offers,
+    owners,
+    reviews
+  } = props;
 
   return (
     <BrowserRouter>
@@ -27,9 +32,16 @@ const App = (props) => {
             offers={offers}
           />
         </Route>
-        <Route exact path="/offer/:id">
-          <RoomScreen />
-        </Route>
+        <Route exact
+          path="/offer/:id"
+          render={({match}) => (
+            <RoomScreen
+              offer={offers.find((item) => item.id === +match.params.id)}
+              owners={owners}
+              offerReviews={reviews.filter((item) => item.offerId === +match.params.id)}
+            />
+          )}
+        />
       </Switch>
     </BrowserRouter>
   );
@@ -38,6 +50,8 @@ const App = (props) => {
 App.propTypes = {
   rentOffersCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  owners: PropTypes.arrayOf(PropTypes.object).isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 
