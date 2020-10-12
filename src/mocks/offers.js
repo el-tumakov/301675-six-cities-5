@@ -28,7 +28,8 @@ export default [
     price: 50,
     features: FEATURES,
     owner: owners[0],
-    city: CITIES[3]
+    city: CITIES[3],
+    favorite: false
   },
   {
     id: 2,
@@ -43,7 +44,8 @@ export default [
     price: 80,
     features: FEATURES,
     owner: owners[1],
-    city: CITIES[3]
+    city: CITIES[3],
+    favorite: true
   },
   {
     id: 3,
@@ -58,7 +60,8 @@ export default [
     price: 30,
     features: FEATURES,
     owner: owners[2],
-    city: CITIES[4]
+    city: CITIES[4],
+    favorite: false
   },
   {
     id: 4,
@@ -73,6 +76,7 @@ export default [
     price: 60,
     features: FEATURES,
     owner: owners[3],
-    city: CITIES[4]
+    city: CITIES[4],
+    favorite: true
   }
 ];
