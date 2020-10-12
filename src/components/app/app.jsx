@@ -8,13 +8,16 @@ import RoomScreen from "../room-screen/room-screen";
 
 
 const App = (props) => {
-  const {rentOffersCount} = props;
+  const {rentOffersCount, offers} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <MainScreen rentOffersCount={rentOffersCount} />
+          <MainScreen
+            rentOffersCount={rentOffersCount}
+            offers={offers}
+          />
         </Route>
         <Route exact path="/login">
           <LoginScreen />
@@ -32,6 +35,7 @@ const App = (props) => {
 
 App.propTypes = {
   rentOffersCount: PropTypes.number.isRequired,
+  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 
