@@ -1,4 +1,3 @@
-import owners from "./owners";
 import {FEATURES, OFFERS_TYPE, CITIES} from "../const";
 
 const PHOTOS_COUNT = 6;
@@ -27,7 +26,7 @@ export default [
     guests: 4,
     price: 50,
     features: FEATURES,
-    owner: owners[0],
+    ownerId: 1,
     city: CITIES[3],
     favorite: false
   },
@@ -43,7 +42,7 @@ export default [
     guests: 6,
     price: 80,
     features: FEATURES,
-    owner: owners[1],
+    ownerId: 2,
     city: CITIES[3],
     favorite: true
   },
@@ -59,7 +58,7 @@ export default [
     guests: 2,
     price: 30,
     features: FEATURES,
-    owner: owners[2],
+    ownerId: 3,
     city: CITIES[4],
     favorite: false
   },
@@ -75,7 +74,7 @@ export default [
     guests: 3,
     price: 60,
     features: FEATURES,
-    owner: owners[3],
+    ownerId: 4,
     city: CITIES[4],
     favorite: true
   }
