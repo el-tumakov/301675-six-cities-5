@@ -1,7 +1,9 @@
+const AVATAR_URL = `https://www.fillmurray.com/54/54`;
+
 export default [
   {
     id: 1,
-    avatar: `https://www.fillmurray.com/200/309`,
+    avatar: AVATAR_URL,
     name: `Johny Depp`,
     rating: 4,
     date: `2019-04-24`,
@@ -10,7 +12,7 @@ export default [
   },
   {
     id: 2,
-    avatar: `https://www.fillmurray.com/200/310`,
+    avatar: AVATAR_URL,
     name: `Keira Knightley`,
     rating: 5,
     date: `2019-05-11`,
@@ -19,7 +21,7 @@ export default [
   },
   {
     id: 3,
-    avatar: `https://www.fillmurray.com/200/311`,
+    avatar: AVATAR_URL,
     name: `Monica Bellucci`,
     rating: 4,
     date: `2019-06-10`,
@@ -28,7 +30,7 @@ export default [
   },
   {
     id: 4,
-    avatar: `https://www.fillmurray.com/200/312`,
+    avatar: AVATAR_URL,
     name: `Keanu Reeves`,
     rating: 3,
     date: `2019-07-07`,

@@ -1,25 +1,27 @@
+const AVATAR_URL = `https://www.fillmurray.com/74/74`;
+
 export default [
   {
     id: 1,
-    avatar: `https://www.fillmurray.com/200/300`,
+    avatar: AVATAR_URL,
     name: `Bill Murray`,
     super: true
   },
   {
     id: 2,
-    avatar: `https://www.fillmurray.com/200/301`,
+    avatar: AVATAR_URL,
     name: `Tom Hanks`,
     super: false
   },
   {
     id: 3,
-    avatar: `https://www.fillmurray.com/200/302`,
+    avatar: AVATAR_URL,
     name: `Woody Harrelson`,
     super: true
   },
   {
     id: 4,
-    avatar: `https://www.fillmurray.com/200/303`,
+    avatar: AVATAR_URL,
     name: `Kevin Costner`,
     super: false
   }

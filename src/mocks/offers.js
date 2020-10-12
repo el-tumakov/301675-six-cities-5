@@ -1,13 +1,16 @@
 import {FEATURES, OFFERS_TYPE, CITIES} from "../const";
 
 const PHOTOS_COUNT = 6;
-const PHOTO_URL = `https://picsum.photos/200`;
+
+const getRandomInt = (max) => {
+  return Math.floor(Math.random() * Math.floor(max));
+};
 
 const getPhotos = () => {
   const photos = [];
 
   for (let i = 0; i < PHOTOS_COUNT; i++) {
-    photos.push(PHOTO_URL);
+    photos.push(`https://picsum.photos/id/${getRandomInt(50)}/260/200`);
   }
 
   return photos;
