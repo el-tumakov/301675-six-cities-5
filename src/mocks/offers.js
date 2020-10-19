@@ -31,7 +31,11 @@ export default [
     features: FEATURES,
     ownerId: 1,
     city: CITIES[3],
-    favorite: false
+    favorite: false,
+    coordinate: {
+      x: 52.3909553943508,
+      y: 4.85309666406198
+    }
   },
   {
     id: 2,
@@ -47,7 +51,11 @@ export default [
     features: FEATURES,
     ownerId: 2,
     city: CITIES[3],
-    favorite: true
+    favorite: true,
+    coordinate: {
+      x: 52.369553943508,
+      y: 4.85309666406198
+    }
   },
   {
     id: 3,
@@ -63,7 +71,11 @@ export default [
     features: FEATURES,
     ownerId: 3,
     city: CITIES[4],
-    favorite: false
+    favorite: false,
+    coordinate: {
+      x: 52.3909553943508,
+      y: 4.929309666406198
+    }
   },
   {
     id: 4,
@@ -79,6 +91,10 @@ export default [
     features: FEATURES,
     ownerId: 4,
     city: CITIES[4],
-    favorite: true
+    favorite: true,
+    coordinate: {
+      x: 52.3809553943508,
+      y: 4.939309666406198
+    }
   }
 ];
