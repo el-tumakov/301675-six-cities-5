@@ -1,10 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import OffersList from "../offers-list/offers-list";
-
+import Map from "../map/map";
 
 const MainScreen = (props) => {
   const {rentOffersCount, offers} = props;
+
+  const coordinates = offers.map((offer) => {
+    return (offer.coordinates);
+  });
 
   return (
     <div className="page page--gray page--main">
@@ -98,7 +102,11 @@ const MainScreen = (props) => {
               <OffersList offers={offers}/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map
+                  coordinates={coordinates}
+                />
+              </section>
             </div>
           </div>
         </div>
