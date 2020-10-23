@@ -2,8 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import RoomGallery from "../room-gallery/room-gallery";
 import RoomOwner from "../room-owner/room-owner";
-import RoomReview from "../room-review/room-review";
-import RoomComment from "../room-comment/room-comment";
+import RoomReviewsList from "../room-reviews-list/room-reviews-list";
 
 const RoomInfo = (props) => {
   const {offer, owner, reviews} = props;
@@ -81,18 +80,9 @@ const RoomInfo = (props) => {
             description={description}
             owner={owner}
           />
-          <section className="property__reviews reviews">
-            <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-            <ul className="reviews__list">
-              {reviews.map((review) => (
-                <RoomReview
-                  key={review.id}
-                  review={review}
-                />
-              ))}
-            </ul>
-            <RoomComment />
-          </section>
+          <RoomReviewsList
+            reviews={reviews}
+          />
         </div>
       </div>
       <section className="property__map map"></section>
