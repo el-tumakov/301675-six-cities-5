@@ -1,14 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
-import OfferCardMain from "../offer-card-main/offer-card-main";
 
 const OffersList = (props) => {
-  const {offers} = props;
+  const {
+    offers,
+    className,
+    Component
+  } = props;
 
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className={className}>
       {offers.map((offer) => (
-        <OfferCardMain
+        <Component
           key={offer.id}
           offer={offer}
         />
@@ -19,6 +22,8 @@ const OffersList = (props) => {
 
 OffersList.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  className: PropTypes.string.isRequired,
+  Component: PropTypes.func.isRequired
 };
 
 export default OffersList;

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
 import RoomInfo from "../room-info/room-info";
-import OfferCardRoom from "../offer-card-room/offer-card-room";
+import OffersListRoom from "../offers-list-room/offers-list-room";
 
 const MAX_SIMILAR_OFFERS = 3;
 
@@ -57,14 +57,7 @@ const RoomScreen = (props) => {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <div className="near-places__list places__list">
-              {similarOffers.map((offer) => (
-                <OfferCardRoom
-                  key={offer.id}
-                  offer={offer}
-                />
-              ))}
-            </div>
+            <OffersListRoom offers={similarOffers} />
           </section>
         </div>
       </main>
