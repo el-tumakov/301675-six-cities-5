@@ -5,7 +5,12 @@ import RoomOwner from "../room-owner/room-owner";
 import RoomReviewsList from "../room-reviews-list/room-reviews-list";
 
 const RoomInfo = (props) => {
-  const {offer, owner, reviews} = props;
+  const {id, offers, owners, reviews} = props;
+
+  const offer = offers.find((item) => item.id === id);
+  const owner = owners.find((item) => item.id === offer.ownerId);
+  const offerReviews = reviews.filter((item) => item.offerId === id);
+
   const {
     photos,
     premium,
@@ -81,30 +86,21 @@ const RoomInfo = (props) => {
             owner={owner}
           />
           <RoomReviewsList
-            reviews={reviews}
+            reviews={offerReviews}
           />
         </div>
       </div>
-      <section className="property__map map"></section>
+      <section className="property__map map">
+      </section>
     </section>
   );
 };
 
 RoomInfo.propTypes = {
-  offer: PropTypes.shape({
-    photos: PropTypes.arrayOf(PropTypes.string).isRequired,
-    premium: PropTypes.bool.isRequired,
-    title: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    features: PropTypes.arrayOf(PropTypes.string).isRequired,
-    description: PropTypes.string.isRequired
-  }).isRequired,
-  owner: PropTypes.object.isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.object).isRequired
+  id: PropTypes.number.isRequired,
+  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  owners: PropTypes.arrayOf(PropTypes.object).isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default RoomInfo;

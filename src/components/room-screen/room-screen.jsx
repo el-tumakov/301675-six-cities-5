@@ -4,8 +4,7 @@ import {Link} from 'react-router-dom';
 import RoomInfo from "../room-info/room-info";
 
 const RoomScreen = (props) => {
-  const {offer, owners, offerReviews} = props;
-  const owner = owners.find((item) => item.id === offer.ownerId);
+  const {id, offers, owners, reviews} = props;
 
   return (
     <div className="page">
@@ -34,9 +33,10 @@ const RoomScreen = (props) => {
 
       <main className="page__main page__main--property">
         <RoomInfo
-          offer={offer}
-          owner={owner}
-          reviews={offerReviews}
+          id={id}
+          offers={offers}
+          owners={owners}
+          reviews={reviews}
         />
         <div className="container">
           <section className="near-places places">
@@ -146,9 +146,10 @@ const RoomScreen = (props) => {
 };
 
 RoomScreen.propTypes = {
-  offer: PropTypes.object.isRequired,
+  id: PropTypes.number.isRequired,
+  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
   owners: PropTypes.arrayOf(PropTypes.object).isRequired,
-  offerReviews: PropTypes.arrayOf(PropTypes.object).isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default RoomScreen;

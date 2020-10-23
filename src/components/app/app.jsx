@@ -36,9 +36,10 @@ const App = (props) => {
           path="/offer/:id"
           render={({match}) => (
             <RoomScreen
-              offer={offers.find((item) => item.id === +match.params.id)}
+              id={+match.params.id}
+              offers={offers}
               owners={owners}
-              offerReviews={reviews.filter((item) => item.offerId === +match.params.id)}
+              reviews={reviews}
             />
           )}
         />
