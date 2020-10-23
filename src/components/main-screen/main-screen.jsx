@@ -6,10 +6,6 @@ import Map from "../map/map";
 const MainScreen = (props) => {
   const {rentOffersCount, offers} = props;
 
-  const coordinates = offers.map((offer) => {
-    return (offer.coordinates);
-  });
-
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -104,7 +100,7 @@ const MainScreen = (props) => {
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
-                  coordinates={coordinates}
+                  offers={offers}
                 />
               </section>
             </div>

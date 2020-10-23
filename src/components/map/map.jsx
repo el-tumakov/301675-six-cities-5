@@ -12,7 +12,11 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const {coordinates} = this.props;
+    const {offers} = this.props;
+
+    const coordinates = offers.map((offer) => {
+      return (offer.coordinates);
+    });
 
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
@@ -49,7 +53,7 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
-  coordinates: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
+  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 
