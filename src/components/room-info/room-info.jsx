@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import RoomGallery from "../room-gallery/room-gallery";
 import RoomOwner from "../room-owner/room-owner";
 import RoomReviewsList from "../room-reviews-list/room-reviews-list";
+import Map from "../map/map";
 
 const RoomInfo = (props) => {
   const {
@@ -10,7 +11,6 @@ const RoomInfo = (props) => {
     offers,
     owners,
     reviews,
-    renderMap,
     similarCoordinates
   } = props;
 
@@ -98,7 +98,9 @@ const RoomInfo = (props) => {
         </div>
       </div>
       <section className="property__map map">
-        {renderMap(similarCoordinates)}
+        <Map
+          coordinates={similarCoordinates}
+        />
       </section>
     </section>
   );
@@ -109,7 +111,6 @@ RoomInfo.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
   owners: PropTypes.arrayOf(PropTypes.object).isRequired,
   reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
-  renderMap: PropTypes.func.isRequired,
   similarCoordinates: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
 };
 

@@ -5,9 +5,6 @@ import MainScreen from "../main-screen/main-screen";
 import LoginScreen from "../login-screen/login-screen";
 import FavoritesScreen from "../favorites-screen/favorites-screen";
 import RoomScreen from "../room-screen/room-screen";
-import withMap from "../../hocs/with-map/with-map";
-
-const MainScreenWrapped = withMap(MainScreen);
 
 const App = (props) => {
   const {
@@ -21,7 +18,7 @@ const App = (props) => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <MainScreenWrapped
+          <MainScreen
             rentOffersCount={rentOffersCount}
             offers={offers}
           />

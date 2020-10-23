@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import OffersList from "../offers-list/offers-list";
+import Map from "../map/map";
 
 const MainScreen = (props) => {
-  const {rentOffersCount, offers, renderMap} = props;
+  const {rentOffersCount, offers} = props;
 
   const coordinates = offers.map((offer) => {
     return (offer.coordinates);
@@ -102,7 +103,9 @@ const MainScreen = (props) => {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                {renderMap(coordinates)}
+                <Map
+                  coordinates={coordinates}
+                />
               </section>
             </div>
           </div>
@@ -114,8 +117,7 @@ const MainScreen = (props) => {
 
 MainScreen.propTypes = {
   rentOffersCount: PropTypes.number.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
-  renderMap: PropTypes.func.isRequired,
+  offers: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 

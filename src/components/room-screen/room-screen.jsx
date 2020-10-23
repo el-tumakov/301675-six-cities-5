@@ -3,11 +3,8 @@ import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
 import RoomInfo from "../room-info/room-info";
 import OfferCardRoom from "../offer-card-room/offer-card-room";
-import withMap from "../../hocs/with-map/with-map";
 
 const MAX_SIMILAR_OFFERS = 3;
-
-const RoomInfoWrapped = withMap(RoomInfo);
 
 const RoomScreen = (props) => {
   const {id, offers, owners, reviews} = props;
@@ -50,7 +47,7 @@ const RoomScreen = (props) => {
       </header>
 
       <main className="page__main page__main--property">
-        <RoomInfoWrapped
+        <RoomInfo
           id={id}
           offers={offers}
           owners={owners}
