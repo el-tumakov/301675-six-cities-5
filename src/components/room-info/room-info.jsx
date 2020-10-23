@@ -4,12 +4,28 @@ import RoomGallery from "../room-gallery/room-gallery";
 import RoomOwner from "../room-owner/room-owner";
 import RoomReviewsList from "../room-reviews-list/room-reviews-list";
 
+const MAX_SIMILAR_OFFERS = 3;
+
 const RoomInfo = (props) => {
-  const {id, offers, owners, reviews} = props;
+  const {id, offers, owners, reviews, renderMap} = props;
 
   const offer = offers.find((item) => item.id === id);
   const owner = owners.find((item) => item.id === offer.ownerId);
   const offerReviews = reviews.filter((item) => item.offerId === id);
+
+  const getCoordinates = () => {
+    const coordinates = [];
+
+    for (let i = 0; i < offers.length; i++) {
+      if (i === MAX_SIMILAR_OFFERS) {
+        break;
+      }
+
+      coordinates.push(offers[i].coordinates);
+    }
+
+    return coordinates;
+  };
 
   const {
     photos,
@@ -91,6 +107,7 @@ const RoomInfo = (props) => {
         </div>
       </div>
       <section className="property__map map">
+        {renderMap(getCoordinates())}
       </section>
     </section>
   );
@@ -101,6 +118,7 @@ RoomInfo.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
   owners: PropTypes.arrayOf(PropTypes.object).isRequired,
   reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
+  renderMap: PropTypes.func.isRequired,
 };
 
 export default RoomInfo;

@@ -2,6 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
 import RoomInfo from "../room-info/room-info";
+import withMap from "../../hocs/with-map/with-map";
+
+const RoomInfoWrapped = withMap(RoomInfo);
 
 const RoomScreen = (props) => {
   const {id, offers, owners, reviews} = props;
@@ -32,7 +35,7 @@ const RoomScreen = (props) => {
       </header>
 
       <main className="page__main page__main--property">
-        <RoomInfo
+        <RoomInfoWrapped
           id={id}
           offers={offers}
           owners={owners}
