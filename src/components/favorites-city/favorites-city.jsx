@@ -1,6 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import FavoritesCard from "../favorites-card/favorites-card";
+import OfferCard from "../offer-card/offer-card";
+import withOfferCard from "../../hocs/with-offer-card/with-offer-card";
+import {ScreenTypes} from "../../const";
+
+const OfferCardWrapped = withOfferCard(OfferCard);
 
 const FavoritesCity = (props) => {
   const {city, favoritesOffersOfCity} = props;
@@ -16,9 +20,10 @@ const FavoritesCity = (props) => {
       </div>
       <div className="favorites__places">
         {favoritesOffersOfCity.map((offer) => (
-          <FavoritesCard
+          <OfferCardWrapped
             key={offer.id}
             offer={offer}
+            screenType={ScreenTypes.FAVORITES}
           />
         ))}
       </div>
