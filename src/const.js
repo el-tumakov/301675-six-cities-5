@@ -26,9 +26,3 @@ export const CITIES = [
   `Hamburg`,
   `Dusseldorf`,
 ];
-
-export const ScreenTypes = {
-  MAIN: `MAIN`,
-  ROOM: `ROOM`,
-  FAVORITES: `FAVORITES`
-};

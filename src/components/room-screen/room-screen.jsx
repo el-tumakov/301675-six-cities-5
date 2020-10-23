@@ -2,15 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
 import RoomInfo from "../room-info/room-info";
-import OfferCard from "../offer-card/offer-card";
+import OfferCardRoom from "../offer-card-room/offer-card-room";
 import withMap from "../../hocs/with-map/with-map";
-import withOfferCard from "../../hocs/with-offer-card/with-offer-card";
-import {ScreenTypes} from "../../const";
 
 const MAX_SIMILAR_OFFERS = 3;
 
 const RoomInfoWrapped = withMap(RoomInfo);
-const OfferCardWrapped = withOfferCard(OfferCard);
 
 const RoomScreen = (props) => {
   const {id, offers, owners, reviews} = props;
@@ -65,10 +62,9 @@ const RoomScreen = (props) => {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
               {similarOffers.map((offer) => (
-                <OfferCardWrapped
+                <OfferCardRoom
                   key={offer.id}
                   offer={offer}
-                  screenType={ScreenTypes.ROOM}
                 />
               ))}
             </div>

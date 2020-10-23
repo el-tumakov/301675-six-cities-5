@@ -2,29 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
 
-const Classes = {
-  MAIN: {
-    ARTICLE: `cities__place-card place-card`,
-    IMAGE: `cities__image-wrapper place-card__image-wrapper`,
-    INFO: `place-card__info`,
-    RATING_STYLE: {width: `80%`},
-  },
-  ROOM: {
-    ARTICLE: `near-places__card place-card`,
-    IMAGE: `near-places__image-wrapper place-card__image-wrapper`,
-    INFO: `place-card__info`,
-    RATING_STYLE: {width: `80%`},
-  },
-  FAVORITES: {
-    ARTICLE: `favorites__card place-card`,
-    IMAGE: `favorites__image-wrapper place-card__image-wrapper`,
-    INFO: `favorites__card-info place-card__info`,
-    RATING_STYLE: {width: `100%`},
-  }
-};
-
 const OfferCard = (props) => {
-  const {offer, screenType} = props;
+  const {
+    offer,
+    articleClassName,
+    imageClassName,
+    infoClassName,
+    ratingStyle
+  } = props;
 
   const {
     id,
@@ -41,7 +26,7 @@ const OfferCard = (props) => {
 
   return (
     <article
-      className={Classes[screenType].ARTICLE}
+      className={`${articleClassName} place-card`}
       onMouseOver={(evt) => {
         evt.preventDefault();
       }}>
@@ -51,12 +36,12 @@ const OfferCard = (props) => {
         </div>
         : ``
       }
-      <div className={Classes[screenType].IMAGE}>
+      <div className={`${imageClassName} place-card__image-wrapper`}>
         <Link to={offerLink}>
           <img className="place-card__image" src={photos[0]} width="260" height="200" alt="Place image" />
         </Link>
       </div>
-      <div className={Classes[screenType].INFO}>
+      <div className={`${infoClassName} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -79,7 +64,7 @@ const OfferCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={Classes[screenType].RATING_STYLE}>{rating}</span>
+            <span style={ratingStyle}>{rating}</span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -103,7 +88,10 @@ OfferCard.propTypes = {
     price: PropTypes.number.isRequired,
     favorite: PropTypes.bool.isRequired,
   }).isRequired,
-  screenType: PropTypes.string.isRequired,
+  articleClassName: PropTypes.string.isRequired,
+  imageClassName: PropTypes.string.isRequired,
+  infoClassName: PropTypes.string.isRequired,
+  ratingStyle: PropTypes.object.isRequired
 };
 
 export default OfferCard;
