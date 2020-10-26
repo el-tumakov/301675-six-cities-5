@@ -10,7 +10,8 @@ const getOffersByCity = (city) => (
 
 const initialState = {
   city: `Amsterdam`,
-  cityOffers: getOffersByCity(`Amsterdam`, offers)
+  cityOffers: getOffersByCity(`Amsterdam`, offers),
+  sort: `popular`
 };
 
 const reducer = (state = initialState, action) => {
@@ -23,6 +24,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.GET_CITY_OFFERS:
       return extend(state, {
         cityOffers: getOffersByCity(state.city)
+      });
+
+    case ActionType.CHANGE_SORT:
+      return extend(state, {
+        sort: action.payload
       });
   }
 
