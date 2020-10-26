@@ -6,6 +6,7 @@ import Map from "../map/map";
 import CityList from "../city-list/city-list";
 import {ActionCreator} from "../../store/action";
 import Sort from "../sort/sort";
+import {sortOffers} from "../../sort";
 
 const MainScreen = (props) => {
   const {
@@ -21,6 +22,8 @@ const MainScreen = (props) => {
   const coordinates = cityOffers.map((offer) => {
     return (offer.coordinates);
   });
+
+  const sortedCityOffers = sortOffers(sort, cityOffers);
 
   return (
     <div className="page page--gray page--main">
@@ -59,12 +62,12 @@ const MainScreen = (props) => {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{cityOffers.length} places to stay in Amsterdam</b>
+              <b className="places__found">{sortedCityOffers.length} places to stay in Amsterdam</b>
               <Sort
                 activeSort={sort}
                 onChangeSort={onChangeSort}
               />
-              <OffersListMain offers={cityOffers}/>
+              <OffersListMain offers={sortedCityOffers}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
