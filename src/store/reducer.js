@@ -2,11 +2,11 @@ import offers from "../mocks/offers";
 import {ActionType} from "./action";
 import {extend} from "../utils";
 
-const getOffersByCity = (city) => {
+const getOffersByCity = (city) => (
   offers.filter((offer) => {
     return offer.city === city;
-  });
-};
+  })
+);
 
 const initialState = {
   city: `Amsterdam`,
