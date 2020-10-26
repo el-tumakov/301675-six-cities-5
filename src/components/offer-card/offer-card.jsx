@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
+import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
 
 const OfferCard = (props) => {
   const {
@@ -8,7 +10,9 @@ const OfferCard = (props) => {
     articleClassName,
     imageClassName,
     infoClassName,
-    ratingStyle
+    ratingStyle,
+    onHoverOffer,
+    resetHoveredOffer
   } = props;
 
   const {
@@ -27,9 +31,15 @@ const OfferCard = (props) => {
   return (
     <article
       className={`${articleClassName} place-card`}
-      onMouseOver={(evt) => {
+      onMouseEnter={(evt) => {
         evt.preventDefault();
-      }}>
+        onHoverOffer(offer);
+      }}
+      onMouseLeave={(evt) => {
+        evt.preventDefault();
+        resetHoveredOffer();
+      }}
+    >
       {premium ?
         <div className="place-card__mark">
           <span>Premium</span>
@@ -91,7 +101,20 @@ OfferCard.propTypes = {
   articleClassName: PropTypes.string.isRequired,
   imageClassName: PropTypes.string.isRequired,
   infoClassName: PropTypes.string.isRequired,
-  ratingStyle: PropTypes.object.isRequired
+  ratingStyle: PropTypes.object.isRequired,
+  onHoverOffer: PropTypes.func.isRequired,
+  resetHoveredOffer: PropTypes.func.isRequired,
 };
 
-export default OfferCard;
+const mapDispatchToProps = (dispatch) => ({
+  onHoverOffer(offer) {
+    dispatch(ActionCreator.changeHoveredOffer(offer));
+  },
+  resetHoveredOffer() {
+    dispatch(ActionCreator.resetHoveredOffer());
+  }
+});
+
+
+export {OfferCard};
+export default connect(``, mapDispatchToProps)(OfferCard);
