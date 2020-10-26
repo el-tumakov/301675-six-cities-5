@@ -1,10 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import OffersListMain from "../offers-list-main/offers-list-main";
 import Map from "../map/map";
+import CityList from "../city-list/city-list";
+import {ActionCreator} from "../../store/action";
 
 const MainScreen = (props) => {
-  const {rentOffersCount, offers} = props;
+  const {
+    rentOffersCount,
+    offers,
+    cityOffers,
+    onChangeCity,
+    getCityOffers,
+    activeCity,
+  } = props;
 
   const coordinates = offers.map((offer) => {
     return (offer.coordinates);
@@ -37,42 +47,12 @@ const MainScreen = (props) => {
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
-        </div>
+        <CityList
+          offers={offers}
+          onChangeCity={onChangeCity}
+          getCityOffers={getCityOffers}
+          activeCity={activeCity}
+        />
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
@@ -99,7 +79,7 @@ const MainScreen = (props) => {
                   <option className="places__option" value="top-rated">Top rated first</option>
                 </select>
               </form>
-              <OffersListMain offers={offers}/>
+              <OffersListMain offers={cityOffers}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
@@ -117,8 +97,27 @@ const MainScreen = (props) => {
 
 MainScreen.propTypes = {
   rentOffersCount: PropTypes.number.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired
+  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  activeCity: PropTypes.string.isRequired,
+  cityOffers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onChangeCity: PropTypes.func.isRequired,
+  getCityOffers: PropTypes.func.isRequired,
 };
 
+const mapStateToProps = (state) => ({
+  activeCity: state.city,
+  cityOffers: state.cityOffers
+});
 
-export default MainScreen;
+const mapDispatchToProps = (dispatch) => ({
+  onChangeCity(city) {
+    dispatch(ActionCreator.changeCity(city));
+  },
+  getCityOffers() {
+    dispatch(ActionCreator.getCityOffer());
+  }
+});
+
+
+export {MainScreen};
+export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);
