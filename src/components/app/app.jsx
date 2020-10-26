@@ -6,7 +6,6 @@ import LoginScreen from "../login-screen/login-screen";
 import FavoritesScreen from "../favorites-screen/favorites-screen";
 import RoomScreen from "../room-screen/room-screen";
 
-
 const App = (props) => {
   const {
     rentOffersCount,
@@ -36,9 +35,10 @@ const App = (props) => {
           path="/offer/:id"
           render={({match}) => (
             <RoomScreen
-              offer={offers.find((item) => item.id === +match.params.id)}
+              id={+match.params.id}
+              offers={offers}
               owners={owners}
-              offerReviews={reviews.filter((item) => item.offerId === +match.params.id)}
+              reviews={reviews}
             />
           )}
         />

@@ -1,39 +1,29 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import OfferCard from "../offer-card/offer-card";
 
-class OffersList extends PureComponent {
-  constructor(props) {
-    super(props);
+const OffersList = (props) => {
+  const {
+    offers,
+    className,
+    Component
+  } = props;
 
-    this.state = {
-      activeOffer: 0,
-    };
-  }
-
-  render() {
-    const {offers} = this.props;
-
-    return (
-      <div className="cities__places-list places__list tabs__content">
-        {offers.map((offer) => (
-          <OfferCard
-            key={offer.id}
-            offer={offer}
-            onActiveOffer={() => {
-              this.setState(() => ({
-                activeOffer: offer.id,
-              }));
-            }}
-          />
-        ))}
-      </div>
-    );
-  }
-}
+  return (
+    <div className={className}>
+      {offers.map((offer) => (
+        <Component
+          key={offer.id}
+          offer={offer}
+        />
+      ))}
+    </div>
+  );
+};
 
 OffersList.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  className: PropTypes.string.isRequired,
+  Component: PropTypes.func.isRequired
 };
 
 export default OffersList;

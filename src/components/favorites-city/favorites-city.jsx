@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import FavoritesCard from "../favorites-card/favorites-card";
+import OffersListFavorite from "../offers-list-favorite/offers-list-favorite";
 
 const FavoritesCity = (props) => {
   const {city, favoritesOffersOfCity} = props;
@@ -14,14 +14,7 @@ const FavoritesCity = (props) => {
           </a>
         </div>
       </div>
-      <div className="favorites__places">
-        {favoritesOffersOfCity.map((offer) => (
-          <FavoritesCard
-            key={offer.id}
-            offer={offer}
-          />
-        ))}
-      </div>
+      <OffersListFavorite offers={favoritesOffersOfCity}/>
     </li>
   );
 };

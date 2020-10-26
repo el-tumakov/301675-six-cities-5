@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import OffersList from "../offers-list/offers-list";
+import OffersListMain from "../offers-list-main/offers-list-main";
 import Map from "../map/map";
 
 const MainScreen = (props) => {
@@ -99,7 +99,7 @@ const MainScreen = (props) => {
                   <option className="places__option" value="top-rated">Top rated first</option>
                 </select>
               </form>
-              <OffersList offers={offers}/>
+              <OffersListMain offers={offers}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
@@ -117,7 +117,7 @@ const MainScreen = (props) => {
 
 MainScreen.propTypes = {
   rentOffersCount: PropTypes.number.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  offers: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 

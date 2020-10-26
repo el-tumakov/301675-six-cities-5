@@ -15,7 +15,7 @@ class Map extends PureComponent {
     const {coordinates} = this.props;
 
     const icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
+      iconUrl: `/img/pin.svg`,
       iconSize: [30, 30]
     });
 

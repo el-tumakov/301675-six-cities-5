@@ -2,11 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 import RoomGallery from "../room-gallery/room-gallery";
 import RoomOwner from "../room-owner/room-owner";
-import RoomReview from "../room-review/room-review";
-import RoomComment from "../room-comment/room-comment";
+import RoomReviewsList from "../room-reviews-list/room-reviews-list";
+import Map from "../map/map";
 
 const RoomInfo = (props) => {
-  const {offer, owner, reviews} = props;
+  const {
+    id,
+    offers,
+    owners,
+    reviews,
+    similarCoordinates
+  } = props;
+
+  const offer = offers.find((item) => item.id === id);
+  const owner = owners.find((item) => item.id === offer.ownerId);
+  const offerReviews = reviews.filter((item) => item.offerId === id);
+
   const {
     photos,
     premium,
@@ -81,40 +92,26 @@ const RoomInfo = (props) => {
             description={description}
             owner={owner}
           />
-          <section className="property__reviews reviews">
-            <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-            <ul className="reviews__list">
-              {reviews.map((review) => (
-                <RoomReview
-                  key={review.id}
-                  review={review}
-                />
-              ))}
-            </ul>
-            <RoomComment />
-          </section>
+          <RoomReviewsList
+            reviews={offerReviews}
+          />
         </div>
       </div>
-      <section className="property__map map"></section>
+      <section className="property__map map">
+        <Map
+          coordinates={similarCoordinates}
+        />
+      </section>
     </section>
   );
 };
 
 RoomInfo.propTypes = {
-  offer: PropTypes.shape({
-    photos: PropTypes.arrayOf(PropTypes.string).isRequired,
-    premium: PropTypes.bool.isRequired,
-    title: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    guests: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    features: PropTypes.arrayOf(PropTypes.string).isRequired,
-    description: PropTypes.string.isRequired
-  }).isRequired,
-  owner: PropTypes.object.isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.object).isRequired
+  id: PropTypes.number.isRequired,
+  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  owners: PropTypes.arrayOf(PropTypes.object).isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
+  similarCoordinates: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
 };
 
 export default RoomInfo;
