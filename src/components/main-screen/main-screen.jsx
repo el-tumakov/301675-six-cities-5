@@ -15,7 +15,7 @@ const MainScreen = (props) => {
     activeCity,
   } = props;
 
-  const coordinates = offers.map((offer) => {
+  const coordinates = cityOffers.map((offer) => {
     return (offer.coordinates);
   });
 
