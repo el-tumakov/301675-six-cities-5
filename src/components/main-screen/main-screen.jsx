@@ -8,7 +8,6 @@ import {ActionCreator} from "../../store/action";
 
 const MainScreen = (props) => {
   const {
-    rentOffersCount,
     offers,
     cityOffers,
     onChangeCity,
@@ -57,7 +56,7 @@ const MainScreen = (props) => {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{rentOffersCount} places to stay in Amsterdam</b>
+              <b className="places__found">{cityOffers.length} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -96,7 +95,6 @@ const MainScreen = (props) => {
 };
 
 MainScreen.propTypes = {
-  rentOffersCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
   activeCity: PropTypes.string.isRequired,
   cityOffers: PropTypes.arrayOf(PropTypes.object).isRequired,

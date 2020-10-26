@@ -8,10 +8,6 @@ import {createStore} from "redux";
 import {Provider} from "react-redux";
 import {reducer} from "./store/reducer";
 
-const Settings = {
-  RENT_OFFERS_COUNT: 312
-};
-
 const store = createStore(
     reducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
@@ -20,7 +16,6 @@ const store = createStore(
 ReactDOM.render(
     <Provider store={store}>
       <App
-        rentOffersCount={Settings.RENT_OFFERS_COUNT}
         offers={offers}
         owners={owners}
         reviews={reviews}
