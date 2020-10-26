@@ -8,7 +8,6 @@ import RoomScreen from "../room-screen/room-screen";
 
 const App = (props) => {
   const {
-    rentOffersCount,
     offers,
     owners,
     reviews
@@ -19,7 +18,6 @@ const App = (props) => {
       <Switch>
         <Route exact path="/">
           <MainScreen
-            rentOffersCount={rentOffersCount}
             offers={offers}
           />
         </Route>
@@ -48,7 +46,6 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  rentOffersCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
   owners: PropTypes.arrayOf(PropTypes.object).isRequired,
   reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
