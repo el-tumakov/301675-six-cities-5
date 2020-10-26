@@ -16,12 +16,9 @@ const MainScreen = (props) => {
     getCityOffers,
     activeCity,
     sort,
-    onChangeSort
+    onChangeSort,
+    hoveredOffer,
   } = props;
-
-  const coordinates = cityOffers.map((offer) => {
-    return (offer.coordinates);
-  });
 
   const sortedCityOffers = sortOffers(sort, cityOffers);
 
@@ -72,7 +69,9 @@ const MainScreen = (props) => {
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
-                  coordinates={coordinates}
+                  city={activeCity}
+                  offers={cityOffers}
+                  hoveredOffer={hoveredOffer}
                 />
               </section>
             </div>
@@ -91,12 +90,14 @@ MainScreen.propTypes = {
   getCityOffers: PropTypes.func.isRequired,
   sort: PropTypes.string.isRequired,
   onChangeSort: PropTypes.func.isRequired,
+  hoveredOffer: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
 };
 
 const mapStateToProps = (state) => ({
   activeCity: state.city,
   cityOffers: state.cityOffers,
-  sort: state.sort
+  sort: state.sort,
+  hoveredOffer: state.hoveredOffer
 });
 
 const mapDispatchToProps = (dispatch) => ({

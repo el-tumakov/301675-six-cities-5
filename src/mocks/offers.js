@@ -66,7 +66,7 @@ export default [
     ownerId: 3,
     city: CITIES[4],
     favorite: false,
-    coordinates: [52.3909553943508, 4.929309666406198]
+    coordinates: [53.54956388, 9.99082893]
   },
   {
     id: 4,
@@ -83,6 +83,6 @@ export default [
     ownerId: 4,
     city: CITIES[4],
     favorite: true,
-    coordinates: [52.3809553943508, 4.939309666406198]
+    coordinates: [53.55211352, 10.00353187]
   }
 ];

@@ -9,17 +9,20 @@ const MAX_SIMILAR_OFFERS = 3;
 const RoomScreen = (props) => {
   const {id, offers, owners, reviews} = props;
 
+  const offer = offers.find((item) => item.id === id);
+  const city = offer.city;
+
   const similarOffers = [];
 
   for (let i = 0; i < offers.length; i++) {
-    if (i === MAX_SIMILAR_OFFERS) {
+    if (similarOffers.length === MAX_SIMILAR_OFFERS) {
       break;
     }
 
-    similarOffers.push(offers[i]);
+    if (offers[i].city === city && offers[i] !== offer) {
+      similarOffers.push(offers[i]);
+    }
   }
-
-  const similarCoordinates = similarOffers.map((offer) => offer.coordinates);
 
   return (
     <div className="page">
@@ -49,10 +52,10 @@ const RoomScreen = (props) => {
       <main className="page__main page__main--property">
         <RoomInfo
           id={id}
-          offers={offers}
+          offers={similarOffers}
           owners={owners}
           reviews={reviews}
-          similarCoordinates={similarCoordinates}
+          offer={offer}
         />
         <div className="container">
           <section className="near-places places">

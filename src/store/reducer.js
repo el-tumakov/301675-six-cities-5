@@ -11,7 +11,8 @@ const getOffersByCity = (city) => (
 const initialState = {
   city: `Amsterdam`,
   cityOffers: getOffersByCity(`Amsterdam`, offers),
-  sort: `popular`
+  sort: `popular`,
+  hoveredOffer: ``
 };
 
 const reducer = (state = initialState, action) => {
@@ -29,6 +30,16 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_SORT:
       return extend(state, {
         sort: action.payload
+      });
+
+    case ActionType.CHANGE_HOVERED_OFFER:
+      return extend(state, {
+        hoveredOffer: action.payload
+      });
+
+    case ActionType.RESET_HOVERED_OFFER:
+      return extend(state, {
+        hoveredOffer: ``
       });
   }
 
