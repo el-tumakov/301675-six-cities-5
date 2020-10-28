@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
 import {Coordinates} from "../../const";
@@ -101,5 +102,9 @@ Map.propTypes = {
   city: PropTypes.string.isRequired,
 };
 
+const mapStateToProps = (state) => ({
+  hoveredOffer: state.hoveredOffer
+});
 
-export default Map;
+export {Map};
+export default connect(mapStateToProps, null)(Map);
