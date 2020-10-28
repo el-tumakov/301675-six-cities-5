@@ -41,6 +41,8 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         hoveredOffer: ``
       });
+    case ActionType.RESET_STATE:
+      return extend(state, initialState);
   }
 
   return state;
