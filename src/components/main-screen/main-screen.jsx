@@ -7,6 +7,9 @@ import CityList from "../city-list/city-list";
 import {ActionCreator} from "../../store/action";
 import Sort from "../sort/sort";
 import {sortOffers} from "../../sort";
+import withSort from "../../hocs/with-sort/with-sort";
+
+const SortWrapped = withSort(Sort);
 
 const MainScreen = (props) => {
   const {
@@ -60,7 +63,7 @@ const MainScreen = (props) => {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{sortedCityOffers.length} places to stay in Amsterdam</b>
-              <Sort
+              <SortWrapped
                 activeSort={sort}
                 onChangeSort={onChangeSort}
               />
