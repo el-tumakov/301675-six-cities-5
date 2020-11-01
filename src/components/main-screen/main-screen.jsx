@@ -11,11 +11,11 @@ import {ActionCreator} from "../../store/action";
 const MainScreen = (props) => {
   const {
     offers,
-    cityOffers,
     onChangeCity,
-    getCityOffers,
     activeCity,
   } = props;
+
+  const cityOffers = offers.filter((offer) => offer.city.name === activeCity);
 
   return (
     <div className="page page--gray page--main">
@@ -46,7 +46,6 @@ const MainScreen = (props) => {
         <h1 className="visually-hidden">Cities</h1>
         <CityList
           onChangeCity={onChangeCity}
-          getCityOffers={getCityOffers}
           activeCity={activeCity}
         />
         <div className="cities">
@@ -58,7 +57,6 @@ const MainScreen = (props) => {
               <div className="cities__right-section">
                 <section className="cities__map map">
                   <Map
-                    city={activeCity}
                     offers={cityOffers}
                   />
                 </section>
@@ -75,22 +73,17 @@ const MainScreen = (props) => {
 MainScreen.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
   activeCity: PropTypes.string.isRequired,
-  cityOffers: PropTypes.arrayOf(PropTypes.object).isRequired,
   onChangeCity: PropTypes.func.isRequired,
-  getCityOffers: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   activeCity: state.city,
-  cityOffers: state.cityOffers,
+  offers: state.offers,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeCity(city) {
     dispatch(ActionCreator.changeCity(city));
-  },
-  getCityOffers() {
-    dispatch(ActionCreator.getCityOffer());
   }
 });
 

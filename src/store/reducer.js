@@ -1,16 +1,9 @@
-import offers from "../mocks/offers";
 import {ActionType} from "./action";
-import {extend} from "../utils";
-
-const getOffersByCity = (city) => (
-  offers.filter((offer) => {
-    return offer.city === city;
-  })
-);
+import {extend, adaptToClient} from "../utils";
 
 const initialState = {
-  city: `Amsterdam`,
-  cityOffers: getOffersByCity(`Amsterdam`, offers),
+  city: `Paris`,
+  offers: [],
   sort: `popular`,
   hoveredOffer: ``
 };
@@ -22,9 +15,9 @@ const reducer = (state = initialState, action) => {
         city: action.payload
       });
 
-    case ActionType.GET_CITY_OFFERS:
+    case ActionType.LOAD_OFFERS:
       return extend(state, {
-        cityOffers: getOffersByCity(state.city)
+        offers: adaptToClient(action.payload)
       });
 
     case ActionType.CHANGE_SORT:
@@ -41,6 +34,7 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         hoveredOffer: ``
       });
+
     case ActionType.RESET_STATE:
       return extend(state, initialState);
   }

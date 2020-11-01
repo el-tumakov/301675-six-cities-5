@@ -3,9 +3,6 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
-import {Coordinates} from "../../const";
-
-const ZOOM = 12;
 
 class Map extends PureComponent {
   constructor(props) {
@@ -27,16 +24,24 @@ class Map extends PureComponent {
   }
 
   initializeMap() {
-    const {offers, city} = this.props;
+    const {offers} = this.props;
 
-    this._city = city;
-    this._coordinates = Coordinates[this._city.toUpperCase()];
-    this._map.setView(this._coordinates, ZOOM);
+    this._city = offers[0].city;
+    this._coordinates = [
+      this._city.location.latitude,
+      this._city.location.longitude
+    ];
+    this._map.setView(this._coordinates, this._city.location.zoom);
     this._markers = [];
 
     for (let offer of offers) {
+      const coordinates = [
+        offer.location.latitude,
+        offer.location.longitude
+      ];
+
       this._markers.push(
-          leaflet.marker(offer.coordinates, {icon: this._icon, offerId: offer.id})
+          leaflet.marker(coordinates, {icon: this._icon, offerId: offer.id})
       );
     }
 
@@ -61,9 +66,9 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate() {
-    const {hoveredOffer, city} = this.props;
+    const {hoveredOffer} = this.props;
 
-    if (this._city !== city) {
+    if (this._city !== hoveredOffer.city) {
       this.initializeMap();
     }
 
@@ -99,7 +104,6 @@ class Map extends PureComponent {
 Map.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
   hoveredOffer: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  city: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({

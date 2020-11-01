@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {CITIES} from "../../const";
 
 const CityList = (props) => {
-  const {onChangeCity, activeCity, getCityOffers} = props;
+  const {onChangeCity, activeCity} = props;
 
   return (
     <div className="tabs">
@@ -17,7 +17,6 @@ const CityList = (props) => {
                 onClick={(evt) => {
                   evt.preventDefault();
                   onChangeCity(item);
-                  getCityOffers();
                 }}
               >
                 <span>{item}</span>
@@ -32,7 +31,6 @@ const CityList = (props) => {
 
 CityList.propTypes = {
   onChangeCity: PropTypes.func.isRequired,
-  getCityOffers: PropTypes.func.isRequired,
   activeCity: PropTypes.string.isRequired,
 };
 
