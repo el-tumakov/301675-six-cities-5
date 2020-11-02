@@ -5,6 +5,7 @@ export const ActionType = {
   CHANGE_HOVERED_OFFER: `CHANGE_HOVERED_OFFER`,
   RESET_HOVERED_OFFER: `RESET_HOVERED_OFFER`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  LOAD_USER_DATA: `LOAD_USER_DATA`
 };
 
 export const ActionCreator = {
@@ -30,5 +31,9 @@ export const ActionCreator = {
   requireAuthorization: (status) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,
     payload: status,
-  })
+  }),
+  loadUserData: (userData) => ({
+    type: ActionType.LOAD_USER_DATA,
+    payload: userData
+  }),
 };
