@@ -1,23 +1,17 @@
-import {ActionType} from "./action";
-import {extend, adaptToClient} from "../utils";
+import {ActionType} from "../../action";
+import {extend} from "../../../utils";
 
 const initialState = {
   city: `Paris`,
-  offers: [],
   sort: `popular`,
   hoveredOffer: ``
 };
 
-const reducer = (state = initialState, action) => {
+const appProcess = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_CITY:
       return extend(state, {
         city: action.payload
-      });
-
-    case ActionType.LOAD_OFFERS:
-      return extend(state, {
-        offers: adaptToClient(action.payload)
       });
 
     case ActionType.CHANGE_SORT:
@@ -34,12 +28,8 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         hoveredOffer: ``
       });
-
-    case ActionType.RESET_STATE:
-      return extend(state, initialState);
   }
-
   return state;
 };
 
-export {reducer};
+export {appProcess};

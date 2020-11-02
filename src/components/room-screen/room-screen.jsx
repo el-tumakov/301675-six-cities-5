@@ -70,8 +70,8 @@ RoomScreen.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.offers,
+const mapStateToProps = ({DATA}) => ({
+  offers: DATA.offers,
 });
 
 export {RoomScreen};

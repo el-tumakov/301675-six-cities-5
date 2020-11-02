@@ -35,8 +35,8 @@ FavoritesList.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.offers,
+const mapStateToProps = ({PROCESS}) => ({
+  offers: PROCESS.offers,
 });
 
 

@@ -76,9 +76,9 @@ MainScreen.propTypes = {
   onChangeCity: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  activeCity: state.city,
-  offers: state.offers,
+const mapStateToProps = ({DATA, PROCESS}) => ({
+  activeCity: PROCESS.city,
+  offers: DATA.offers,
 });
 
 const mapDispatchToProps = (dispatch) => ({

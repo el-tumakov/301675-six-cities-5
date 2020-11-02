@@ -33,8 +33,8 @@ CitiesOffers.propTypes = {
   onChangeSort: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  sort: state.sort,
+const mapStateToProps = ({PROCESS}) => ({
+  sort: PROCESS.sort,
 });
 
 const mapDispatchToProps = (dispatch) => ({
