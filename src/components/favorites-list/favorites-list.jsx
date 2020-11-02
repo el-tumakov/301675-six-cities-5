@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import FavoritesCity from "../favorites-city/favorites-city";
 import {CITIES} from "../../const";
 
@@ -34,4 +35,11 @@ FavoritesList.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default FavoritesList;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+});
+
+
+export {FavoritesList};
+export default connect(mapStateToProps, null)(FavoritesList);
+
