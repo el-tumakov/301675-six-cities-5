@@ -3,7 +3,7 @@ import {extend, adaptToClient} from "../../../utils";
 
 const initialState = {
   offers: [],
-  userData: ``
+  userData: {}
 };
 
 const appData = (state = initialState, action) => {

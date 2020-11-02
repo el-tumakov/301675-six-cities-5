@@ -5,7 +5,8 @@ import {connect} from "react-redux";
 import {AuthorizationStatus} from "../../const";
 
 const Header = (props) => {
-  const {authorizationStatus} = props;
+  const {authorizationStatus, userData} = props;
+  const {email} = userData;
 
   return (
     <header className="header">
@@ -19,15 +20,15 @@ const Header = (props) => {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <a className="header__nav-link header__nav-link--profile" href="#">
+                <Link className="header__nav-link header__nav-link--profile" to="/login">
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
                   <span className="header__user-name user__name">
                     {`${authorizationStatus === AuthorizationStatus.AUTH
-                      ? `Oliver.conner@gmail.com`
+                      ? email
                       : `Sign in`}`}
                   </span>
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
@@ -38,11 +39,13 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired
+  authorizationStatus: PropTypes.string.isRequired,
+  userData: PropTypes.object.isRequired
 };
 
-const mapStateToProps = ({USER}) => ({
-  authorizationStatus: USER.authorizationStatus
+const mapStateToProps = ({USER, DATA}) => ({
+  authorizationStatus: USER.authorizationStatus,
+  userData: DATA.userData
 });
 
 export {Header};
