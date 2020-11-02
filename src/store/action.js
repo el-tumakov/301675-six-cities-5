@@ -4,6 +4,7 @@ export const ActionType = {
   CHANGE_SORT: `CHANGE_SORT`,
   CHANGE_HOVERED_OFFER: `CHANGE_HOVERED_OFFER`,
   RESET_HOVERED_OFFER: `RESET_HOVERED_OFFER`,
+  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
 };
 
 export const ActionCreator = {
@@ -25,5 +26,9 @@ export const ActionCreator = {
   }),
   resetHoveredOffer: () => ({
     type: ActionType.RESET_HOVERED_OFFER
+  }),
+  requireAuthorization: (status) => ({
+    type: ActionType.REQUIRED_AUTHORIZATION,
+    payload: status,
   })
 };
