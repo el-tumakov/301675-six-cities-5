@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import {Link} from 'react-router-dom';
 import RoomInfo from "../room-info/room-info";
 import OffersListRoom from "../offers-list-room/offers-list-room";
@@ -7,10 +8,10 @@ import OffersListRoom from "../offers-list-room/offers-list-room";
 const MAX_SIMILAR_OFFERS = 3;
 
 const RoomScreen = (props) => {
-  const {id, offers, owners, reviews} = props;
+  const {id, offers} = props;
 
   const offer = offers.find((item) => item.id === id);
-  const city = offer.city;
+  const city = offer.city.name;
 
   const similarOffers = [];
 
@@ -19,7 +20,7 @@ const RoomScreen = (props) => {
       break;
     }
 
-    if (offers[i].city === city && offers[i] !== offer) {
+    if (offers[i].city.name === city && offers[i] !== offer) {
       similarOffers.push(offers[i]);
     }
   }
@@ -53,8 +54,6 @@ const RoomScreen = (props) => {
         <RoomInfo
           id={id}
           offers={similarOffers}
-          owners={owners}
-          reviews={reviews}
           offer={offer}
         />
         <div className="container">
@@ -71,8 +70,11 @@ const RoomScreen = (props) => {
 RoomScreen.propTypes = {
   id: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
-  owners: PropTypes.arrayOf(PropTypes.object).isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default RoomScreen;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+});
+
+export {RoomScreen};
+export default connect(mapStateToProps, null)(RoomScreen);

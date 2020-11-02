@@ -8,16 +8,10 @@ import Map from "../map/map";
 
 const RoomInfo = (props) => {
   const {
-    id,
     offers,
-    owners,
-    reviews,
     offer,
     hoveredOffer
   } = props;
-
-  const owner = owners.find((item) => item.id === offer.ownerId);
-  const offerReviews = reviews.filter((item) => item.offerId === id);
 
   const {
     photos,
@@ -30,8 +24,11 @@ const RoomInfo = (props) => {
     price,
     features,
     description,
-    city
+    city,
+    owner
   } = offer;
+
+  const offerReviews = [];
 
   return (
     <section className="property">
@@ -113,8 +110,6 @@ const RoomInfo = (props) => {
 RoomInfo.propTypes = {
   id: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
-  owners: PropTypes.arrayOf(PropTypes.object).isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
   offer: PropTypes.object.isRequired,
   hoveredOffer: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
 };
