@@ -6,6 +6,7 @@ import MainScreen from "../main-screen/main-screen";
 import LoginScreen from "../login-screen/login-screen";
 import FavoritesScreen from "../favorites-screen/favorites-screen";
 import RoomScreen from "../room-screen/room-screen";
+import PrivateRoute from "../private-route/private-route";
 import {ActionCreator} from "../../store/action";
 
 const App = (props) => {
@@ -17,9 +18,12 @@ const App = (props) => {
         <Route exact path="/">
           <MainScreen />
         </Route>
-        <Route exact path="/login">
-          <LoginScreen />
-        </Route>
+        <PrivateRoute exact
+          path="/login"
+          render={() => (
+            <LoginScreen />
+          )}
+        />
         <Route exact path="/favorites">
           <FavoritesScreen />
         </Route>
