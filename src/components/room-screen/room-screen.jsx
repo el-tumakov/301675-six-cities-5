@@ -11,8 +11,6 @@ const RoomScreen = (props) => {
   const {id, offers} = props;
 
   const offer = offers.find((item) => item.id === id);
-  const city = offer.city.name;
-
   const similarOffers = [];
 
   for (let i = 0; i < offers.length; i++) {
@@ -20,7 +18,7 @@ const RoomScreen = (props) => {
       break;
     }
 
-    if (offers[i].city.name === city && offers[i] !== offer) {
+    if (offers[i].city.name === offer.city.name && offers[i] !== offer) {
       similarOffers.push(offers[i]);
     }
   }

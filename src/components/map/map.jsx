@@ -21,9 +21,10 @@ class Map extends PureComponent {
       iconUrl: `/img/pin-active.svg`,
       iconSize: [30, 30]
     });
+    this._activeOfferId = ``;
   }
 
-  initializeMap() {
+  _initializeMap() {
     const {offers} = this.props;
 
     this._city = offers[0].city;
@@ -32,6 +33,15 @@ class Map extends PureComponent {
       this._city.location.longitude
     ];
     this._map.setView(this._coordinates, this._city.location.zoom);
+  }
+
+  _initializeMarkers() {
+    const {offers} = this.props;
+
+    for (let marker of this._markers) {
+      marker.remove();
+    }
+
     this._markers = [];
 
     for (let offer of offers) {
@@ -51,6 +61,12 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
+    const {activeOfferId} = this.props;
+
+    if (activeOfferId) {
+      this._activeOfferId = activeOfferId;
+    }
+
     this._map = leaflet.map(`map`, {
       zoomControl: false,
       marker: true
@@ -62,14 +78,27 @@ class Map extends PureComponent {
       })
       .addTo(this._map);
 
-    this.initializeMap();
+    this._initializeMap();
+    this._initializeMarkers();
   }
 
   componentDidUpdate() {
-    const {hoveredOffer} = this.props;
+    const {activeOfferId, offers, hoveredOffer} = this.props;
 
-    if (this._city !== hoveredOffer.city) {
-      this.initializeMap();
+    if (activeOfferId && this._activeOfferId !== activeOfferId) {
+      this._activeOfferId = activeOfferId;
+
+      this._initializeMap();
+      this._initializeMarkers();
+
+      return;
+    }
+
+    if (this._city.name !== offers[0].city.name) {
+      this._initializeMap();
+      this._initializeMarkers();
+
+      return;
     }
 
     if (this._activeMarker) {
@@ -102,6 +131,7 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
+  activeOfferId: PropTypes.number,
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
   hoveredOffer: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
