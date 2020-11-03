@@ -4,6 +4,11 @@ import {Route, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import {AuthorizationStatus} from "../../const";
 
+const Routes = {
+  MAIN: `/`,
+  LOGIN: `/login`,
+  FAVORITES: `/favorites`
+};
 
 const PrivateRoute = (props) => {
   const {render, path, exact, authorizationStatus} = props;
@@ -13,11 +18,23 @@ const PrivateRoute = (props) => {
       path={path}
       exact={exact}
       render={(routeProps) => {
-        return (
-          authorizationStatus === AuthorizationStatus.NO_AUTH
-            ? render(routeProps)
-            : <Redirect to={`/`} />
-        );
+        switch (path) {
+          case Routes.LOGIN:
+            return (
+              authorizationStatus === AuthorizationStatus.NO_AUTH
+                ? render(routeProps)
+                : <Redirect to={Routes.MAIN} />
+            );
+
+          case Routes.FAVORITES:
+            return (
+              authorizationStatus === AuthorizationStatus.AUTH
+                ? render(routeProps)
+                : <Redirect to={Routes.LOGIN} />
+            );
+        }
+
+        return render(routeProps);
       }}
     />
   );

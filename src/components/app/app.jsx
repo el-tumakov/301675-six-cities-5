@@ -24,9 +24,12 @@ const App = (props) => {
             <LoginScreen />
           )}
         />
-        <Route exact path="/favorites">
-          <FavoritesScreen />
-        </Route>
+        <PrivateRoute exact
+          path="/favorites"
+          render={() => (
+            <FavoritesScreen />
+          )}
+        />
         <Route exact
           path="/offer/:id"
           render={({match}) => {
