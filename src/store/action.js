@@ -5,7 +5,8 @@ export const ActionType = {
   CHANGE_HOVERED_OFFER: `CHANGE_HOVERED_OFFER`,
   RESET_HOVERED_OFFER: `RESET_HOVERED_OFFER`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
-  LOAD_USER_DATA: `LOAD_USER_DATA`
+  LOAD_USER_DATA: `LOAD_USER_DATA`,
+  LOAD_REVIEWS: `LOAD_REVIEWS`
 };
 
 export const ActionCreator = {
@@ -36,4 +37,8 @@ export const ActionCreator = {
     type: ActionType.LOAD_USER_DATA,
     payload: userData
   }),
+  loadReviews: (reviews) => ({
+    type: ActionType.LOAD_REVIEWS,
+    payload: reviews
+  })
 };
