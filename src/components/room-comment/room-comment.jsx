@@ -16,7 +16,7 @@ const TITLES = [
   `perfect`
 ];
 
-const createRatingFragment = (changeHandler) => {
+const createRatingFragment = (changeHandler, state) => {
   const ratingInputs = [];
 
   for (let i = MAX_RATING; i > 0; i--) {
@@ -29,6 +29,7 @@ const createRatingFragment = (changeHandler) => {
             id={`${i}-stars`}
             type="radio"
             onChange={changeHandler}
+            disabled={state.isDisabled}
           />
           <label htmlFor={`${i}-stars`} className="reviews__rating-label form__rating-label" title={TITLES[i - 1]}>
             <svg className="form__star-image" width="37" height="33">
@@ -49,20 +50,22 @@ class RoomComment extends PureComponent {
     this.state = {
       comment: ``,
       rating: ``,
+      isDisabled: false
     };
 
     this.form = createRef();
     this.input = createRef();
+    this.submitButton = createRef();
 
     this.handleCommentChange = this.handleCommentChange.bind(this);
     this.handleRatingChange = this.handleRatingChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleLoad = this.handleLoad.bind(this);
+    this.handleError = this.handleError.bind(this);
   }
 
   handleCommentChange(evt) {
     evt.preventDefault();
-
-    this.input.current.setCustomValidity(``);
 
     this.setState({
       comment: evt.target.value
@@ -70,8 +73,6 @@ class RoomComment extends PureComponent {
   }
 
   handleRatingChange(evt) {
-    this.input.current.setCustomValidity(``);
-
     this.setState({
       rating: evt.target.value
     });
@@ -82,38 +83,44 @@ class RoomComment extends PureComponent {
 
     const {onSubmit, offerId} = this.props;
 
-    if (this.checkValidity()) {
-      onSubmit({
-        comment: this.state.comment,
-        rating: this.state.rating
-      }, offerId);
+    this.disableForm();
 
-      this.resetForm();
-    }
+    onSubmit(
+        {
+          comment: this.state.comment,
+          rating: this.state.rating
+        },
+        offerId,
+        this.handleLoad,
+        this.handleError
+    );
   }
 
-  resetForm() {
+  handleLoad() {
     this.form.current.reset();
+    this.form.current.style.border = null;
+
     this.setState({
       comment: ``,
-      rating: ``
+      rating: ``,
+      isDisabled: false
     });
   }
 
-  checkValidity() {
-    if (this.state.comment.length < CommentLength.MIN) {
-      this.input.current.setCustomValidity(`Describe your stay with at least 50 characters.`);
+  handleError() {
+    this.form.current.style.border = `1px solid red`;
 
-      return false;
-    }
+    this.setState({
+      isDisabled: false
+    });
+  }
 
-    if (!this.state.rating) {
-      this.input.current.setCustomValidity(`Set ratig.`);
+  disableForm() {
+    this.submitButton.current.disabled = true;
 
-      return false;
-    }
-
-    return true;
+    this.setState({
+      isDisabled: true
+    });
   }
 
   render() {
@@ -136,16 +143,33 @@ class RoomComment extends PureComponent {
           onChange={this.handleCommentChange}
           ref={this.input}
           maxLength={CommentLength.MAX}
+          disabled={this.state.isDisabled}
         >
         </textarea>
         <div className="reviews__button-wrapper">
           <p className="reviews__help">
             To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
           </p>
-          <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
+          <button
+            className="reviews__submit form__submit button"
+            type="submit"
+            disabled
+            ref={this.submitButton}
+          >
+            Submit
+          </button>
         </div>
       </form>
     );
+  }
+
+  componentDidUpdate() {
+    if (this.state.rating
+      && this.state.comment.length >= CommentLength.MIN
+      && !this.state.isDisabled
+    ) {
+      this.submitButton.current.disabled = false;
+    }
   }
 }
 
@@ -155,8 +179,12 @@ RoomComment.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit(commentData, offerId) {
-    dispatch(uploadComment(commentData, offerId));
+  onSubmit(commentData, offerId, loadingHandler, errorHandler) {
+    Promise.all([
+      dispatch(uploadComment(commentData, offerId))
+    ])
+    .then(() => (loadingHandler()))
+    .catch(() => (errorHandler()));
   }
 });
 
