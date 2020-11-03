@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {uploadComment} from "../../store/api-actions";
 
 const MAX_RATING = 5;
+const MIN_COMMENT_LENGTH = 50;
 const TITLES = [
   `terribly`,
   `badly`,
@@ -48,6 +49,7 @@ class RoomComment extends PureComponent {
     };
 
     this.form = createRef();
+    this.input = createRef();
 
     this.handleCommentChange = this.handleCommentChange.bind(this);
     this.handleRatingChange = this.handleRatingChange.bind(this);
@@ -56,12 +58,17 @@ class RoomComment extends PureComponent {
 
   handleCommentChange(evt) {
     evt.preventDefault();
+
+    this.input.current.setCustomValidity(``);
+
     this.setState({
       comment: evt.target.value
     });
   }
 
   handleRatingChange(evt) {
+    this.input.current.setCustomValidity(``);
+
     this.setState({
       rating: evt.target.value
     });
@@ -72,16 +79,14 @@ class RoomComment extends PureComponent {
 
     const {onSubmit, offerId} = this.props;
 
-    if (this.state.comment.length < 50 || !this.state.rating) {
-      return;
+    if (this.checkValidity()) {
+      onSubmit({
+        comment: this.state.comment,
+        rating: this.state.rating
+      }, offerId);
+
+      this.resetForm();
     }
-
-    onSubmit({
-      comment: this.state.comment,
-      rating: this.state.rating
-    }, offerId);
-
-    this.resetForm();
   }
 
   resetForm() {
@@ -90,6 +95,22 @@ class RoomComment extends PureComponent {
       comment: ``,
       rating: ``
     });
+  }
+
+  checkValidity() {
+    if (this.state.comment.length < MIN_COMMENT_LENGTH) {
+      this.input.current.setCustomValidity(`Describe your stay with at least 50 characters.`);
+
+      return false;
+    }
+
+    if (!this.state.rating) {
+      this.input.current.setCustomValidity(`Set ratig.`);
+
+      return false;
+    }
+
+    return true;
   }
 
   render() {
@@ -110,6 +131,7 @@ class RoomComment extends PureComponent {
           placeholder="Tell how was your stay, what you like and what can be improved"
           value={this.state.comment}
           onChange={this.handleCommentChange}
+          ref={this.input}
         >
         </textarea>
         <div className="reviews__button-wrapper">
