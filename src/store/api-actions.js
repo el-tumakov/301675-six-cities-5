@@ -25,3 +25,8 @@ export const fetchReviews = (offerId) => (dispatch, _getState, api) => (
   api.get(`/comments/` + offerId)
     .then(({data}) => dispatch(ActionCreator.loadReviews(data)))
 );
+
+export const uploadComment = ({comment, rating}, offerId) => (dispatch, _getState, api) => (
+  api.post(`/comments/` + offerId, {comment, rating})
+    .then(() => dispatch(fetchReviews(offerId)))
+);
