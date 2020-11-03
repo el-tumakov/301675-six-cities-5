@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import RoomReview from "../room-review/room-review";
 import RoomComment from "../room-comment/room-comment";
 
@@ -26,4 +27,9 @@ RoomReviewsList.propTypes = {
   reviews: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
-export default RoomReviewsList;
+const mapStateToProps = ({DATA}) => ({
+  reviews: DATA.reviews
+});
+
+export {RoomReviewsList};
+export default connect(mapStateToProps, null)(RoomReviewsList);

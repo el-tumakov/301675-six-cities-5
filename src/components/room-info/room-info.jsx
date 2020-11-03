@@ -26,8 +26,6 @@ const RoomInfo = (props) => {
     owner
   } = offer;
 
-  const offerReviews = [];
-
   return (
     <section className="property">
       <RoomGallery photos={photos} />
@@ -89,9 +87,7 @@ const RoomInfo = (props) => {
             description={description}
             owner={owner}
           />
-          <RoomReviewsList
-            reviews={offerReviews}
-          />
+          <RoomReviewsList />
         </div>
       </div>
       <section className="property__map map">

@@ -4,11 +4,10 @@ import PropTypes from "prop-types";
 const RoomReview = (props) => {
   const {review} = props;
   const {
-    avatar,
-    name,
+    user,
     rating,
     date,
-    description
+    comment
   } = review;
 
   const getStringDate = (isoDate) => {
@@ -22,10 +21,10 @@ const RoomReview = (props) => {
     <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
-          <img className="reviews__avatar user__avatar" src={avatar} width="54" height="54" alt="Reviews avatar" />
+          <img className="reviews__avatar user__avatar" src={user.avatar} width="54" height="54" alt="Reviews avatar" />
         </div>
         <span className="reviews__user-name">
-          {name}
+          {user.name}
         </span>
       </div>
       <div className="reviews__info">
@@ -36,7 +35,7 @@ const RoomReview = (props) => {
           </div>
         </div>
         <p className="reviews__text">
-          {description}
+          {comment}
         </p>
         <time className="reviews__time" dateTime={date}>{getStringDate(date)}</time>
       </div>
@@ -46,11 +45,10 @@ const RoomReview = (props) => {
 
 RoomReview.propTypes = {
   review: PropTypes.shape({
-    avatar: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
+    user: PropTypes.object.isRequired,
     rating: PropTypes.number.isRequired,
     date: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired
+    comment: PropTypes.string.isRequired
   }).isRequired
 };
 
