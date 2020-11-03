@@ -20,3 +20,8 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
       dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH))
       && dispatch(ActionCreator.loadUserData(data)))
 );
+
+export const fetchReviews = (offerId) => (dispatch, _getState, api) => (
+  api.get(`/comments/` + offerId)
+    .then(({data}) => dispatch(ActionCreator.loadReviews(data)))
+);
