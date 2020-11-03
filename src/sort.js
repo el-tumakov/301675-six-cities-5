@@ -19,3 +19,9 @@ export const sortOffers = (sortType, offers) => {
 
   return sortedOffers;
 };
+
+export const sortReviews = (reviews) => {
+  return reviews.slice().sort((previous, next) => (
+    new Date(next.date) - new Date(previous.date)
+  ));
+};
