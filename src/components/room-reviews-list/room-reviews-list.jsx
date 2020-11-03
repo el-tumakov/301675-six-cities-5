@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import RoomReview from "../room-review/room-review";
 import RoomComment from "../room-comment/room-comment";
+import {AuthorizationStatus} from "../../const";
 
 const RoomReviewsList = (props) => {
-  const {reviews} = props;
+  const {reviews, authorizationStatus} = props;
 
   return (
     <section className="property__reviews reviews">
@@ -18,17 +19,22 @@ const RoomReviewsList = (props) => {
           />
         ))}
       </ul>
-      <RoomComment />
+      {authorizationStatus === AuthorizationStatus.AUTH
+        ? <RoomComment />
+        : ``
+      }
     </section>
   );
 };
 
 RoomReviewsList.propTypes = {
-  reviews: PropTypes.arrayOf(PropTypes.object).isRequired
+  reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
+  authorizationStatus: PropTypes.string.isRequired
 };
 
-const mapStateToProps = ({DATA}) => ({
-  reviews: DATA.reviews
+const mapStateToProps = ({DATA, USER}) => ({
+  reviews: DATA.reviews,
+  authorizationStatus: USER.authorizationStatus
 });
 
 export {RoomReviewsList};
