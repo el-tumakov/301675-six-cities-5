@@ -3,8 +3,11 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {uploadComment} from "../../store/api-actions";
 
+const CommentLength = {
+  MIN: 50,
+  MAX: 300
+};
 const MAX_RATING = 5;
-const MIN_COMMENT_LENGTH = 50;
 const TITLES = [
   `terribly`,
   `badly`,
@@ -98,7 +101,7 @@ class RoomComment extends PureComponent {
   }
 
   checkValidity() {
-    if (this.state.comment.length < MIN_COMMENT_LENGTH) {
+    if (this.state.comment.length < CommentLength.MIN) {
       this.input.current.setCustomValidity(`Describe your stay with at least 50 characters.`);
 
       return false;
@@ -132,6 +135,7 @@ class RoomComment extends PureComponent {
           value={this.state.comment}
           onChange={this.handleCommentChange}
           ref={this.input}
+          maxLength={CommentLength.MAX}
         >
         </textarea>
         <div className="reviews__button-wrapper">
