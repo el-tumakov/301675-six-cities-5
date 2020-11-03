@@ -1,6 +1,16 @@
-import React, {PureComponent} from "react";
+import React, {PureComponent, createRef} from "react";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {uploadComment} from "../../store/api-actions";
 
 const MAX_RATING = 5;
+const TITLES = [
+  `terribly`,
+  `badly`,
+  `not bad`,
+  `good`,
+  `perfect`
+];
 
 const createRatingFragment = (changeHandler) => {
   const ratingInputs = [];
@@ -16,7 +26,7 @@ const createRatingFragment = (changeHandler) => {
             type="radio"
             onChange={changeHandler}
           />
-          <label htmlFor={`${i}-stars`} className="reviews__rating-label form__rating-label" title="perfect">
+          <label htmlFor={`${i}-stars`} className="reviews__rating-label form__rating-label" title={TITLES[i - 1]}>
             <svg className="form__star-image" width="37" height="33">
               <use xlinkHref="#icon-star"></use>
             </svg>
@@ -34,8 +44,10 @@ class RoomComment extends PureComponent {
 
     this.state = {
       comment: ``,
-      rating: ``
+      rating: ``,
     };
+
+    this.form = createRef();
 
     this.handleCommentChange = this.handleCommentChange.bind(this);
     this.handleRatingChange = this.handleRatingChange.bind(this);
@@ -50,7 +62,6 @@ class RoomComment extends PureComponent {
   }
 
   handleRatingChange(evt) {
-    evt.preventDefault();
     this.setState({
       rating: evt.target.value
     });
@@ -58,6 +69,27 @@ class RoomComment extends PureComponent {
 
   handleSubmit(evt) {
     evt.preventDefault();
+
+    const {onSubmit, offerId} = this.props;
+
+    if (this.state.comment.length < 50 || !this.state.rating) {
+      return;
+    }
+
+    onSubmit({
+      comment: this.state.comment,
+      rating: this.state.rating
+    }, offerId);
+
+    this.resetForm();
+  }
+
+  resetForm() {
+    this.form.current.reset();
+    this.setState({
+      comment: ``,
+      rating: ``
+    });
   }
 
   render() {
@@ -65,10 +97,11 @@ class RoomComment extends PureComponent {
       <form
         className="reviews__form form"
         onSubmit={this.handleSubmit}
+        ref={this.form}
       >
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
-          {createRatingFragment(this.handleRatingChange)}
+          {createRatingFragment(this.handleRatingChange, this.state)}
         </div>
         <textarea
           className="reviews__textarea form__textarea"
@@ -90,4 +123,16 @@ class RoomComment extends PureComponent {
   }
 }
 
-export default RoomComment;
+RoomComment.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  offerId: PropTypes.number.isRequired
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit(commentData, offerId) {
+    dispatch(uploadComment(commentData, offerId));
+  }
+});
+
+export {RoomComment};
+export default connect(null, mapDispatchToProps)(RoomComment);

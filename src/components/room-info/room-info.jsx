@@ -87,7 +87,9 @@ const RoomInfo = (props) => {
             description={description}
             owner={owner}
           />
-          <RoomReviewsList />
+          <RoomReviewsList
+            offerId={id}
+          />
         </div>
       </div>
       <section className="property__map map">

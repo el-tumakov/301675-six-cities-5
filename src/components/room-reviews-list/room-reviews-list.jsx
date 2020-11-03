@@ -6,7 +6,7 @@ import RoomComment from "../room-comment/room-comment";
 import {AuthorizationStatus} from "../../const";
 
 const RoomReviewsList = (props) => {
-  const {reviews, authorizationStatus} = props;
+  const {reviews, authorizationStatus, offerId} = props;
 
   return (
     <section className="property__reviews reviews">
@@ -20,7 +20,7 @@ const RoomReviewsList = (props) => {
         ))}
       </ul>
       {authorizationStatus === AuthorizationStatus.AUTH
-        ? <RoomComment />
+        ? <RoomComment offerId={offerId}/>
         : ``
       }
     </section>
@@ -29,7 +29,8 @@ const RoomReviewsList = (props) => {
 
 RoomReviewsList.propTypes = {
   reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
-  authorizationStatus: PropTypes.string.isRequired
+  authorizationStatus: PropTypes.string.isRequired,
+  offerId: PropTypes.number.isRequired
 };
 
 const mapStateToProps = ({DATA, USER}) => ({
