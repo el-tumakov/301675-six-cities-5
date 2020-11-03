@@ -4,11 +4,12 @@ import {connect} from "react-redux";
 import RoomInfo from "../room-info/room-info";
 import OffersListRoom from "../offers-list-room/offers-list-room";
 import Header from "../header/header";
+import {fetchReviews} from "../../store/api-actions";
 
 const MAX_SIMILAR_OFFERS = 3;
 
 const RoomScreen = (props) => {
-  const {id, offers} = props;
+  const {id, offers, loadReviews} = props;
 
   const offer = offers.find((item) => item.id === id);
   const similarOffers = [];
@@ -22,6 +23,8 @@ const RoomScreen = (props) => {
       similarOffers.push(offers[i]);
     }
   }
+
+  loadReviews(id);
 
   return (
     <div className="page">
@@ -47,11 +50,18 @@ const RoomScreen = (props) => {
 RoomScreen.propTypes = {
   id: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  loadReviews: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({DATA}) => ({
   offers: DATA.offers,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  loadReviews(offerId) {
+    dispatch(fetchReviews(offerId));
+  }
+});
+
 export {RoomScreen};
-export default connect(mapStateToProps, null)(RoomScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(RoomScreen);
