@@ -7,7 +7,16 @@ import {AuthorizationStatus} from "../../const";
 
 
 const FavoriteButton = (props) => {
-  const {id, favorite, authorizationStatus, onButtonClick} = props;
+  const {
+    id,
+    favorite,
+    authorizationStatus,
+    onButtonClick,
+    buttonClassName,
+    buttonWidth,
+    buttonHeight
+  } = props;
+
   const history = useHistory();
   const [isFavorite, changeFavorite] = useState(favorite);
 
@@ -16,9 +25,9 @@ const FavoriteButton = (props) => {
       className={
         `${
           isFavorite
-            ? `place-card__bookmark-button--active`
+            ? `${buttonClassName}-button--active`
             : ``
-        } place-card__bookmark-button button`
+        } ${buttonClassName}-button button`
       }
       type="button"
       onClick={(evt) => {
@@ -31,7 +40,7 @@ const FavoriteButton = (props) => {
           : onButtonClick(id, +!isFavorite);
       }}
     >
-      <svg className="place-card__bookmark-icon" width="18" height="19">
+      <svg className={`place-card__bookmark-icon`} width={buttonWidth} height={buttonHeight}>
         <use xlinkHref="#icon-bookmark"></use>
       </svg>
       <span className="visually-hidden">To bookmarks</span>
@@ -43,7 +52,10 @@ FavoriteButton.propTypes = {
   id: PropTypes.number.isRequired,
   favorite: PropTypes.bool.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
-  onButtonClick: PropTypes.func.isRequired
+  onButtonClick: PropTypes.func.isRequired,
+  buttonClassName: PropTypes.string.isRequired,
+  buttonWidth: PropTypes.number.isRequired,
+  buttonHeight: PropTypes.number.isRequired
 };
 
 const mapStateToProps = ({USER}) => ({

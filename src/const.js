@@ -54,3 +54,10 @@ export const CardImageSizes = {
   FAVORITE_WIDTH: 150,
   FAVORITE_HEIGHT: 110
 };
+
+export const FavoriteButtonSizes = {
+  MAIN_WIDTH: 18,
+  MAIN_HEIGHT: 19,
+  ROOM_WIDTH: 31,
+  ROOM_HEIGHT: 33
+};

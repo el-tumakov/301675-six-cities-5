@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
-import FavoriteButton from "../favorite-button/favorite-button";
+import FavoriteButtonMain from "../favorite-button-main/favorite-button-main";
 
 
 const OfferCard = (props) => {
@@ -61,7 +61,7 @@ const OfferCard = (props) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <FavoriteButton id={id} favorite={favorite} />
+          <FavoriteButtonMain id={id} favorite={favorite} />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
