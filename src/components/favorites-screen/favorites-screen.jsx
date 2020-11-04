@@ -1,21 +1,29 @@
-import React from "react";
+import React, {useEffect} from "react";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import {Link} from 'react-router-dom';
-import FavoritesList from "../favorites-list/favorites-list";
+import {fetchFavoriteOffers} from "../../store/api-actions";
 import Header from "../header/header";
+import FavoritesFilled from "../favorites-filled/favorites-filled";
+import FavoritesEmpty from "../favorites-empty/favorites-empty";
 
-const FavoritesScreen = () => {
+
+const FavoritesScreen = (props) => {
+  const {favoriteOffers, loadFavoriteOffers} = props;
+
+  useEffect(() => {
+    loadFavoriteOffers();
+  }, []);
+
   return (
     <div className="page">
       <Header />
 
-      <main className="page__main page__main--favorites">
-        <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <FavoritesList />
-          </section>
-        </div>
-      </main>
+      {favoriteOffers.length
+        ? <FavoritesFilled favoriteOffers={favoriteOffers} />
+        : <FavoritesEmpty />
+      }
+
       <footer className="footer container">
         <Link className="footer__logo-link" to="/">
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
@@ -25,4 +33,21 @@ const FavoritesScreen = () => {
   );
 };
 
-export default FavoritesScreen;
+FavoritesScreen.propTypes = {
+  favoriteOffers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  loadFavoriteOffers: PropTypes.func.isRequired
+};
+
+const mapStateToProps = ({DATA}) => ({
+  favoriteOffers: DATA.favoriteOffers
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loadFavoriteOffers() {
+    dispatch(fetchFavoriteOffers());
+  }
+});
+
+
+export {FavoritesScreen};
+export default connect(mapStateToProps, mapDispatchToProps)(FavoritesScreen);

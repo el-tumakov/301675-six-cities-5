@@ -1,16 +1,10 @@
-import React, {useEffect} from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
 import FavoritesCity from "../favorites-city/favorites-city";
-import {fetchFavoriteOffers} from "../../store/api-actions";
 import {CITIES} from "../../const";
 
 const FavoritesList = (props) => {
-  const {favoriteOffers, loadFavoriteOffers} = props;
-
-  useEffect(() => {
-    loadFavoriteOffers();
-  }, []);
+  const {favoriteOffers} = props;
 
   const getFavoritesOffersOfCity = (city) => {
     return favoriteOffers.filter((offer) => {
@@ -34,21 +28,8 @@ const FavoritesList = (props) => {
 };
 
 FavoritesList.propTypes = {
-  favoriteOffers: PropTypes.arrayOf(PropTypes.object).isRequired,
-  loadFavoriteOffers: PropTypes.func.isRequired
+  favoriteOffers: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
-const mapStateToProps = ({DATA}) => ({
-  favoriteOffers: DATA.favoriteOffers
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  loadFavoriteOffers() {
-    dispatch(fetchFavoriteOffers());
-  }
-});
-
-
-export {FavoritesList};
-export default connect(mapStateToProps, mapDispatchToProps)(FavoritesList);
+export default FavoritesList;
 
