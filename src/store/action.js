@@ -6,7 +6,8 @@ export const ActionType = {
   RESET_HOVERED_OFFER: `RESET_HOVERED_OFFER`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   LOAD_USER_DATA: `LOAD_USER_DATA`,
-  LOAD_REVIEWS: `LOAD_REVIEWS`
+  LOAD_REVIEWS: `LOAD_REVIEWS`,
+  UPDATE_FAVORITE: `UPDATE_FAVORITE`
 };
 
 export const ActionCreator = {
@@ -40,5 +41,9 @@ export const ActionCreator = {
   loadReviews: (reviews) => ({
     type: ActionType.LOAD_REVIEWS,
     payload: reviews
+  }),
+  updateFavorite: (offer) => ({
+    type: ActionType.UPDATE_FAVORITE,
+    payload: offer
   })
 };

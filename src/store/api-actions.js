@@ -30,3 +30,11 @@ export const uploadComment = ({comment, rating}, offerId) => (dispatch, _getStat
   api.post(`/comments/` + offerId, {comment, rating})
     .then(() => dispatch(fetchReviews(offerId)))
 );
+
+export const setFavorite = (offerId, status) => (dispatch, _getState, api) => (
+  api.post(`/favorite/${offerId}/${status}`)
+    .then(({data}) => dispatch(ActionCreator.updateFavorite(data)))
+    .catch((err) => {
+      throw err;
+    })
+);

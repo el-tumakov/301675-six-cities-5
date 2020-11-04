@@ -23,6 +23,13 @@ const appData = (state = initialState, action) => {
       return extend(state, {
         reviews: adaptReviewsToClient(action.payload)
       });
+
+    case ActionType.UPDATE_FAVORITE:
+      const currentOffer = state.offers.find((offer) => (
+        offer.id === action.payload.id
+      ));
+
+      currentOffer.favorite = action.payload.is_favorite;
   }
 
   return state;
