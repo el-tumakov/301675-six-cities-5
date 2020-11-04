@@ -4,7 +4,8 @@ import {extend, adaptOffersToClient, adaptReviewsToClient} from "../../../utils"
 const initialState = {
   offers: [],
   userData: {},
-  reviews: []
+  reviews: [],
+  favoriteOffers: []
 };
 
 const appData = (state = initialState, action) => {
@@ -30,6 +31,12 @@ const appData = (state = initialState, action) => {
       ));
 
       currentOffer.favorite = action.payload.is_favorite;
+      break;
+
+    case ActionType.LOAD_FAVORITE_OFFERS:
+      return extend(state, {
+        favoriteOffers: adaptOffersToClient(action.payload)
+      });
   }
 
   return state;
