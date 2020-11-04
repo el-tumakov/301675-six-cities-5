@@ -14,7 +14,9 @@ const OfferCard = (props) => {
     infoClassName,
     ratingStyle,
     onHoverOffer,
-    resetHoveredOffer
+    resetHoveredOffer,
+    imageWidth,
+    imageHeight
   } = props;
 
   const {
@@ -50,7 +52,7 @@ const OfferCard = (props) => {
       }
       <div className={`${imageClassName} place-card__image-wrapper`}>
         <Link to={offerLink}>
-          <img className="place-card__image" src={preview} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={preview} width={imageWidth} height={imageHeight} alt="Place image" />
         </Link>
       </div>
       <div className={`${infoClassName} place-card__info`}>
@@ -93,6 +95,8 @@ OfferCard.propTypes = {
   ratingStyle: PropTypes.object.isRequired,
   onHoverOffer: PropTypes.func.isRequired,
   resetHoveredOffer: PropTypes.func.isRequired,
+  imageWidth: PropTypes.number.isRequired,
+  imageHeight: PropTypes.number.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({
