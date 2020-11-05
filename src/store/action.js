@@ -1,10 +1,9 @@
 export const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
-  GET_CITY_OFFERS: `GET_OFFERS`,
+  LOAD_OFFERS: `LOAD_OFFERS`,
   CHANGE_SORT: `CHANGE_SORT`,
   CHANGE_HOVERED_OFFER: `CHANGE_HOVERED_OFFER`,
   RESET_HOVERED_OFFER: `RESET_HOVERED_OFFER`,
-  RESET_STATE: `RESET_STATE`
 };
 
 export const ActionCreator = {
@@ -12,8 +11,9 @@ export const ActionCreator = {
     type: ActionType.CHANGE_CITY,
     payload: city
   }),
-  getCityOffer: () => ({
-    type: ActionType.GET_CITY_OFFERS
+  loadOffers: (offers) => ({
+    type: ActionType.LOAD_OFFERS,
+    payload: offers
   }),
   changeSort: (sort) => ({
     type: ActionType.CHANGE_SORT,
@@ -25,8 +25,5 @@ export const ActionCreator = {
   }),
   resetHoveredOffer: () => ({
     type: ActionType.RESET_HOVERED_OFFER
-  }),
-  resetState: () => ({
-    type: ActionType.RESET_STATE
   })
 };

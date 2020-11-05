@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
 import RoomGallery from "../room-gallery/room-gallery";
 import RoomOwner from "../room-owner/room-owner";
 import RoomReviewsList from "../room-reviews-list/room-reviews-list";
@@ -10,14 +9,8 @@ const RoomInfo = (props) => {
   const {
     id,
     offers,
-    owners,
-    reviews,
     offer,
-    hoveredOffer
   } = props;
-
-  const owner = owners.find((item) => item.id === offer.ownerId);
-  const offerReviews = reviews.filter((item) => item.offerId === id);
 
   const {
     photos,
@@ -30,8 +23,10 @@ const RoomInfo = (props) => {
     price,
     features,
     description,
-    city
+    owner
   } = offer;
+
+  const offerReviews = [];
 
   return (
     <section className="property">
@@ -101,9 +96,8 @@ const RoomInfo = (props) => {
       </div>
       <section className="property__map map">
         <Map
-          city={city}
+          activeOfferId={id}
           offers={offers}
-          hoveredOffer={hoveredOffer}
         />
       </section>
     </section>
@@ -113,16 +107,7 @@ const RoomInfo = (props) => {
 RoomInfo.propTypes = {
   id: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
-  owners: PropTypes.arrayOf(PropTypes.object).isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
   offer: PropTypes.object.isRequired,
-  hoveredOffer: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
 };
 
-
-const mapStateToProps = (state) => ({
-  hoveredOffer: state.hoveredOffer
-});
-
-export {RoomInfo};
-export default connect(mapStateToProps)(RoomInfo);
+export default RoomInfo;

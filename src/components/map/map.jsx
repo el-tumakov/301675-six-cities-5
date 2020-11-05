@@ -3,9 +3,6 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
-import {Coordinates} from "../../const";
-
-const ZOOM = 12;
 
 class Map extends PureComponent {
   constructor(props) {
@@ -24,19 +21,37 @@ class Map extends PureComponent {
       iconUrl: `/img/pin-active.svg`,
       iconSize: [30, 30]
     });
+    this._activeOfferId = ``;
   }
 
-  initializeMap() {
-    const {offers, city} = this.props;
+  _initializeMap() {
+    const {offers} = this.props;
 
-    this._city = city;
-    this._coordinates = Coordinates[this._city.toUpperCase()];
-    this._map.setView(this._coordinates, ZOOM);
+    this._city = offers[0].city;
+    this._coordinates = [
+      this._city.location.latitude,
+      this._city.location.longitude
+    ];
+    this._map.setView(this._coordinates, this._city.location.zoom);
+  }
+
+  _initializeMarkers() {
+    const {offers} = this.props;
+
+    for (let marker of this._markers) {
+      marker.remove();
+    }
+
     this._markers = [];
 
     for (let offer of offers) {
+      const coordinates = [
+        offer.location.latitude,
+        offer.location.longitude
+      ];
+
       this._markers.push(
-          leaflet.marker(offer.coordinates, {icon: this._icon, offerId: offer.id})
+          leaflet.marker(coordinates, {icon: this._icon, offerId: offer.id})
       );
     }
 
@@ -46,6 +61,12 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
+    const {activeOfferId} = this.props;
+
+    if (activeOfferId) {
+      this._activeOfferId = activeOfferId;
+    }
+
     this._map = leaflet.map(`map`, {
       zoomControl: false,
       marker: true
@@ -57,14 +78,27 @@ class Map extends PureComponent {
       })
       .addTo(this._map);
 
-    this.initializeMap();
+    this._initializeMap();
+    this._initializeMarkers();
   }
 
   componentDidUpdate() {
-    const {hoveredOffer, city} = this.props;
+    const {activeOfferId, offers, hoveredOffer} = this.props;
 
-    if (this._city !== city) {
-      this.initializeMap();
+    if (activeOfferId && this._activeOfferId !== activeOfferId) {
+      this._activeOfferId = activeOfferId;
+
+      this._initializeMap();
+      this._initializeMarkers();
+
+      return;
+    }
+
+    if (this._city.name !== offers[0].city.name) {
+      this._initializeMap();
+      this._initializeMarkers();
+
+      return;
     }
 
     if (this._activeMarker) {
@@ -97,13 +131,13 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
+  activeOfferId: PropTypes.number,
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
   hoveredOffer: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  city: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  hoveredOffer: state.hoveredOffer
+const mapStateToProps = ({PROCESS}) => ({
+  hoveredOffer: PROCESS.hoveredOffer
 });
 
 export {Map};

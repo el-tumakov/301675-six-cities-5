@@ -1,11 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
 import FavoritesList from "../favorites-list/favorites-list";
 
-const FavoritesScreen = (props) => {
-  const {offers} = props;
-
+const FavoritesScreen = () => {
   return (
     <div className="page">
       <header className="header">
@@ -35,7 +32,7 @@ const FavoritesScreen = (props) => {
         <div className="page__favorites-container container">
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
-            <FavoritesList offers={offers}/>
+            <FavoritesList />
           </section>
         </div>
       </main>
@@ -46,10 +43,6 @@ const FavoritesScreen = (props) => {
       </footer>
     </div>
   );
-};
-
-FavoritesScreen.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default FavoritesScreen;

@@ -17,13 +17,13 @@ const OfferCard = (props) => {
 
   const {
     id,
-    photos,
     title,
     premium,
     type,
     rating,
     price,
-    favorite
+    favorite,
+    preview
   } = offer;
 
   const offerLink = `/offer/${id}`;
@@ -48,7 +48,7 @@ const OfferCard = (props) => {
       }
       <div className={`${imageClassName} place-card__image-wrapper`}>
         <Link to={offerLink}>
-          <img className="place-card__image" src={photos[0]} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={preview} width="260" height="200" alt="Place image" />
         </Link>
       </div>
       <div className={`${infoClassName} place-card__info`}>
@@ -90,7 +90,7 @@ const OfferCard = (props) => {
 OfferCard.propTypes = {
   offer: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    photos: PropTypes.arrayOf(PropTypes.string).isRequired,
+    preview: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     premium: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
