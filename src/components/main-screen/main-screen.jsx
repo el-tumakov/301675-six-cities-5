@@ -1,12 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import OffersListMain from "../offers-list-main/offers-list-main";
+import CitiesOffers from "../cities-offers/cities-offers";
 import Map from "../map/map";
 import CityList from "../city-list/city-list";
 import {ActionCreator} from "../../store/action";
-import Sort from "../sort/sort";
-import {sortOffers} from "../../sort";
+
 
 const MainScreen = (props) => {
   const {
@@ -15,12 +14,7 @@ const MainScreen = (props) => {
     onChangeCity,
     getCityOffers,
     activeCity,
-    sort,
-    onChangeSort,
-    hoveredOffer,
   } = props;
-
-  const sortedCityOffers = sortOffers(sort, cityOffers);
 
   return (
     <div className="page page--gray page--main">
@@ -57,21 +51,14 @@ const MainScreen = (props) => {
         />
         <div className="cities">
           <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{sortedCityOffers.length} places to stay in Amsterdam</b>
-              <Sort
-                activeSort={sort}
-                onChangeSort={onChangeSort}
-              />
-              <OffersListMain offers={sortedCityOffers}/>
-            </section>
+            <CitiesOffers
+              offers={cityOffers}
+            />
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
                   city={activeCity}
                   offers={cityOffers}
-                  hoveredOffer={hoveredOffer}
                 />
               </section>
             </div>
@@ -88,16 +75,11 @@ MainScreen.propTypes = {
   cityOffers: PropTypes.arrayOf(PropTypes.object).isRequired,
   onChangeCity: PropTypes.func.isRequired,
   getCityOffers: PropTypes.func.isRequired,
-  sort: PropTypes.string.isRequired,
-  onChangeSort: PropTypes.func.isRequired,
-  hoveredOffer: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
 };
 
 const mapStateToProps = (state) => ({
   activeCity: state.city,
   cityOffers: state.cityOffers,
-  sort: state.sort,
-  hoveredOffer: state.hoveredOffer
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -106,9 +88,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
   getCityOffers() {
     dispatch(ActionCreator.getCityOffer());
-  },
-  onChangeSort(sort) {
-    dispatch(ActionCreator.changeSort(sort));
   }
 });
 

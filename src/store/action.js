@@ -3,7 +3,8 @@ export const ActionType = {
   GET_CITY_OFFERS: `GET_OFFERS`,
   CHANGE_SORT: `CHANGE_SORT`,
   CHANGE_HOVERED_OFFER: `CHANGE_HOVERED_OFFER`,
-  RESET_HOVERED_OFFER: `RESET_HOVERED_OFFER`
+  RESET_HOVERED_OFFER: `RESET_HOVERED_OFFER`,
+  RESET_STATE: `RESET_STATE`
 };
 
 export const ActionCreator = {
@@ -24,5 +25,8 @@ export const ActionCreator = {
   }),
   resetHoveredOffer: () => ({
     type: ActionType.RESET_HOVERED_OFFER
+  }),
+  resetState: () => ({
+    type: ActionType.RESET_STATE
   })
 };
