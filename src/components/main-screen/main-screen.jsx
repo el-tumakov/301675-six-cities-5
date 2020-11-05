@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import CitiesOffers from "../cities-offers/cities-offers";
 import Map from "../map/map";
 import CityList from "../city-list/city-list";
+import MainEmpty from "../main-empty/main-empty";
 import {ActionCreator} from "../../store/action";
 
 
@@ -41,28 +42,30 @@ const MainScreen = (props) => {
         </div>
       </header>
 
-      <main className="page__main page__main--index">
+      <main className={`page__main page__main--index ${cityOffers.length ? `` : `page__main--index-empty`}`}>
         <h1 className="visually-hidden">Cities</h1>
         <CityList
-          offers={offers}
           onChangeCity={onChangeCity}
           getCityOffers={getCityOffers}
           activeCity={activeCity}
         />
         <div className="cities">
-          <div className="cities__places-container container">
-            <CitiesOffers
-              offers={cityOffers}
-            />
-            <div className="cities__right-section">
-              <section className="cities__map map">
-                <Map
-                  city={activeCity}
-                  offers={cityOffers}
-                />
-              </section>
+          {cityOffers.length ?
+            <div className="cities__places-container container">
+              <CitiesOffers
+                offers={cityOffers}
+              />
+              <div className="cities__right-section">
+                <section className="cities__map map">
+                  <Map
+                    city={activeCity}
+                    offers={cityOffers}
+                  />
+                </section>
+              </div>
             </div>
-          </div>
+            : <MainEmpty city={activeCity}/>
+          }
         </div>
       </main>
     </div>
