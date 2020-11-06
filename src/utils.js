@@ -2,7 +2,7 @@ export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
-export const adaptToClient = (offers) => {
+export const adaptOffersToClient = (offers) => {
   const adaptedOffers = offers.map((offer) => {
     const adaptedOffer = Object.assign(
         {},
@@ -36,4 +36,26 @@ export const adaptToClient = (offers) => {
   });
 
   return adaptedOffers;
+};
+
+export const adaptReviewsToClient = (reviews) => {
+  const adaptedReviews = reviews.map((review) => {
+    const adaptedReview = Object.assign(
+        {},
+        review,
+        {
+          user: Object.assign({}, review.user, {
+            avatar: review.user.avatar_url,
+            isPro: review.user.is_pro
+          })
+        }
+    );
+
+    delete adaptedReview.user.avatar_url;
+    delete adaptedReview.user.is_pro;
+
+    return adaptedReview;
+  });
+
+  return adaptedReviews;
 };

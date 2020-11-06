@@ -4,6 +4,8 @@ import RoomGallery from "../room-gallery/room-gallery";
 import RoomOwner from "../room-owner/room-owner";
 import RoomReviewsList from "../room-reviews-list/room-reviews-list";
 import Map from "../map/map";
+import FavoriteButtonRoom from "../favorite-button-room/favorite-button-room";
+
 
 const RoomInfo = (props) => {
   const {
@@ -23,10 +25,9 @@ const RoomInfo = (props) => {
     price,
     features,
     description,
-    owner
+    owner,
+    favorite
   } = offer;
-
-  const offerReviews = [];
 
   return (
     <section className="property">
@@ -43,12 +44,7 @@ const RoomInfo = (props) => {
             <h1 className="property__name">
               {title}
             </h1>
-            <button className="property__bookmark-button button" type="button">
-              <svg className="property__bookmark-icon" width="31" height="33">
-                <use xlinkHref="#icon-bookmark"></use>
-              </svg>
-              <span className="visually-hidden">To bookmarks</span>
-            </button>
+            <FavoriteButtonRoom id={id} favorite={favorite}/>
           </div>
           <div className="property__rating rating">
             <div className="property__stars rating__stars">
@@ -90,7 +86,7 @@ const RoomInfo = (props) => {
             owner={owner}
           />
           <RoomReviewsList
-            reviews={offerReviews}
+            offerId={id}
           />
         </div>
       </div>

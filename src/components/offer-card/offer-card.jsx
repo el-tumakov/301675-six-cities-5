@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
+import FavoriteButtonMain from "../favorite-button-main/favorite-button-main";
+
 
 const OfferCard = (props) => {
   const {
@@ -12,7 +14,9 @@ const OfferCard = (props) => {
     infoClassName,
     ratingStyle,
     onHoverOffer,
-    resetHoveredOffer
+    resetHoveredOffer,
+    imageWidth,
+    imageHeight
   } = props;
 
   const {
@@ -48,7 +52,7 @@ const OfferCard = (props) => {
       }
       <div className={`${imageClassName} place-card__image-wrapper`}>
         <Link to={offerLink}>
-          <img className="place-card__image" src={preview} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={preview} width={imageWidth} height={imageHeight} alt="Place image" />
         </Link>
       </div>
       <div className={`${infoClassName} place-card__info`}>
@@ -57,20 +61,7 @@ const OfferCard = (props) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button
-            className={
-              `${
-                favorite
-                  ? `place-card__bookmark-button--active`
-                  : ``
-              } place-card__bookmark-button button`
-            }
-            type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <FavoriteButtonMain id={id} favorite={favorite} />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -104,6 +95,8 @@ OfferCard.propTypes = {
   ratingStyle: PropTypes.object.isRequired,
   onHoverOffer: PropTypes.func.isRequired,
   resetHoveredOffer: PropTypes.func.isRequired,
+  imageWidth: PropTypes.number.isRequired,
+  imageHeight: PropTypes.number.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({

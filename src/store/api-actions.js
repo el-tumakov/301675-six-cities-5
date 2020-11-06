@@ -20,3 +20,27 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
       dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH))
       && dispatch(ActionCreator.loadUserData(data)))
 );
+
+export const fetchReviews = (offerId) => (dispatch, _getState, api) => (
+  api.get(`/comments/` + offerId)
+    .then(({data}) => dispatch(ActionCreator.loadReviews(data)))
+);
+
+export const uploadComment = ({comment, rating}, offerId) => (dispatch, _getState, api) => (
+  api.post(`/comments/` + offerId, {comment, rating})
+    .then(() => dispatch(fetchReviews(offerId)))
+);
+
+export const fetchFavoriteOffers = () => (dispatch, _getState, api) => (
+  api.get(`/favorite`)
+    .then(({data}) => dispatch(ActionCreator.loadFavoriteOffers(data)))
+);
+
+export const setFavorite = (offerId, status) => (dispatch, _getState, api) => (
+  api.post(`/favorite/${offerId}/${status}`)
+    .then(({data}) => dispatch(ActionCreator.updateFavorite(data)))
+    .then(() => dispatch(fetchFavoriteOffers()))
+    .catch((err) => {
+      throw err;
+    })
+);

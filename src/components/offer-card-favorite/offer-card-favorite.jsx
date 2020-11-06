@@ -1,5 +1,7 @@
 import React from "react";
 import OfferCard from "../offer-card/offer-card";
+import {CardImageSizes} from "../../const";
+
 
 const OfferCardFavorite = (props) => {
   return (
@@ -8,6 +10,8 @@ const OfferCardFavorite = (props) => {
       imageClassName={`favorites__image-wrapper`}
       infoClassName={`favorites__card-info`}
       ratingStyle={{width: `100%`}}
+      imageWidth={CardImageSizes.FAVORITE_WIDTH}
+      imageHeight={CardImageSizes.FAVORITE_HEIGHT}
       {...props}
     />
   );

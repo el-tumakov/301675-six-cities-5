@@ -1,18 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
 import FavoritesCity from "../favorites-city/favorites-city";
 import {CITIES} from "../../const";
 
 const FavoritesList = (props) => {
-  const {offers} = props;
-  const favoritesOffers = offers.filter((offer) => {
-    return offer.favorite ? offer : ``;
-  });
+  const {favoriteOffers} = props;
 
   const getFavoritesOffersOfCity = (city) => {
-    return favoritesOffers.filter((offer) => {
-      return offer.city === city ? offer : ``;
+    return favoriteOffers.filter((offer) => {
+      return offer.city.name === city ? offer : ``;
     });
   };
 
@@ -32,14 +28,8 @@ const FavoritesList = (props) => {
 };
 
 FavoritesList.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  favoriteOffers: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
-const mapStateToProps = ({DATA}) => ({
-  offers: DATA.offers,
-});
-
-
-export {FavoritesList};
-export default connect(mapStateToProps, null)(FavoritesList);
+export default FavoritesList;
 
