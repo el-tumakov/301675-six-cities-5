@@ -8,8 +8,12 @@ import thunk from "redux-thunk";
 import {createAPI} from "./services/api";
 import {composeWithDevTools} from "redux-devtools-extension";
 import {fetchOffers} from "./store/api-actions";
+import {ActionCreator} from "./store/action";
+import {AuthorizationStatus} from "./const";
 
-const api = createAPI();
+const api = createAPI(
+    () => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH))
+);
 
 const store = createStore(
     rootReducer,

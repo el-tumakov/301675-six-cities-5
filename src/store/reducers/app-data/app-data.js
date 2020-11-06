@@ -3,6 +3,7 @@ import {extend, adaptToClient} from "../../../utils";
 
 const initialState = {
   offers: [],
+  userData: {}
 };
 
 const appData = (state = initialState, action) => {
@@ -10,6 +11,11 @@ const appData = (state = initialState, action) => {
     case ActionType.LOAD_OFFERS:
       return extend(state, {
         offers: adaptToClient(action.payload)
+      });
+
+    case ActionType.LOAD_USER_DATA:
+      return extend(state, {
+        userData: action.payload
       });
   }
 
