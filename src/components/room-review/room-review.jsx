@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {getRatingPercent} from "../../utils";
+
 
 const RoomReview = (props) => {
   const {review} = props;
@@ -30,7 +32,7 @@ const RoomReview = (props) => {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: `80%`}}>{rating}</span>
+            <span style={{width: `${getRatingPercent(rating)}%`}}>{rating}</span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

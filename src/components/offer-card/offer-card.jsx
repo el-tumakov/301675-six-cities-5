@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
 import FavoriteButtonMain from "../favorite-button-main/favorite-button-main";
+import {getRatingPercent} from "../../utils";
 
 
 const OfferCard = (props) => {
@@ -12,7 +13,6 @@ const OfferCard = (props) => {
     articleClassName,
     imageClassName,
     infoClassName,
-    ratingStyle,
     onHoverOffer,
     resetHoveredOffer,
     imageWidth,
@@ -65,7 +65,7 @@ const OfferCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={ratingStyle}>{rating}</span>
+            <span style={{width: `${getRatingPercent(rating)}%`}}>{rating}</span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -92,7 +92,6 @@ OfferCard.propTypes = {
   articleClassName: PropTypes.string.isRequired,
   imageClassName: PropTypes.string.isRequired,
   infoClassName: PropTypes.string.isRequired,
-  ratingStyle: PropTypes.object.isRequired,
   onHoverOffer: PropTypes.func.isRequired,
   resetHoveredOffer: PropTypes.func.isRequired,
   imageWidth: PropTypes.number.isRequired,

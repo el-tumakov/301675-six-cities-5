@@ -9,7 +9,6 @@ const OfferCardRoom = (props) => {
       articleClassName={`near-places__card`}
       imageClassName={`near-places__image-wrapper`}
       infoClassName={``}
-      ratingStyle={{width: `80%`}}
       imageWidth={CardImageSizes.MAIN_WIDTH}
       imageHeight={CardImageSizes.MAIN_HEIGHT}
       {...props}

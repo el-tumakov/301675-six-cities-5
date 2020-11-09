@@ -9,7 +9,6 @@ const OfferCardFavorite = (props) => {
       articleClassName={`favorites__card`}
       imageClassName={`favorites__image-wrapper`}
       infoClassName={`favorites__card-info`}
-      ratingStyle={{width: `100%`}}
       imageWidth={CardImageSizes.FAVORITE_WIDTH}
       imageHeight={CardImageSizes.FAVORITE_HEIGHT}
       {...props}

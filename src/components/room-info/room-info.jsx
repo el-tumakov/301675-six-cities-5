@@ -5,7 +5,7 @@ import RoomOwner from "../room-owner/room-owner";
 import RoomReviewsList from "../room-reviews-list/room-reviews-list";
 import Map from "../map/map";
 import FavoriteButtonRoom from "../favorite-button-room/favorite-button-room";
-
+import {getRatingPercent} from "../../utils";
 
 const RoomInfo = (props) => {
   const {
@@ -48,7 +48,7 @@ const RoomInfo = (props) => {
           </div>
           <div className="property__rating rating">
             <div className="property__stars rating__stars">
-              <span style={{width: `80%`}}></span>
+              <span style={{width: `${getRatingPercent(rating)}%`}}></span>
               <span className="visually-hidden">Rating</span>
             </div>
             <span className="property__rating-value rating__value">{rating}</span>
