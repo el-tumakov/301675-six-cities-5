@@ -3,14 +3,13 @@ import PropTypes from "prop-types";
 import RoomGallery from "../room-gallery/room-gallery";
 import RoomOwner from "../room-owner/room-owner";
 import RoomReviewsList from "../room-reviews-list/room-reviews-list";
-import Map from "../map/map";
+import MapRoom from "../map-room/map-room";
 import FavoriteButtonRoom from "../favorite-button-room/favorite-button-room";
 import {getRatingPercent} from "../../utils";
 
 const RoomInfo = (props) => {
   const {
     id,
-    offers,
     offer,
   } = props;
 
@@ -91,9 +90,8 @@ const RoomInfo = (props) => {
         </div>
       </div>
       <section className="property__map map">
-        <Map
-          activeOfferId={id}
-          offers={offers}
+        <MapRoom
+          currentOffer={offer}
         />
       </section>
     </section>
@@ -102,7 +100,6 @@ const RoomInfo = (props) => {
 
 RoomInfo.propTypes = {
   id: PropTypes.number.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
   offer: PropTypes.object.isRequired,
 };
 

@@ -1,6 +1,5 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -21,7 +20,6 @@ class Map extends PureComponent {
       iconUrl: `/img/pin-active.svg`,
       iconSize: [30, 30]
     });
-    this._activeOfferId = ``;
   }
 
   _initializeMap() {
@@ -36,7 +34,7 @@ class Map extends PureComponent {
   }
 
   _initializeMarkers() {
-    const {offers} = this.props;
+    const {offers, activeOfferId} = this.props;
 
     for (let marker of this._markers) {
       marker.remove();
@@ -55,18 +53,20 @@ class Map extends PureComponent {
       );
     }
 
+    if (activeOfferId) {
+      this._activeMarker = this._markers.find((marker) => (
+        marker.options.offerId === activeOfferId
+      ));
+
+      this._activeMarker.setIcon(this._activeIcon);
+    }
+
     for (let marker of this._markers) {
       marker.addTo(this._map);
     }
   }
 
   componentDidMount() {
-    const {activeOfferId} = this.props;
-
-    if (activeOfferId) {
-      this._activeOfferId = activeOfferId;
-    }
-
     this._map = leaflet.map(`map`, {
       zoomControl: false,
       marker: true
@@ -85,8 +85,7 @@ class Map extends PureComponent {
   componentDidUpdate() {
     const {activeOfferId, offers, hoveredOffer} = this.props;
 
-    if (activeOfferId && this._activeOfferId !== activeOfferId) {
-      this._activeOfferId = activeOfferId;
+    if (activeOfferId) {
 
       this._initializeMap();
       this._initializeMarkers();
@@ -136,9 +135,4 @@ Map.propTypes = {
   hoveredOffer: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
-const mapStateToProps = ({PROCESS}) => ({
-  hoveredOffer: PROCESS.hoveredOffer
-});
-
-export {Map};
-export default connect(mapStateToProps, null)(Map);
+export default Map;
