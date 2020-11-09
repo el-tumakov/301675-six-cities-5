@@ -44,3 +44,11 @@ export const setFavorite = (offerId, status) => (dispatch, _getState, api) => (
       throw err;
     })
 );
+
+export const fetchNearbyOffers = (offerId) => (dispatch, _getState, api) => (
+  api.get(`/hotels/${offerId}/nearby`)
+    .then(({data}) => dispatch(ActionCreator.loadNearbyOffers(data)))
+    .catch((err) => {
+      throw err;
+    })
+);

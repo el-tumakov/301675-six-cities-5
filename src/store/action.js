@@ -8,7 +8,8 @@ export const ActionType = {
   LOAD_USER_DATA: `LOAD_USER_DATA`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   LOAD_FAVORITE_OFFERS: `LOAD_FAVORITE_OFFERS`,
-  UPDATE_FAVORITE: `UPDATE_FAVORITE`
+  UPDATE_FAVORITE: `UPDATE_FAVORITE`,
+  LOAD_NEARBY_OFFERS: `LOAD_NEARBY_OFFERS`
 };
 
 export const ActionCreator = {
@@ -50,5 +51,9 @@ export const ActionCreator = {
   updateFavorite: (offer) => ({
     type: ActionType.UPDATE_FAVORITE,
     payload: offer
+  }),
+  loadNearbyOffers: (offers) => ({
+    type: ActionType.LOAD_NEARBY_OFFERS,
+    payload: offers
   })
 };
