@@ -5,16 +5,18 @@ import RoomInfo from "../room-info/room-info";
 import OffersListRoom from "../offers-list-room/offers-list-room";
 import Header from "../header/header";
 import {fetchNearbyOffers, fetchReviews} from "../../store/api-actions";
+import {ActionCreator} from "../../store/action";
 
 
 const RoomScreen = (props) => {
-  const {id, offers, loadReviews, loadNearbyOffers} = props;
+  const {id, offers, loadReviews, loadNearbyOffers, resetHoveredOffer} = props;
 
   const offer = offers.find((item) => item.id === id);
 
   useEffect(() => {
     loadReviews(id);
     loadNearbyOffers(id);
+    resetHoveredOffer();
   });
 
   return (
@@ -41,7 +43,8 @@ RoomScreen.propTypes = {
   id: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
   loadReviews: PropTypes.func.isRequired,
-  loadNearbyOffers: PropTypes.func.isRequired
+  loadNearbyOffers: PropTypes.func.isRequired,
+  resetHoveredOffer: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({DATA}) => ({
@@ -54,6 +57,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   loadNearbyOffers(offerId) {
     dispatch(fetchNearbyOffers(offerId));
+  },
+  resetHoveredOffer() {
+    dispatch(ActionCreator.resetHoveredOffer());
   }
 });
 
