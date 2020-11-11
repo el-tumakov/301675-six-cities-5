@@ -68,3 +68,5 @@ export const adaptReviewsToClient = (reviews) => {
 export const getRatingPercent = (rating) => (
   Math.round(rating) * MaxRating.PERCENT / MaxRating.NUMBER
 );
+
+export const noop = () => {};
