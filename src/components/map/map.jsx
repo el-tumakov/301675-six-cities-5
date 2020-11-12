@@ -1,4 +1,4 @@
-import React, {PureComponent} from "react";
+import React, {PureComponent, createRef} from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -6,6 +6,8 @@ import "leaflet/dist/leaflet.css";
 class Map extends PureComponent {
   constructor(props) {
     super(props);
+
+    this._mapRef = createRef();
 
     this._city = ``;
     this._coordinates = ``;
@@ -67,7 +69,7 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    this._map = leaflet.map(`map`, {
+    this._map = leaflet.map(this._mapRef.current, {
       zoomControl: false,
       marker: true
     });
@@ -124,7 +126,7 @@ class Map extends PureComponent {
 
   render() {
     return (
-      <div id="map" style={{height: `100%`}}/>
+      <div ref={this._mapRef} id="map" style={{height: `100%`}}/>
     );
   }
 }

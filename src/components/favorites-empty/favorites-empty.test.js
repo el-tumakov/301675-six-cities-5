@@ -1,12 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app";
+import FavoritesEmpty from "./favorites-empty";
 
 
-it(`Should App render correctly`, () => {
+it(`Should FavoritesEmpty render correctly`, () => {
   const tree = renderer
       .create(
-          <App />
+          <FavoritesEmpty />
       ).toJSON();
 
   expect(tree).toMatchSnapshot();
