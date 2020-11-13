@@ -9,7 +9,7 @@ const OWNER = {
   avatar: `img/avatar-angelina.jpg`,
   name: `Angelina`,
   super: true
-}
+};
 
 
 it(`Should RoomOwner render correctly`, () => {
