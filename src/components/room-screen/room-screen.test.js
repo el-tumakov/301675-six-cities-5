@@ -69,8 +69,6 @@ const OFFERS = [
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
-jest.mock(`leaflet`);
-
 it(`Should RoomScreen render correctly`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
@@ -91,25 +89,18 @@ it(`Should RoomScreen render correctly`, () => {
   });
 
   const tree = renderer
-      .create((
-        <Provider store={store}>
-          <BrowserRouter>
-            <RoomScreen
-              id={1}
-              offers={OFFERS}
-              loadReviews={noop}
-              loadNearbyOffers={noop}
-              resetHoveredOffer={noop}
-            >
-              <React.Fragment />
-            </RoomScreen>
-          </BrowserRouter>
-        </Provider>
-      ), {
-        createNodeMock: () => {
-          return {};
-        }
-      }
+      .create(
+          <Provider store={store}>
+            <BrowserRouter>
+              <RoomScreen
+                id={1}
+                offers={OFFERS}
+                loadReviews={noop}
+                loadNearbyOffers={noop}
+                resetHoveredOffer={noop}
+              />
+            </BrowserRouter>
+          </Provider>
       ).toJSON();
 
   expect(tree).toMatchSnapshot();
