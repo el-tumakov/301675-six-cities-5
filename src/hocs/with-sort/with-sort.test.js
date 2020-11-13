@@ -1,26 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import PropTypes from "prop-types";
 import withSort from "./with-sort";
 import {noop} from "../../utils";
 
 
-const MockComponent = (props) => {
-  const {children} = props;
-
-  return (
-    <React.Fragment>
-      {children}
-    </React.Fragment>
-  );
-};
-
-MockComponent.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired,
-};
+const MockComponent = () => (
+  <React.Fragment />
+);
 
 const MockComponentWrapped = withSort(MockComponent);
 

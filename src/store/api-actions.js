@@ -16,9 +16,8 @@ export const checkAuth = () => (dispatch, _getState, api) => (
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(`/login`, {email, password})
-    .then(({data}) =>
-      dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH))
-      && dispatch(ActionCreator.loadUserData(data)))
+    .then(({data}) => dispatch(ActionCreator.loadUserData(data)))
+    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
 );
 
 export const fetchReviews = (offerId) => (dispatch, _getState, api) => (
