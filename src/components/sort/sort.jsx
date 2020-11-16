@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import PropTypes from "prop-types";
 
 export const SORT_NAMES = [
@@ -23,19 +23,26 @@ export const SORT_NAMES = [
 const Sort = (props) => {
   const {
     activeSort,
-    onChangeSort,
-    isSortOpened,
-    onSortFocus,
-    onSortBlur
+    onChangeSort
   } = props;
+
+  const [isSortOpened, setSortOpened] = useState(false);
 
   return (
     <form
       className="places__sorting"
       action="#"
       method="get"
-      onFocus={onSortFocus}
-      onBlur={onSortBlur}
+      onFocus={(evt) => {
+        evt.preventDefault();
+
+        setSortOpened(true);
+      }}
+      onBlur={(evt) => {
+        evt.preventDefault();
+
+        setSortOpened(false);
+      }}
     >
       <span className="places__sorting-caption">Sort by </span>
       <span className="places__sorting-type" tabIndex="0">
