@@ -1,75 +1,72 @@
-import React, {PureComponent, createRef} from "react";
+import React, {useRef, useEffect} from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-class Map extends PureComponent {
-  constructor(props) {
-    super(props);
 
-    this._mapRef = createRef();
+const icon = leaflet.icon({
+  iconUrl: `/img/pin.svg`,
+  iconSize: [30, 30]
+});
+const activeIcon = leaflet.icon({
+  iconUrl: `/img/pin-active.svg`,
+  iconSize: [30, 30]
+});
 
-    this._city = ``;
-    this._coordinates = ``;
-    this._map = ``;
-    this._markers = [];
-    this._activeMarker = ``;
-    this._icon = leaflet.icon({
-      iconUrl: `/img/pin.svg`,
-      iconSize: [30, 30]
-    });
-    this._activeIcon = leaflet.icon({
-      iconUrl: `/img/pin-active.svg`,
-      iconSize: [30, 30]
-    });
+let city = ``;
+let map = ``;
+let markers = [];
+let activeMarker = ``;
+
+const initializeMap = (offers) => {
+  city = offers[0].city;
+
+  const coordinates = [
+    city.location.latitude,
+    city.location.longitude
+  ];
+
+  map.setView(coordinates, city.location.zoom);
+};
+
+const initializeMarkers = (offers, activeOfferId) => {
+  for (let marker of markers) {
+    marker.remove();
   }
 
-  _initializeMap() {
-    const {offers} = this.props;
+  markers = [];
 
-    this._city = offers[0].city;
-    this._coordinates = [
-      this._city.location.latitude,
-      this._city.location.longitude
+  for (let offer of offers) {
+    const offerCoordinates = [
+      offer.location.latitude,
+      offer.location.longitude
     ];
-    this._map.setView(this._coordinates, this._city.location.zoom);
+
+    markers.push(
+        leaflet.marker(offerCoordinates, {icon, offerId: offer.id})
+    );
   }
 
-  _initializeMarkers() {
-    const {offers, activeOfferId} = this.props;
+  if (activeOfferId) {
+    activeMarker = markers.find((marker) => (
+      marker.options.offerId === activeOfferId
+    ));
 
-    for (let marker of this._markers) {
-      marker.remove();
-    }
-
-    this._markers = [];
-
-    for (let offer of offers) {
-      const coordinates = [
-        offer.location.latitude,
-        offer.location.longitude
-      ];
-
-      this._markers.push(
-          leaflet.marker(coordinates, {icon: this._icon, offerId: offer.id})
-      );
-    }
-
-    if (activeOfferId) {
-      this._activeMarker = this._markers.find((marker) => (
-        marker.options.offerId === activeOfferId
-      ));
-
-      this._activeMarker.setIcon(this._activeIcon);
-    }
-
-    for (let marker of this._markers) {
-      marker.addTo(this._map);
-    }
+    activeMarker.setIcon(activeIcon);
   }
 
-  componentDidMount() {
-    this._map = leaflet.map(this._mapRef.current, {
+  for (let marker of markers) {
+    marker.addTo(map);
+  }
+};
+
+const Map = (props) => {
+  const {offers, activeOfferId, hoveredOffer} = props;
+
+  const mapRef = useRef(null);
+
+  useEffect(() => {
+    map = leaflet.map(mapRef.current, {
       zoomControl: false,
       marker: true
     });
@@ -78,58 +75,44 @@ class Map extends PureComponent {
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
-      .addTo(this._map);
+      .addTo(map);
 
-    this._initializeMap();
-    this._initializeMarkers();
-  }
+    initializeMap(offers);
+    initializeMarkers(offers, activeOfferId);
+  }, []);
 
-  componentDidUpdate() {
-    const {activeOfferId, offers, hoveredOffer} = this.props;
-
+  useEffect(() => {
     if (activeOfferId) {
+      initializeMap(offers);
+      initializeMarkers(offers, activeOfferId);
 
-      this._initializeMap();
-      this._initializeMarkers();
+      return;
+    }
+    if (city.name !== offers[0].city.name) {
+      initializeMap(offers);
+      initializeMarkers(offers, activeOfferId);
 
       return;
     }
 
-    if (this._city.name !== offers[0].city.name) {
-      this._initializeMap();
-      this._initializeMarkers();
-
-      return;
-    }
-
-    if (this._activeMarker) {
-      this._activeMarker.setIcon(this._icon);
-      this._activeMarker = ``;
+    if (activeMarker) {
+      activeMarker.setIcon(icon);
+      activeMarker = ``;
     }
 
     if (hoveredOffer) {
-      this._activeMarker = this._markers.find((marker) => (
+      activeMarker = markers.find((marker) => (
         marker.options.offerId === hoveredOffer.id
       ));
 
-      this._activeMarker.setIcon(this._activeIcon);
+      activeMarker.setIcon(activeIcon);
     }
-  }
+  });
 
-  componentWillUnmount() {
-    this._city = ``;
-    this._coordinates = ``;
-    this._map = ``;
-    this._markers = [];
-    this._activeMarker = ``;
-  }
-
-  render() {
-    return (
-      <div ref={this._mapRef} id="map" style={{height: `100%`}}/>
-    );
-  }
-}
+  return (
+    <div ref={mapRef} id="map" style={{height: `100%`}}/>
+  );
+};
 
 Map.propTypes = {
   activeOfferId: PropTypes.number,
