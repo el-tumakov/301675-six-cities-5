@@ -84,10 +84,7 @@ const Sort = (props) => {
 
 Sort.propTypes = {
   activeSort: PropTypes.string.isRequired,
-  onChangeSort: PropTypes.func.isRequired,
-  isSortOpened: PropTypes.bool.isRequired,
-  onSortFocus: PropTypes.func.isRequired,
-  onSortBlur: PropTypes.func.isRequired
+  onChangeSort: PropTypes.func.isRequired
 };
 
 export default Sort;
