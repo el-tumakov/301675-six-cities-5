@@ -1,6 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import OffersList from "./offers-list";
+import {Provider} from "react-redux";
+import {BrowserRouter} from "react-router-dom";
+import thunk from "redux-thunk";
+import configureStore from "redux-mock-store";
+import App from "./app";
+import {SortTypes, CITIES, AuthorizationStatus} from "../../const";
+import {NameSpace} from "../../store/reducers/root-reducer";
 
 
 const OFFERS = [
@@ -59,44 +65,35 @@ const OFFERS = [
   },
 ];
 
-const component = () => (
-  <React.Fragment />
-);
+const middlewares = [thunk];
+const mockStore = configureStore(middlewares);
 
-it(`Should OffersListMain render correctly`, () => {
+it(`Should App render correctly`, () => {
+  const store = mockStore({
+    [NameSpace.DATA]: {
+      offers: OFFERS,
+      userData: {},
+      reviews: [],
+      favoriteOffers: [],
+      nearbyOffers: []
+    },
+    [NameSpace.PROCESS]: {
+      city: CITIES[0],
+      sort: SortTypes.POPULAR,
+      hoveredOffer: {}
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH
+    }
+  });
+
   const tree = renderer
       .create(
-          <OffersList
-            offers={OFFERS}
-            className={`cities__places-list places__list tabs__content`}
-            Component={component}
-          />
-      ).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it(`Should OffersListFavorite render correctly`, () => {
-  const tree = renderer
-      .create(
-          <OffersList
-            offers={OFFERS}
-            className="favorites__places"
-            Component={component}
-          />
-      ).toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-it(`Should OffersListRoom render correctly`, () => {
-  const tree = renderer
-      .create(
-          <OffersList
-            offers={OFFERS}
-            className="near-places__list places__list"
-            Component={component}
-          />
+          <Provider store={store}>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </Provider>
       ).toJSON();
 
   expect(tree).toMatchSnapshot();
