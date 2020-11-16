@@ -1,88 +1,114 @@
-import {FEATURES, OFFERS_TYPE, CITIES} from "../const";
-
-const PHOTOS_COUNT = 6;
-
-const getRandomInt = (max) => {
-  return Math.floor(Math.random() * Math.floor(max));
-};
-
-const getPhotos = () => {
-  const photos = [];
-
-  for (let i = 0; i < PHOTOS_COUNT; i++) {
-    photos.push(`https://picsum.photos/id/${getRandomInt(50)}/260/200`);
-  }
-
-  return photos;
-};
-
 export default [
   {
-    id: 1,
-    photos: getPhotos(),
-    title: `Sed laoreet non odio a dapibus.`,
-    description: `Donec eget nunc egestas, scelerisque risus id, cursus turpis. Sed sollicitudin ipsum id quam posuere, hendrerit faucibus lorem ultricies.`,
-    premium: false,
-    type: OFFERS_TYPE[0],
-    rating: 4,
-    bedrooms: 2,
-    guests: 4,
-    price: 50,
-    features: FEATURES,
-    ownerId: 1,
-    city: CITIES[3],
-    favorite: false,
-    coordinates: [52.3909553943508, 4.85309666406198]
-  },
-  {
-    id: 2,
-    photos: getPhotos(),
-    title: `Proin tortor quam, rhoncus sed magna nec, interdum venenatis felis.`,
-    description: `Duis non faucibus sapien, eget lacinia metus. Ut volutpat, purus in dapibus tempus, elit magna facilisis lectus, ut imperdiet massa risus eget magna.`,
-    premium: true,
-    type: OFFERS_TYPE[1],
-    rating: 4.5,
     bedrooms: 3,
-    guests: 6,
-    price: 80,
-    features: FEATURES,
-    ownerId: 2,
-    city: CITIES[3],
-    favorite: true,
-    coordinates: [52.369553943508, 4.85309666406198]
-  },
-  {
-    id: 3,
-    photos: getPhotos(),
-    title: `Etiam dignissim diam enim, ut aliquam ipsum consequat nec.`,
-    description: `Aenean lacus diam, dapibus sit amet magna quis, hendrerit sollicitudin magna. Ut aliquet tempor neque, sed dapibus eros mollis ut.`,
-    premium: false,
-    type: OFFERS_TYPE[2],
-    rating: 3.8,
-    bedrooms: 1,
-    guests: 2,
-    price: 30,
-    features: FEATURES,
-    ownerId: 3,
-    city: CITIES[4],
+    city: {
+      name: `Cologne`,
+      location: {
+        latitude: 50.938361,
+        longitude: 6.959974,
+        zoom: 13,
+      },
+    },
+    description: `Discover daily local life in city center, friendly neighborhood, clandestine casino, karaoke, old-style artisans, art gallery and artist studio downstairs.`,
     favorite: false,
-    coordinates: [53.54956388, 9.99082893]
+    features: [
+      `Laptop friendly workspace`,
+      `Washer`,
+      `Towels`,
+      `Fridge`,
+      `Air conditioning`,
+      `Baby seat`,
+      `Breakfast`
+    ],
+    guests: 4,
+    id: 1,
+    location: {latitude: 50.957361, longitude: 6.9509739999999995, zoom: 16},
+    owner: {
+      id: 25,
+      avatar: `img/avatar-angelina.jpg`,
+      name: `Angelina`,
+      super: true
+    },
+    photos: [
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/15.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/9.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/4.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/19.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/14.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/3.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/2.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/11.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/1.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/17.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/5.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/13.jpg`
+    ],
+    premium: false,
+    preview: `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/14.jpg`,
+    price: 493,
+    rating: 3.8,
+    title: `The house among olive`,
+    type: `house`,
   },
   {
-    id: 4,
-    photos: getPhotos(),
-    title: `Cras interdum malesuada odio, at iaculis ipsum gravida eget.`,
-    description: `Quisque quam felis, malesuada ac risus nec, tempus condimentum turpis. Etiam ut augue sodales, commodo magna eget, convallis dui.`,
-    premium: true,
-    type: OFFERS_TYPE[3],
-    rating: 4.4,
-    bedrooms: 2,
-    guests: 3,
-    price: 60,
-    features: FEATURES,
-    ownerId: 4,
-    city: CITIES[4],
-    favorite: true,
-    coordinates: [53.55211352, 10.00353187]
+    bedrooms: 5,
+    city: {
+      location: {
+        latitude: 48.85661,
+        longitude: 2.351499,
+        zoom: 13,
+      }
+    },
+    name: `Paris`,
+    description: `Peaceful studio in the most wanted area in town. Quiet house Near of everything. Completely renovated. Lovely neighbourhood, lot of trendy shops, restaurants and bars in a walking distance.`,
+    favorite: false,
+    features: [
+      `Dishwasher`,
+      `Fridge`,
+      `Towels`,
+      `Washer`,
+      `Breakfast`,
+      `Baby seat`,
+      `Laptop friendly workspace`,
+      `Air conditioning`,
+      `Coffee machine`,
+    ],
+    guests: 8,
+    id: 6,
+    location: {
+      latitude: 48.877610000000004,
+      longitude: 2.333499,
+      zoom: 16,
+    },
+    owner: {
+      avatar: `img/avatar-angelina.jpg`,
+      id: 25,
+      name: `Angelina`,
+      super: true,
+    },
+    photos: [
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/15.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/19.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/3.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/17.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/7.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/6.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/5.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/8.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/9.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/2.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/20.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/11.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/13.jpg`,
+      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg`,
+    ],
+    premium: false,
+    preview: `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/13.jpg`,
+    price: 226,
+    rating: 3,
+    title: `The house among olive `,
+    type: `apartment`
   }
 ];

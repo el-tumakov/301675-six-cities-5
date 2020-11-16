@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import CitiesOffers from "../cities-offers/cities-offers";
-import Map from "../map/map";
+import MapMain from "../map-main/map-main";
 import CityList from "../city-list/city-list";
 import MainEmpty from "../main-empty/main-empty";
 import Header from "../header/header";
@@ -36,7 +36,7 @@ const MainScreen = (props) => {
               />
               <div className="cities__right-section">
                 <section className="cities__map map">
-                  <Map
+                  <MapMain
                     offers={cityOffers}
                   />
                 </section>

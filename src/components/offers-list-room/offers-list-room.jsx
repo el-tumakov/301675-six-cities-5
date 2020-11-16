@@ -1,15 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import OffersList from "../offers-list/offers-list";
 import OfferCardRoom from "../offer-card-room/offer-card-room";
 
 const OfferListRoom = (props) => {
-  const {offers} = props;
+  const {nearbyOffers} = props;
 
   return (
     <OffersList
       className="near-places__list places__list"
-      offers={offers}
+      offers={nearbyOffers}
       Component={OfferCardRoom}
       {...props}
     />
@@ -17,7 +18,12 @@ const OfferListRoom = (props) => {
 };
 
 OfferListRoom.propTypes = {
-  offers: PropTypes.array.isRequired
+  nearbyOffers: PropTypes.array.isRequired
 };
 
-export default OfferListRoom;
+const mapStateToProps = ({DATA}) => ({
+  nearbyOffers: DATA.nearbyOffers
+});
+
+export {OfferListRoom};
+export default connect(mapStateToProps, null)(OfferListRoom);

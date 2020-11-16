@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should Sort render correctly 1`] = `
+<form
+  action="#"
+  className="places__sorting"
+  method="get"
+  onBlur={[Function]}
+  onFocus={[Function]}
+>
+  <span
+    className="places__sorting-caption"
+  >
+    Sort by 
+  </span>
+  <span
+    className="places__sorting-type"
+    tabIndex="0"
+  >
+    Popular
+    <svg
+      className="places__sorting-arrow"
+      height="4"
+      width="7"
+    >
+      <use
+        xlinkHref="#icon-arrow-select"
+      />
+    </svg>
+  </span>
+  <ul
+    className="places__options places__options--custom places__options--opened"
+  >
+    <li
+      className="places__option places__option--active"
+      onMouseDown={[Function]}
+      tabIndex="0"
+    >
+      Popular
+    </li>
+    <li
+      className="places__option "
+      onMouseDown={[Function]}
+      tabIndex="0"
+    >
+      Price: low to high
+    </li>
+    <li
+      className="places__option "
+      onMouseDown={[Function]}
+      tabIndex="0"
+    >
+      Price: high to low
+    </li>
+    <li
+      className="places__option "
+      onMouseDown={[Function]}
+      tabIndex="0"
+    >
+      Top rated first
+    </li>
+  </ul>
+  <select
+    className="places__sorting-type visually-hidden"
+    defaultValue="popular"
+    id="places-sorting"
+  >
+    <option
+      className="places__option"
+      value="popular"
+    >
+      Popular
+    </option>
+    <option
+      className="places__option"
+      value="to-low"
+    >
+      Price: low to high
+    </option>
+    <option
+      className="places__option"
+      value="to-high"
+    >
+      Price: high to low
+    </option>
+    <option
+      className="places__option"
+      value="top-rated"
+    >
+      Top rated first
+    </option>
+  </select>
+</form>
+`;

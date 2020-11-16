@@ -1,3 +1,8 @@
+const MaxRating = {
+  PERCENT: 100,
+  NUMBER: 5
+};
+
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
@@ -59,3 +64,9 @@ export const adaptReviewsToClient = (reviews) => {
 
   return adaptedReviews;
 };
+
+export const getRatingPercent = (rating) => (
+  Math.round(rating) * MaxRating.PERCENT / MaxRating.NUMBER
+);
+
+export const noop = () => {};

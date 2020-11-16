@@ -5,7 +5,8 @@ const initialState = {
   offers: [],
   userData: {},
   reviews: [],
-  favoriteOffers: []
+  favoriteOffers: [],
+  nearbyOffers: []
 };
 
 const appData = (state = initialState, action) => {
@@ -36,6 +37,11 @@ const appData = (state = initialState, action) => {
     case ActionType.LOAD_FAVORITE_OFFERS:
       return extend(state, {
         favoriteOffers: adaptOffersToClient(action.payload)
+      });
+
+    case ActionType.LOAD_NEARBY_OFFERS:
+      return extend(state, {
+        nearbyOffers: adaptOffersToClient(action.payload)
       });
   }
 

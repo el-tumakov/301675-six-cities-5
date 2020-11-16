@@ -16,9 +16,8 @@ export const checkAuth = () => (dispatch, _getState, api) => (
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(`/login`, {email, password})
-    .then(({data}) =>
-      dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH))
-      && dispatch(ActionCreator.loadUserData(data)))
+    .then(({data}) => dispatch(ActionCreator.loadUserData(data)))
+    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
 );
 
 export const fetchReviews = (offerId) => (dispatch, _getState, api) => (
@@ -40,6 +39,14 @@ export const setFavorite = (offerId, status) => (dispatch, _getState, api) => (
   api.post(`/favorite/${offerId}/${status}`)
     .then(({data}) => dispatch(ActionCreator.updateFavorite(data)))
     .then(() => dispatch(fetchFavoriteOffers()))
+    .catch((err) => {
+      throw err;
+    })
+);
+
+export const fetchNearbyOffers = (offerId) => (dispatch, _getState, api) => (
+  api.get(`/hotels/${offerId}/nearby`)
+    .then(({data}) => dispatch(ActionCreator.loadNearbyOffers(data)))
     .catch((err) => {
       throw err;
     })
