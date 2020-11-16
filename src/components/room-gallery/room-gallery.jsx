@@ -30,7 +30,7 @@ const RoomGallery = (props) => {
 };
 
 RoomGallery.propTypes = {
-  photos: PropTypes.array.isRequired,
+  photos: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default RoomGallery;

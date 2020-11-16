@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
 import {connect} from "react-redux";
 import {AuthorizationStatus} from "../../const";
+import {userDataProps} from "../../prop-types";
+
 
 const Header = (props) => {
   const {authorizationStatus, userData} = props;
@@ -43,7 +45,7 @@ const Header = (props) => {
 
 Header.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
-  userData: PropTypes.object.isRequired
+  userData: userDataProps
 };
 
 const mapStateToProps = ({USER, DATA}) => ({

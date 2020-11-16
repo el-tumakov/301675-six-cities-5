@@ -5,6 +5,8 @@ import {ActionCreator} from "../../store/action";
 import OffersListMain from "../offers-list-main/offers-list-main";
 import Sort from "../sort/sort";
 import {sortOffers} from "../../sort";
+import {offersProps} from "../../prop-types";
+
 
 const CitiesOffers = (props) => {
   const {sort, offers, onChangeSort} = props;
@@ -26,7 +28,7 @@ const CitiesOffers = (props) => {
 
 CitiesOffers.propTypes = {
   sort: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  offers: offersProps,
   onChangeSort: PropTypes.func.isRequired,
 };
 

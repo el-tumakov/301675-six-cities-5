@@ -7,6 +7,7 @@ import CityList from "../city-list/city-list";
 import MainEmpty from "../main-empty/main-empty";
 import Header from "../header/header";
 import {ActionCreator} from "../../store/action";
+import {offersProps} from "../../prop-types";
 
 
 const MainScreen = (props) => {
@@ -51,7 +52,7 @@ const MainScreen = (props) => {
 };
 
 MainScreen.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  offers: offersProps,
   activeCity: PropTypes.string.isRequired,
   onChangeCity: PropTypes.func.isRequired,
 };

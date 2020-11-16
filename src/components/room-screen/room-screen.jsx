@@ -6,7 +6,7 @@ import OffersListRoom from "../offers-list-room/offers-list-room";
 import Header from "../header/header";
 import {fetchNearbyOffers, fetchReviews} from "../../store/api-actions";
 import {ActionCreator} from "../../store/action";
-
+import {offersProps} from "../../prop-types";
 
 const RoomScreen = (props) => {
   const {id, offers, loadReviews, loadNearbyOffers, resetHoveredOffer} = props;
@@ -41,7 +41,7 @@ const RoomScreen = (props) => {
 
 RoomScreen.propTypes = {
   id: PropTypes.number.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  offers: offersProps,
   loadReviews: PropTypes.func.isRequired,
   loadNearbyOffers: PropTypes.func.isRequired,
   resetHoveredOffer: PropTypes.func.isRequired

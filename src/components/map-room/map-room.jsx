@@ -1,7 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import Map from "../map/map";
+import {oneOfferProps, offersProps} from "../../prop-types";
 
 
 const MapRoom = (props) => {
@@ -22,8 +22,8 @@ const MapRoom = (props) => {
 };
 
 MapRoom.propTypes = {
-  currentOffer: PropTypes.object.isRequired,
-  nearbyOffers: PropTypes.arrayOf(PropTypes.object).isRequired
+  currentOffer: oneOfferProps,
+  nearbyOffers: offersProps
 };
 
 const mapStateToProps = ({DATA}) => ({

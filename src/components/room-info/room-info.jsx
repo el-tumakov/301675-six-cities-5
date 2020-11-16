@@ -6,6 +6,8 @@ import RoomReviewsList from "../room-reviews-list/room-reviews-list";
 import MapRoom from "../map-room/map-room";
 import FavoriteButtonRoom from "../favorite-button-room/favorite-button-room";
 import {getRatingPercent} from "../../utils";
+import {oneOfferProps} from "../../prop-types";
+
 
 const RoomInfo = (props) => {
   const {
@@ -100,7 +102,7 @@ const RoomInfo = (props) => {
 
 RoomInfo.propTypes = {
   id: PropTypes.number.isRequired,
-  offer: PropTypes.object.isRequired,
+  offer: oneOfferProps,
 };
 
 export default RoomInfo;

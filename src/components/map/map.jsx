@@ -2,6 +2,7 @@ import React, {useRef, useEffect} from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
+import {offersProps} from "../../prop-types";
 
 
 const icon = leaflet.icon({
@@ -116,7 +117,7 @@ const Map = (props) => {
 
 Map.propTypes = {
   activeOfferId: PropTypes.number,
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  offers: offersProps,
   hoveredOffer: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
