@@ -57,7 +57,7 @@ exports[`Should RoomReview render correctly 1`] = `
       className="reviews__time"
       dateTime="2020-10-10T13:38:44.753Z"
     >
-      October 10, 4:38:44 PM
+      October 10, 1:38:44 PM
     </time>
   </div>
 </li>

@@ -6,14 +6,14 @@ exports[`Should OffersListFavorite render correctly 1`] = `
 />
 `;
 
-exports[`Should OffersListFavorite render correctly 2`] = `
-<div
-  className="near-places__list places__list"
-/>
-`;
-
 exports[`Should OffersListMain render correctly 1`] = `
 <div
   className="cities__places-list places__list tabs__content"
+/>
+`;
+
+exports[`Should OffersListRoom render correctly 1`] = `
+<div
+  className="near-places__list places__list"
 />
 `;
