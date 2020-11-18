@@ -5,6 +5,8 @@ import RoomReview from "../room-review/room-review";
 import RoomComment from "../room-comment/room-comment";
 import {sortReviews} from "../../sort";
 import {AuthorizationStatus} from "../../const";
+import {reviewProps} from "../../prop-types";
+
 
 const MAX_REVIEWS = 10;
 
@@ -42,7 +44,7 @@ const RoomReviewsList = (props) => {
 };
 
 RoomReviewsList.propTypes = {
-  reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
+  reviews: PropTypes.arrayOf(reviewProps).isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   offerId: PropTypes.number.isRequired
 };

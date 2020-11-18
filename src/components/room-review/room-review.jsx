@@ -1,6 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 import {getRatingPercent} from "../../utils";
+import {reviewProps} from "../../prop-types";
 
 
 const RoomReview = (props) => {
@@ -46,12 +46,7 @@ const RoomReview = (props) => {
 };
 
 RoomReview.propTypes = {
-  review: PropTypes.shape({
-    user: PropTypes.object.isRequired,
-    rating: PropTypes.number.isRequired,
-    date: PropTypes.string.isRequired,
-    comment: PropTypes.string.isRequired
-  }).isRequired
+  review: reviewProps
 };
 
 export default RoomReview;

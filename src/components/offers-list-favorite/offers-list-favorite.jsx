@@ -1,7 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
 import OffersList from "../offers-list/offers-list";
 import OfferCardFavorite from "../offer-card-favorite/offer-card-favorite";
+import {offersProps} from "../../prop-types";
+
 
 const OfferListFavorite = (props) => {
   const {offers} = props;
@@ -17,7 +18,7 @@ const OfferListFavorite = (props) => {
 };
 
 OfferListFavorite.propTypes = {
-  offers: PropTypes.array.isRequired
+  offers: offersProps
 };
 
 export default OfferListFavorite;

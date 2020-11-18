@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {offersProps} from "../../prop-types";
+
 
 const OffersList = (props) => {
   const {
@@ -21,7 +23,7 @@ const OffersList = (props) => {
 };
 
 OffersList.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  offers: offersProps,
   className: PropTypes.string.isRequired,
   Component: PropTypes.func.isRequired
 };

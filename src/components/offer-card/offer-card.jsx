@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
 import FavoriteButtonMain from "../favorite-button-main/favorite-button-main";
 import {getRatingPercent} from "../../utils";
+import {oneOfferProps} from "../../prop-types";
 
 
 const OfferCard = (props) => {
@@ -79,16 +80,7 @@ const OfferCard = (props) => {
 };
 
 OfferCard.propTypes = {
-  offer: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    preview: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    premium: PropTypes.bool.isRequired,
-    type: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    favorite: PropTypes.bool.isRequired,
-  }).isRequired,
+  offer: oneOfferProps,
   articleClassName: PropTypes.string.isRequired,
   imageClassName: PropTypes.string.isRequired,
   infoClassName: PropTypes.string.isRequired,

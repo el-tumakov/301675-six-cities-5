@@ -5,9 +5,8 @@ import {ActionCreator} from "../../store/action";
 import OffersListMain from "../offers-list-main/offers-list-main";
 import Sort from "../sort/sort";
 import {sortOffers} from "../../sort";
-import withSort from "../../hocs/with-sort/with-sort";
+import {offersProps} from "../../prop-types";
 
-const SortWrapped = withSort(Sort);
 
 const CitiesOffers = (props) => {
   const {sort, offers, onChangeSort} = props;
@@ -18,7 +17,7 @@ const CitiesOffers = (props) => {
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
       <b className="places__found">{sortedCityOffers.length} places to stay in Amsterdam</b>
-      <SortWrapped
+      <Sort
         activeSort={sort}
         onChangeSort={onChangeSort}
       />
@@ -29,7 +28,7 @@ const CitiesOffers = (props) => {
 
 CitiesOffers.propTypes = {
   sort: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  offers: offersProps,
   onChangeSort: PropTypes.func.isRequired,
 };
 

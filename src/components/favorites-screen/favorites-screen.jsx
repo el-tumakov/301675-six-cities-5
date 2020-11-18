@@ -6,7 +6,7 @@ import {fetchFavoriteOffers} from "../../store/api-actions";
 import Header from "../header/header";
 import FavoritesFilled from "../favorites-filled/favorites-filled";
 import FavoritesEmpty from "../favorites-empty/favorites-empty";
-
+import {offersProps} from "../../prop-types";
 
 const FavoritesScreen = (props) => {
   const {favoriteOffers, loadFavoriteOffers} = props;
@@ -34,7 +34,7 @@ const FavoritesScreen = (props) => {
 };
 
 FavoritesScreen.propTypes = {
-  favoriteOffers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  favoriteOffers: offersProps,
   loadFavoriteOffers: PropTypes.func.isRequired
 };
 
