@@ -48,7 +48,7 @@ const Sort = (props) => {
       <span className="places__sorting-type" tabIndex="0">
         {SORT_NAMES.find((item) => (item.type === activeSort)).title}
         <svg className="places__sorting-arrow" width="7" height="4">
-          <use xlinkHref="#icon-arrow-select"></use>
+          <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
       <ul className={

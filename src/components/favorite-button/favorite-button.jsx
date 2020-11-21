@@ -41,7 +41,7 @@ const FavoriteButton = (props) => {
       }}
     >
       <svg className={`place-card__bookmark-icon`} width={buttonWidth} height={buttonHeight}>
-        <use xlinkHref="#icon-bookmark"></use>
+        <use xlinkHref="#icon-bookmark" />
       </svg>
       <span className="visually-hidden">To bookmarks</span>
     </button>
