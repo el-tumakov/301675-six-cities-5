@@ -7,63 +7,46 @@ export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
-export const adaptOffersToClient = (offers) => {
-  const adaptedOffers = offers.map((offer) => {
-    const adaptedOffer = Object.assign(
-        {},
-        offer,
-        {
-          owner: {
-            id: offer.host.id,
-            avatar: offer.host.avatar_url,
-            name: offer.host.name,
-            super: offer.host.is_pro
-          },
-          photos: offer.images,
-          favorite: offer.is_favorite,
-          premium: offer.is_premium,
-          guests: offer.max_adults,
-          preview: offer.preview_image,
-          features: offer.goods
-        }
-    );
+export const adaptOffersToClient = (offers) => (
+  offers.map((offer) => ({
+    bedrooms: offer.bedrooms,
+    city: offer.city,
+    description: offer.description,
+    favorite: offer.is_favorite,
+    features: offer.goods,
+    guests: offer.max_adults,
+    id: offer.id,
+    location: offer.location,
+    owner: {
+      id: offer.host.id,
+      avatar: offer.host.avatar_url,
+      name: offer.host.name,
+      super: offer.host.is_pro
+    },
+    photos: offer.images,
+    premium: offer.is_premium,
+    preview: offer.preview_image,
+    price: offer.price,
+    rating: offer.rating,
+    title: offer.title,
+    type: offer.type
+  }))
+);
 
-    delete adaptedOffer.host;
-    delete adaptedOffer.images;
-    delete adaptedOffer.is_favorite;
-    delete adaptedOffer.is_premium;
-    delete adaptedOffer.max_adults;
-    delete adaptedOffer.preview_image;
-    delete adaptedOffer.goods;
-
-
-    return adaptedOffer;
-  });
-
-  return adaptedOffers;
-};
-
-export const adaptReviewsToClient = (reviews) => {
-  const adaptedReviews = reviews.map((review) => {
-    const adaptedReview = Object.assign(
-        {},
-        review,
-        {
-          user: Object.assign({}, review.user, {
-            avatar: review.user.avatar_url,
-            isPro: review.user.is_pro
-          })
-        }
-    );
-
-    delete adaptedReview.user.avatar_url;
-    delete adaptedReview.user.is_pro;
-
-    return adaptedReview;
-  });
-
-  return adaptedReviews;
-};
+export const adaptReviewsToClient = (reviews) => (
+  reviews.map((review) => ({
+    comment: review.comment,
+    date: review.date,
+    id: review.id,
+    rating: review.rating,
+    user: {
+      avatar: review.user.avatar_url,
+      id: review.user.id,
+      isPro: review.user.is_pro,
+      name: review.user.name
+    }
+  }))
+);
 
 export const getRatingPercent = (rating) => (
   Math.round(rating) * MaxRating.PERCENT / MaxRating.NUMBER
