@@ -16,7 +16,7 @@ const TITLES = [
   `perfect`
 ];
 
-const createRatingFragment = (changeHandler, isDisabled) => {
+const createRatingFragment = (changeHandler, isDisabled, rating) => {
   const ratingInputs = [];
 
   for (let i = MAX_RATING; i > 0; i--) {
@@ -30,6 +30,7 @@ const createRatingFragment = (changeHandler, isDisabled) => {
             type="radio"
             onChange={changeHandler}
             disabled={isDisabled}
+            checked={+rating === i ? `checked` : ``}
           />
           <label htmlFor={`${i}-stars`} className="reviews__rating-label form__rating-label" title={TITLES[i - 1]}>
             <svg className="form__star-image" width="37" height="33">
@@ -53,6 +54,12 @@ const RoomComment = (props) => {
   const form = useRef();
   const input = useRef();
   const submitButton = useRef();
+
+  useEffect(() => {
+    setComment(``);
+    setRating(``);
+    setDisabled(false);
+  }, [offerId]);
 
   useEffect(() => {
     if (rating && comment.length >= CommentLength.MIN && !isDisabled) {
@@ -103,7 +110,7 @@ const RoomComment = (props) => {
       <div className="reviews__rating-form form__rating">
         {createRatingFragment((evt) => {
           setRating(evt.target.value);
-        }, isDisabled)}
+        }, isDisabled, rating)}
       </div>
       <textarea
         className="reviews__textarea form__textarea"
