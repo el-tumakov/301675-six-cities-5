@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 import {CITIES} from "../../const";
 
 const CityList = (props) => {
@@ -11,16 +12,15 @@ const CityList = (props) => {
         <ul className="locations__list tabs__list">
           {CITIES.map((item, index) => (
             <li key={item + index} className="locations__item">
-              <a
+              <Link
                 className={`locations__item-link tabs__item ${item === activeCity ? `tabs__item--active` : ``}`}
-                href="#"
-                onClick={(evt) => {
-                  evt.preventDefault();
+                to="#"
+                onClick={() => {
                   onChangeCity(item);
                 }}
               >
                 <span>{item}</span>
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

@@ -1,12 +1,16 @@
 import React, {useRef} from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import Header from "../header/header";
 import {login} from "../../store/api-actions";
+import {ActionCreator} from "../../store/action";
 
+
+const CITY = `Amsterdam`;
 
 const LoginScreen = (props) => {
-  const {onSubmit} = props;
+  const {onSubmit, onChangeCity} = props;
 
   const loginRef = useRef(null);
   const passwordRef = useRef(null);
@@ -56,9 +60,15 @@ const LoginScreen = (props) => {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
+              <Link
+                className="locations__item-link"
+                to="/"
+                onClick={() => {
+                  onChangeCity(CITY);
+                }}
+              >
+                <span>{CITY}</span>
+              </Link>
             </div>
           </section>
         </div>
@@ -68,12 +78,16 @@ const LoginScreen = (props) => {
 };
 
 LoginScreen.propTypes = {
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  onChangeCity: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit(authData) {
     dispatch(login(authData));
+  },
+  onChangeCity(city) {
+    dispatch(ActionCreator.changeCity(city));
   }
 });
 

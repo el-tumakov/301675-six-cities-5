@@ -1,19 +1,28 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
+import {connect} from "react-redux";
 import OffersListFavorite from "../offers-list-favorite/offers-list-favorite";
 import {offersProps} from "../../prop-types";
+import {ActionCreator} from "../../store/action";
 
 
 const FavoritesCity = (props) => {
-  const {city, favoritesOffersOfCity} = props;
+  const {city, favoritesOffersOfCity, onChangeCity} = props;
 
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
-          <a className="locations__item-link" href="#">
+          <Link
+            className="locations__item-link"
+            to="/"
+            onClick={() => {
+              onChangeCity(city);
+            }}
+          >
             <span>{city}</span>
-          </a>
+          </Link>
         </div>
       </div>
       <OffersListFavorite offers={favoritesOffersOfCity}/>
@@ -24,6 +33,15 @@ const FavoritesCity = (props) => {
 FavoritesCity.propTypes = {
   city: PropTypes.string.isRequired,
   favoritesOffersOfCity: offersProps,
+  onChangeCity: PropTypes.func.isRequired
 };
 
-export default FavoritesCity;
+const mapDispatchToProps = (dispatch) => ({
+  onChangeCity(city) {
+    dispatch(ActionCreator.changeCity(city));
+  }
+});
+
+
+export {FavoritesCity};
+export default connect(null, mapDispatchToProps)(FavoritesCity);
