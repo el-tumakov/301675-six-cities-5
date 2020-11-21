@@ -100,6 +100,16 @@ const RoomComment = (props) => {
     setDisabled(false);
   };
 
+  const handleCommentChange = (evt) => {
+    evt.preventDefault();
+
+    setComment(evt.target.value);
+  };
+
+  const handleRatingChange = (evt) => {
+    setRating(evt.target.value);
+  };
+
   return (
     <form
       className="reviews__form form"
@@ -108,9 +118,7 @@ const RoomComment = (props) => {
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {createRatingFragment((evt) => {
-          setRating(evt.target.value);
-        }, isDisabled, rating)}
+        {createRatingFragment(handleRatingChange, isDisabled, rating)}
       </div>
       <textarea
         className="reviews__textarea form__textarea"
@@ -118,11 +126,7 @@ const RoomComment = (props) => {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={comment}
-        onChange={(evt) => {
-          evt.preventDefault();
-
-          setComment(evt.target.value);
-        }}
+        onChange={handleCommentChange}
         ref={input}
         maxLength={CommentLength.MAX}
         disabled={isDisabled}

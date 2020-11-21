@@ -10,6 +10,10 @@ import {ActionCreator} from "../../store/action";
 const FavoritesCity = (props) => {
   const {city, favoritesOffersOfCity, onChangeCity} = props;
 
+  const handleClick = () => {
+    onChangeCity(city);
+  };
+
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
@@ -17,9 +21,7 @@ const FavoritesCity = (props) => {
           <Link
             className="locations__item-link"
             to="/"
-            onClick={() => {
-              onChangeCity(city);
-            }}
+            onClick={handleClick}
           >
             <span>{city}</span>
           </Link>

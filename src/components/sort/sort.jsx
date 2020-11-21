@@ -28,21 +28,25 @@ const Sort = (props) => {
 
   const [isSortOpened, setSortOpened] = useState(false);
 
+  const handleFocus = (evt) => {
+    evt.preventDefault();
+
+    setSortOpened(true);
+  };
+
+  const handleBlur = (evt) => {
+    evt.preventDefault();
+
+    setSortOpened(false);
+  };
+
   return (
     <form
       className="places__sorting"
       action="#"
       method="get"
-      onFocus={(evt) => {
-        evt.preventDefault();
-
-        setSortOpened(true);
-      }}
-      onBlur={(evt) => {
-        evt.preventDefault();
-
-        setSortOpened(false);
-      }}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
     >
       <span className="places__sorting-caption">Sort by </span>
       <span className="places__sorting-type" tabIndex="0">

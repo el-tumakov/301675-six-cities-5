@@ -20,6 +20,14 @@ const FavoriteButton = (props) => {
   const history = useHistory();
   const [isFavorite, changeFavorite] = useState(favorite);
 
+  const handleClick = () => {
+    changeFavorite(!isFavorite);
+
+    return authorizationStatus === AuthorizationStatus.NO_AUTH
+      ? history.push(`/login`)
+      : onButtonClick(id, +!isFavorite);
+  };
+
   return (
     <button
       className={
@@ -30,15 +38,7 @@ const FavoriteButton = (props) => {
         } ${buttonClassName}-button button`
       }
       type="button"
-      onClick={(evt) => {
-        evt.preventDefault();
-
-        changeFavorite(!isFavorite);
-
-        return authorizationStatus === AuthorizationStatus.NO_AUTH
-          ? history.push(`/login`)
-          : onButtonClick(id, +!isFavorite);
-      }}
+      onClick={handleClick}
     >
       <svg className={`place-card__bookmark-icon`} width={buttonWidth} height={buttonHeight}>
         <use xlinkHref="#icon-bookmark" />

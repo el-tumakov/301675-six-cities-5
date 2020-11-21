@@ -13,29 +13,31 @@ const Routes = {
 const PrivateRoute = (props) => {
   const {onRender, path, exact, authorizationStatus} = props;
 
+  const handleRender = (routeProps) => {
+    switch (path) {
+      case Routes.LOGIN:
+        return (
+          authorizationStatus === AuthorizationStatus.NO_AUTH
+            ? onRender(routeProps)
+            : <Redirect to={Routes.MAIN} />
+        );
+
+      case Routes.FAVORITES:
+        return (
+          authorizationStatus === AuthorizationStatus.AUTH
+            ? onRender(routeProps)
+            : <Redirect to={Routes.LOGIN} />
+        );
+    }
+
+    return onRender(routeProps);
+  };
+
   return (
     <Route
       path={path}
       exact={exact}
-      render={(routeProps) => {
-        switch (path) {
-          case Routes.LOGIN:
-            return (
-              authorizationStatus === AuthorizationStatus.NO_AUTH
-                ? onRender(routeProps)
-                : <Redirect to={Routes.MAIN} />
-            );
-
-          case Routes.FAVORITES:
-            return (
-              authorizationStatus === AuthorizationStatus.AUTH
-                ? onRender(routeProps)
-                : <Redirect to={Routes.LOGIN} />
-            );
-        }
-
-        return onRender(routeProps);
-      }}
+      render={handleRender}
     />
   );
 };

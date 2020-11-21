@@ -15,6 +15,19 @@ const LoginScreen = (props) => {
   const loginRef = useRef(null);
   const passwordRef = useRef(null);
 
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    onSubmit({
+      login: loginRef.current.value,
+      password: passwordRef.current.value,
+    });
+  };
+
+  const handleClick = () => {
+    onChangeCity(CITY);
+  };
+
   return (
     <div className="page page--gray page--login">
       <Header />
@@ -26,14 +39,7 @@ const LoginScreen = (props) => {
             <form
               className="login__form form"
               action=""
-              onSubmit={(evt) => {
-                evt.preventDefault();
-
-                onSubmit({
-                  login: loginRef.current.value,
-                  password: passwordRef.current.value,
-                });
-              }}
+              onSubmit={handleSubmit}
             >
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
@@ -63,9 +69,7 @@ const LoginScreen = (props) => {
               <Link
                 className="locations__item-link"
                 to="/"
-                onClick={() => {
-                  onChangeCity(CITY);
-                }}
+                onClick={handleClick}
               >
                 <span>{CITY}</span>
               </Link>

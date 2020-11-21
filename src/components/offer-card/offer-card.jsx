@@ -33,17 +33,23 @@ const OfferCard = (props) => {
 
   const offerLink = `/offer/${id}`;
 
+  const handleMouseEnter = (evt) => {
+    evt.preventDefault();
+
+    onHoverOffer(offer);
+  };
+
+  const handleMouseLeave = (evt) => {
+    evt.preventDefault();
+
+    resetHoveredOffer();
+  };
+
   return (
     <article
       className={`${articleClassName} place-card`}
-      onMouseEnter={(evt) => {
-        evt.preventDefault();
-        onHoverOffer(offer);
-      }}
-      onMouseLeave={(evt) => {
-        evt.preventDefault();
-        resetHoveredOffer();
-      }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       {premium ?
         <div className="place-card__mark">
