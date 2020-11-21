@@ -6,15 +6,7 @@ const MAX_PHOTOS = 6;
 const RoomGallery = (props) => {
   const {photos} = props;
 
-  const images = [];
-
-  for (let i = 0; i < photos.length; i++) {
-    if (i === MAX_PHOTOS) {
-      break;
-    }
-
-    images.push(photos[i]);
-  }
+  const images = photos.slice(0, MAX_PHOTOS);
 
   return (
     <div className="property__gallery-container container">
