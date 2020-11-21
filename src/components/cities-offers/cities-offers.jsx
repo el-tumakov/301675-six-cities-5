@@ -9,14 +9,14 @@ import {offersProps} from "../../prop-types";
 
 
 const CitiesOffers = (props) => {
-  const {sort, offers, onChangeSort} = props;
+  const {sort, offers, onChangeSort, city} = props;
 
   const sortedCityOffers = sortOffers(sort, offers);
 
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
-      <b className="places__found">{sortedCityOffers.length} places to stay in Amsterdam</b>
+      <b className="places__found">{sortedCityOffers.length} places to stay in {city}</b>
       <Sort
         activeSort={sort}
         onChangeSort={onChangeSort}
@@ -30,10 +30,12 @@ CitiesOffers.propTypes = {
   sort: PropTypes.string.isRequired,
   offers: offersProps,
   onChangeSort: PropTypes.func.isRequired,
+  city: PropTypes.string.isRequired
 };
 
 const mapStateToProps = ({PROCESS}) => ({
   sort: PROCESS.sort,
+  city: PROCESS.city
 });
 
 const mapDispatchToProps = (dispatch) => ({
