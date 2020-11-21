@@ -32,3 +32,9 @@ export const FavoriteButtonSizes = {
   ROOM_WIDTH: 31,
   ROOM_HEIGHT: 33
 };
+
+export const ScreenTypes = {
+  MAIN: `MAIN`,
+  ROOM: `ROOM`,
+  FAVORITE: `FAVORITE`
+};

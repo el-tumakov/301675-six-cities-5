@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
-import FavoriteButtonMain from "../favorite-button-main/favorite-button-main";
+import FavoriteButton from "../favorite-button/favorite-button";
 import {getRatingPercent} from "../../utils";
 import {oneOfferProps} from "../../prop-types";
+import {ScreenTypes} from "../../const";
 
 
 const OfferCard = (props) => {
@@ -68,7 +69,11 @@ const OfferCard = (props) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <FavoriteButtonMain id={id} favorite={favorite} />
+          <FavoriteButton
+            id={id}
+            favorite={favorite}
+            screenType={ScreenTypes.MAIN}
+          />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
