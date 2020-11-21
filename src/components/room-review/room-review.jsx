@@ -13,9 +13,9 @@ const RoomReview = (props) => {
   } = review;
 
   const getStringDate = (isoDate) => {
-    return new Date(isoDate).toLocaleTimeString(`en-US`, {
+    return new Date(isoDate).toLocaleString(`en-US`, {
       month: `long`,
-      day: `numeric`
+      year: `numeric`,
     });
   };
 
