@@ -60,7 +60,7 @@ const RoomComment = (props) => {
     } else {
       submitButton.current.disabled = true;
     }
-  });
+  }, [rating, comment, isDisabled]);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();

@@ -17,7 +17,7 @@ const RoomScreen = (props) => {
     loadReviews(id);
     loadNearbyOffers(id);
     resetHoveredOffer();
-  });
+  }, [id]);
 
   return (
     <div className="page">
