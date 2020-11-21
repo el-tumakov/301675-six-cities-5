@@ -297,11 +297,7 @@ describe(`Async operation work correctly`, () => {
 
     return favoriteSetter(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(2);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.UPDATE_FAVORITE,
-          payload: [{fake: true}],
-        });
+        expect(dispatch).toHaveBeenCalledTimes(1);
       });
   });
 

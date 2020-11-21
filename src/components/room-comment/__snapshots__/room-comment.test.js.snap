@@ -15,6 +15,7 @@ exports[`Should RoomComment render correctly 1`] = `
     className="reviews__rating-form form__rating"
   >
     <input
+      checked=""
       className="form__rating-input visually-hidden"
       disabled={false}
       id="5-stars"
@@ -39,6 +40,7 @@ exports[`Should RoomComment render correctly 1`] = `
       </svg>
     </label>
     <input
+      checked=""
       className="form__rating-input visually-hidden"
       disabled={false}
       id="4-stars"
@@ -63,6 +65,7 @@ exports[`Should RoomComment render correctly 1`] = `
       </svg>
     </label>
     <input
+      checked=""
       className="form__rating-input visually-hidden"
       disabled={false}
       id="3-stars"
@@ -87,6 +90,7 @@ exports[`Should RoomComment render correctly 1`] = `
       </svg>
     </label>
     <input
+      checked=""
       className="form__rating-input visually-hidden"
       disabled={false}
       id="2-stars"
@@ -111,6 +115,7 @@ exports[`Should RoomComment render correctly 1`] = `
       </svg>
     </label>
     <input
+      checked=""
       className="form__rating-input visually-hidden"
       disabled={false}
       id="1-stars"

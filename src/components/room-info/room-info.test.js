@@ -94,6 +94,7 @@ it(`Should RoomInfo render correctly`, () => {
               <RoomInfo
                 id={1}
                 offer={OFFERS[0]}
+                nearbyOffers={OFFERS}
               />
             </BrowserRouter>
           </Provider>

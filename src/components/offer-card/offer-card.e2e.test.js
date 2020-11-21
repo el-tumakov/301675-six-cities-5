@@ -2,7 +2,8 @@ import React from "react";
 import {configure, shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import {OfferCard} from "./offer-card";
-import {CardImageSizes} from "../../const";
+import {ScreenTypes} from "../../const";
+
 
 const OFFERS = [
   {
@@ -64,18 +65,14 @@ configure({adapter: new Adapter()});
 
 it(`Should callback be called when mouse enter and leave on OfferCard`, () => {
   const onHoverOffer = jest.fn();
-  const resetHoveredOffer = jest.fn();
+  const onResetHoveredOffer = jest.fn();
 
   const wrapper = shallow(
       <OfferCard
         offer={OFFERS[0]}
-        articleClassName={`cities__place-card`}
-        imageClassName={`cities__image-wrapper`}
-        infoClassName={``}
-        imageWidth={CardImageSizes.MAIN_WIDTH}
-        imageHeight={CardImageSizes.MAIN_HEIGHT}
         onHoverOffer={onHoverOffer}
-        resetHoveredOffer={resetHoveredOffer}
+        onResetHoveredOffer={onResetHoveredOffer}
+        screenType={ScreenTypes.MAIN}
       />
   );
 
@@ -85,5 +82,5 @@ it(`Should callback be called when mouse enter and leave on OfferCard`, () => {
   expect(onHoverOffer).toHaveBeenCalledTimes(1);
 
   offer.simulate(`mouseleave`, {preventDefault() {}});
-  expect(resetHoveredOffer).toHaveBeenCalledTimes(1);
+  expect(onResetHoveredOffer).toHaveBeenCalledTimes(1);
 });

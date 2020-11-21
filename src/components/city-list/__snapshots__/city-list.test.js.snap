@@ -15,7 +15,7 @@ exports[`Should CityList render correctly 1`] = `
       >
         <a
           className="locations__item-link tabs__item tabs__item--active"
-          href="#"
+          href="/"
           onClick={[Function]}
         >
           <span>
@@ -28,7 +28,7 @@ exports[`Should CityList render correctly 1`] = `
       >
         <a
           className="locations__item-link tabs__item "
-          href="#"
+          href="/"
           onClick={[Function]}
         >
           <span>
@@ -41,7 +41,7 @@ exports[`Should CityList render correctly 1`] = `
       >
         <a
           className="locations__item-link tabs__item "
-          href="#"
+          href="/"
           onClick={[Function]}
         >
           <span>
@@ -54,7 +54,7 @@ exports[`Should CityList render correctly 1`] = `
       >
         <a
           className="locations__item-link tabs__item "
-          href="#"
+          href="/"
           onClick={[Function]}
         >
           <span>
@@ -67,7 +67,7 @@ exports[`Should CityList render correctly 1`] = `
       >
         <a
           className="locations__item-link tabs__item "
-          href="#"
+          href="/"
           onClick={[Function]}
         >
           <span>
@@ -80,7 +80,7 @@ exports[`Should CityList render correctly 1`] = `
       >
         <a
           className="locations__item-link tabs__item "
-          href="#"
+          href="/"
           onClick={[Function]}
         >
           <span>

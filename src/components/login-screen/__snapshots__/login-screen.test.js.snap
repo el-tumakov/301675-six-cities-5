@@ -126,7 +126,8 @@ exports[`Should LoginScreen render correctly 1`] = `
         >
           <a
             className="locations__item-link"
-            href="#"
+            href="/"
+            onClick={[Function]}
           >
             <span>
               Amsterdam

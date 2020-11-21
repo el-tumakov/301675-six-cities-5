@@ -95,9 +95,10 @@ it(`Should RoomScreen render correctly`, () => {
               <RoomScreen
                 id={1}
                 offers={OFFERS}
-                loadReviews={noop}
-                loadNearbyOffers={noop}
-                resetHoveredOffer={noop}
+                nearbyOffers={OFFERS}
+                onLoadReviews={noop}
+                onLoadNearbyOffers={noop}
+                onResetHoveredOffer={noop}
               />
             </BrowserRouter>
           </Provider>

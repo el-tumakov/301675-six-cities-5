@@ -30,7 +30,8 @@ exports[`Should FavoritesFilled render correctly 1`] = `
             >
               <a
                 className="locations__item-link"
-                href="#"
+                href="/"
+                onClick={[Function]}
               >
                 <span>
                   Cologne

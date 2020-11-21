@@ -13,7 +13,7 @@ exports[`Should CitiesOffers render correctly with popular sort and without auth
     className="places__found"
   >
     1
-     places to stay in Amsterdam
+     places to stay in 
   </b>
   <form
     action="#"
@@ -228,7 +228,7 @@ exports[`Should CitiesOffers render correctly with to-low sort and with authoriz
     className="places__found"
   >
     1
-     places to stay in Amsterdam
+     places to stay in 
   </b>
   <form
     action="#"
