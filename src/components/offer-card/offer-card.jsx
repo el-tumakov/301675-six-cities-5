@@ -101,4 +101,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 
 export {OfferCard};
-export default connect(``, mapDispatchToProps)(OfferCard);
+export default connect(null, mapDispatchToProps)(OfferCard);

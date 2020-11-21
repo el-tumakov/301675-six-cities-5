@@ -55,4 +55,4 @@ const mapStateToProps = ({DATA, USER}) => ({
 });
 
 export {RoomReviewsList};
-export default connect(mapStateToProps, null)(RoomReviewsList);
+export default connect(mapStateToProps)(RoomReviewsList);

@@ -31,4 +31,4 @@ const mapStateToProps = ({DATA}) => ({
 });
 
 export {MapRoom};
-export default connect(mapStateToProps, null)(MapRoom);
+export default connect(mapStateToProps)(MapRoom);

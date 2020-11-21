@@ -25,4 +25,4 @@ const mapStateToProps = ({PROCESS}) => ({
 });
 
 export {MapMain};
-export default connect(mapStateToProps, null)(MapMain);
+export default connect(mapStateToProps)(MapMain);
