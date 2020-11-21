@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import RoomGallery from "../room-gallery/room-gallery";
 import RoomOwner from "../room-owner/room-owner";
 import RoomReviewsList from "../room-reviews-list/room-reviews-list";
-import MapRoom from "../map-room/map-room";
+import Map from "../map/map";
 import FavoriteButton from "../favorite-button/favorite-button";
 import {getRatingPercent} from "../../utils";
-import {oneOfferProps} from "../../prop-types";
+import {offersProps, oneOfferProps} from "../../prop-types";
 import {ScreenTypes} from "../../const";
 
 
@@ -14,6 +14,7 @@ const RoomInfo = (props) => {
   const {
     id,
     offer,
+    nearbyOffers
   } = props;
 
   const {
@@ -30,6 +31,11 @@ const RoomInfo = (props) => {
     owner,
     favorite
   } = offer;
+
+  const offersOnMap = [
+    offer,
+    ...nearbyOffers
+  ];
 
   return (
     <section className="property">
@@ -97,8 +103,9 @@ const RoomInfo = (props) => {
         </div>
       </div>
       <section className="property__map map">
-        <MapRoom
-          currentOffer={offer}
+        <Map
+          activeOfferId={offer.id}
+          offers={offersOnMap}
         />
       </section>
     </section>
@@ -108,6 +115,7 @@ const RoomInfo = (props) => {
 RoomInfo.propTypes = {
   id: PropTypes.number.isRequired,
   offer: oneOfferProps,
+  nearbyOffers: offersProps,
 };
 
 export default RoomInfo;

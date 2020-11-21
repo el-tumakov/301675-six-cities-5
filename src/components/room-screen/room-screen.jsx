@@ -36,6 +36,7 @@ const RoomScreen = (props) => {
         <RoomInfo
           id={id}
           offer={offer}
+          nearbyOffers={nearbyOffers}
         />
         <div className="container">
           <section className="near-places places">
