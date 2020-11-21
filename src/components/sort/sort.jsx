@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
 
-export const SORT_NAMES = [
+const SORT_NAMES = [
   {
     type: `popular`,
     title: `Popular`
