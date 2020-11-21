@@ -14,15 +14,7 @@ const RoomReviewsList = (props) => {
   const {reviews, authorizationStatus, offerId} = props;
 
   const sortedReviews = sortReviews(reviews);
-  const filteredReviews = [];
-
-  for (let i = 0; i < sortedReviews.length; i++) {
-    if (i === MAX_REVIEWS) {
-      break;
-    }
-
-    filteredReviews.push(sortedReviews[i]);
-  }
+  const filteredReviews = sortedReviews.slice(0, MAX_REVIEWS);
 
   return (
     <section className="property__reviews reviews">
