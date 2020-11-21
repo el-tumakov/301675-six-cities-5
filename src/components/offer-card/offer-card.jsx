@@ -6,19 +6,15 @@ import {ActionCreator} from "../../store/action";
 import FavoriteButton from "../favorite-button/favorite-button";
 import {getRatingPercent} from "../../utils";
 import {oneOfferProps} from "../../prop-types";
-import {ScreenTypes} from "../../const";
+import {ScreenTypes, CardImageSizes} from "../../const";
 
 
 const OfferCard = (props) => {
   const {
     offer,
-    articleClassName,
-    imageClassName,
-    infoClassName,
     onHoverOffer,
-    resetHoveredOffer,
-    imageWidth,
-    imageHeight
+    onResetHoveredOffer,
+    screenType
   } = props;
 
   const {
@@ -43,8 +39,41 @@ const OfferCard = (props) => {
   const handleMouseLeave = (evt) => {
     evt.preventDefault();
 
-    resetHoveredOffer();
+    onResetHoveredOffer();
   };
+
+  let articleClassName = ``;
+  let imageClassName = ``;
+  let infoClassName = ``;
+  let imageWidth = ``;
+  let imageHeight = ``;
+
+  switch (screenType) {
+    case ScreenTypes.MAIN:
+      articleClassName = `cities__place-card`;
+      imageClassName = `cities__image-wrapper`;
+      infoClassName = ``;
+      imageWidth = CardImageSizes.MAIN_WIDTH;
+      imageHeight = CardImageSizes.MAIN_HEIGHT;
+
+      break;
+    case ScreenTypes.ROOM:
+      articleClassName = `near-places__card`;
+      imageClassName = `near-places__image-wrapper`;
+      infoClassName = ``;
+      imageWidth = CardImageSizes.MAIN_WIDTH;
+      imageHeight = CardImageSizes.MAIN_HEIGHT;
+
+      break;
+    case ScreenTypes.FAVORITE:
+      articleClassName = `favorites__card`;
+      imageClassName = `favorites__image-wrapper`;
+      infoClassName = `favorites__card-info`;
+      imageWidth = CardImageSizes.FAVORITE_WIDTH;
+      imageHeight = CardImageSizes.FAVORITE_HEIGHT;
+
+      break;
+  }
 
   return (
     <article
@@ -92,20 +121,16 @@ const OfferCard = (props) => {
 
 OfferCard.propTypes = {
   offer: oneOfferProps,
-  articleClassName: PropTypes.string.isRequired,
-  imageClassName: PropTypes.string.isRequired,
-  infoClassName: PropTypes.string.isRequired,
   onHoverOffer: PropTypes.func.isRequired,
-  resetHoveredOffer: PropTypes.func.isRequired,
-  imageWidth: PropTypes.number.isRequired,
-  imageHeight: PropTypes.number.isRequired
+  onResetHoveredOffer: PropTypes.func.isRequired,
+  screenType: PropTypes.string.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({
   onHoverOffer(offer) {
     dispatch(ActionCreator.changeHoveredOffer(offer));
   },
-  resetHoveredOffer() {
+  onResetHoveredOffer() {
     dispatch(ActionCreator.resetHoveredOffer());
   }
 });

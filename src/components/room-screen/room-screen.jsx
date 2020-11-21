@@ -2,14 +2,23 @@ import React, {useEffect} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import RoomInfo from "../room-info/room-info";
-import OffersListRoom from "../offers-list-room/offers-list-room";
+import OffersList from "../offers-list/offers-list";
 import Header from "../header/header";
 import {fetchNearbyOffers, fetchReviews} from "../../store/api-actions";
 import {ActionCreator} from "../../store/action";
 import {offersProps} from "../../prop-types";
+import {ScreenTypes} from "../../const";
+
 
 const RoomScreen = (props) => {
-  const {id, offers, onLoadReviews, onLoadNearbyOffers, onResetHoveredOffer} = props;
+  const {
+    id,
+    offers,
+    nearbyOffers,
+    onLoadReviews,
+    onLoadNearbyOffers,
+    onResetHoveredOffer
+  } = props;
 
   const offer = offers.find((item) => item.id === id);
 
@@ -31,7 +40,10 @@ const RoomScreen = (props) => {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <OffersListRoom />
+            <OffersList
+              offers={nearbyOffers}
+              screenType={ScreenTypes.ROOM}
+            />
           </section>
         </div>
       </main>
@@ -42,6 +54,7 @@ const RoomScreen = (props) => {
 RoomScreen.propTypes = {
   id: PropTypes.number.isRequired,
   offers: offersProps,
+  nearbyOffers: offersProps,
   onLoadReviews: PropTypes.func.isRequired,
   onLoadNearbyOffers: PropTypes.func.isRequired,
   onResetHoveredOffer: PropTypes.func.isRequired
@@ -49,6 +62,7 @@ RoomScreen.propTypes = {
 
 const mapStateToProps = ({DATA}) => ({
   offers: DATA.offers,
+  nearbyOffers: DATA.nearbyOffers
 });
 
 const mapDispatchToProps = (dispatch) => ({
