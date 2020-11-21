@@ -15,13 +15,13 @@ const App = () => (
       </Route>
       <PrivateRoute exact
         path="/login"
-        render={() => (
+        onRender={() => (
           <LoginScreen />
         )}
       />
       <PrivateRoute exact
         path="/favorites"
-        render={() => (
+        onRender={() => (
           <FavoritesScreen />
         )}
       />

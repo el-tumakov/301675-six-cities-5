@@ -9,10 +9,10 @@ import FavoritesEmpty from "../favorites-empty/favorites-empty";
 import {offersProps} from "../../prop-types";
 
 const FavoritesScreen = (props) => {
-  const {favoriteOffers, loadFavoriteOffers} = props;
+  const {favoriteOffers, onLoadFavoriteOffers} = props;
 
   useEffect(() => {
-    loadFavoriteOffers();
+    onLoadFavoriteOffers();
   }, []);
 
   return (
@@ -35,7 +35,7 @@ const FavoritesScreen = (props) => {
 
 FavoritesScreen.propTypes = {
   favoriteOffers: offersProps,
-  loadFavoriteOffers: PropTypes.func.isRequired
+  onLoadFavoriteOffers: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({DATA}) => ({
@@ -43,7 +43,7 @@ const mapStateToProps = ({DATA}) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadFavoriteOffers() {
+  onLoadFavoriteOffers() {
     dispatch(fetchFavoriteOffers());
   }
 });

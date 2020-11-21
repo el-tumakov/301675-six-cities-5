@@ -9,14 +9,14 @@ import {ActionCreator} from "../../store/action";
 import {offersProps} from "../../prop-types";
 
 const RoomScreen = (props) => {
-  const {id, offers, loadReviews, loadNearbyOffers, resetHoveredOffer} = props;
+  const {id, offers, onLoadReviews, onLoadNearbyOffers, onResetHoveredOffer} = props;
 
   const offer = offers.find((item) => item.id === id);
 
   useEffect(() => {
-    loadReviews(id);
-    loadNearbyOffers(id);
-    resetHoveredOffer();
+    onLoadReviews(id);
+    onLoadNearbyOffers(id);
+    onResetHoveredOffer();
   }, [id]);
 
   return (
@@ -42,9 +42,9 @@ const RoomScreen = (props) => {
 RoomScreen.propTypes = {
   id: PropTypes.number.isRequired,
   offers: offersProps,
-  loadReviews: PropTypes.func.isRequired,
-  loadNearbyOffers: PropTypes.func.isRequired,
-  resetHoveredOffer: PropTypes.func.isRequired
+  onLoadReviews: PropTypes.func.isRequired,
+  onLoadNearbyOffers: PropTypes.func.isRequired,
+  onResetHoveredOffer: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({DATA}) => ({
@@ -52,13 +52,13 @@ const mapStateToProps = ({DATA}) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadReviews(offerId) {
+  onLoadReviews(offerId) {
     dispatch(fetchReviews(offerId));
   },
-  loadNearbyOffers(offerId) {
+  onLoadNearbyOffers(offerId) {
     dispatch(fetchNearbyOffers(offerId));
   },
-  resetHoveredOffer() {
+  onResetHoveredOffer() {
     dispatch(ActionCreator.resetHoveredOffer());
   }
 });

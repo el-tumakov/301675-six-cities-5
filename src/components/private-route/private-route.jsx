@@ -11,7 +11,7 @@ const Routes = {
 };
 
 const PrivateRoute = (props) => {
-  const {render, path, exact, authorizationStatus} = props;
+  const {onRender, path, exact, authorizationStatus} = props;
 
   return (
     <Route
@@ -22,19 +22,19 @@ const PrivateRoute = (props) => {
           case Routes.LOGIN:
             return (
               authorizationStatus === AuthorizationStatus.NO_AUTH
-                ? render(routeProps)
+                ? onRender(routeProps)
                 : <Redirect to={Routes.MAIN} />
             );
 
           case Routes.FAVORITES:
             return (
               authorizationStatus === AuthorizationStatus.AUTH
-                ? render(routeProps)
+                ? onRender(routeProps)
                 : <Redirect to={Routes.LOGIN} />
             );
         }
 
-        return render(routeProps);
+        return onRender(routeProps);
       }}
     />
   );
@@ -44,7 +44,7 @@ PrivateRoute.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   exact: PropTypes.bool.isRequired,
   path: PropTypes.string.isRequired,
-  render: PropTypes.func.isRequired,
+  onRender: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({USER}) => ({
