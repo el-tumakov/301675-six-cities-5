@@ -26,14 +26,6 @@ const appData = (state = initialState, action) => {
         reviews: adaptReviewsToClient(action.payload)
       });
 
-    case ActionType.UPDATE_FAVORITE:
-      const currentOffer = state.offers.find((offer) => (
-        offer.id === action.payload.id
-      ));
-
-      currentOffer.favorite = action.payload.is_favorite;
-      break;
-
     case ActionType.LOAD_FAVORITE_OFFERS:
       return extend(state, {
         favoriteOffers: adaptOffersToClient(action.payload)

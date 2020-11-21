@@ -37,7 +37,6 @@ export const fetchFavoriteOffers = () => (dispatch, _getState, api) => (
 
 export const setFavorite = (offerId, status) => (dispatch, _getState, api) => (
   api.post(`/favorite/${offerId}/${status}`)
-    .then(({data}) => dispatch(ActionCreator.updateFavorite(data)))
     .then(() => dispatch(fetchFavoriteOffers()))
     .catch((err) => {
       throw err;
