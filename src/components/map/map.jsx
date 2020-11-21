@@ -83,19 +83,13 @@ const Map = (props) => {
   }, []);
 
   useEffect(() => {
-    if (activeOfferId) {
+    if ((city !== offers[0].city) || activeOfferId) {
       initializeMap(offers);
       initializeMarkers(offers, activeOfferId);
-
-      return;
     }
-    if (city.name !== offers[0].city.name) {
-      initializeMap(offers);
-      initializeMarkers(offers, activeOfferId);
+  }, [offers]);
 
-      return;
-    }
-
+  useEffect(() => {
     if (activeMarker) {
       activeMarker.setIcon(icon);
       activeMarker = ``;
@@ -108,7 +102,7 @@ const Map = (props) => {
 
       activeMarker.setIcon(activeIcon);
     }
-  });
+  }, [hoveredOffer]);
 
   return (
     <div ref={mapRef} id="map" style={{height: `100%`}}/>
