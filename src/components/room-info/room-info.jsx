@@ -4,10 +4,9 @@ import RoomGallery from "../room-gallery/room-gallery";
 import RoomOwner from "../room-owner/room-owner";
 import RoomReviewsList from "../room-reviews-list/room-reviews-list";
 import Map from "../map/map";
-import FavoriteButton from "../favorite-button/favorite-button";
+import FavoriteButtonRoom from "../favorite-button-room/favorite-button-room";
 import {getRatingPercent} from "../../utils";
 import {offersProps, oneOfferProps} from "../../prop-types";
-import {ScreenTypes} from "../../const";
 
 
 const RoomInfo = (props) => {
@@ -52,11 +51,7 @@ const RoomInfo = (props) => {
             <h1 className="property__name">
               {title}
             </h1>
-            <FavoriteButton
-              id={id}
-              favorite={favorite}
-              screenType={ScreenTypes.ROOM}
-            />
+            <FavoriteButtonRoom id={id} favorite={favorite}/>
           </div>
           <div className="property__rating rating">
             <div className="property__stars rating__stars">

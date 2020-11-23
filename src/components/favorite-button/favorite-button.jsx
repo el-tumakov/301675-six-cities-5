@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {useHistory} from "react-router-dom";
 import {connect} from "react-redux";
 import {setFavorite} from "../../store/api-actions";
-import {AuthorizationStatus, ScreenTypes, FavoriteButtonSizes} from "../../const";
+import {AuthorizationStatus} from "../../const";
 
 
 const FavoriteButton = (props) => {
@@ -12,7 +12,9 @@ const FavoriteButton = (props) => {
     favorite,
     authorizationStatus,
     onButtonClick,
-    screenType
+    buttonClassName,
+    buttonWidth,
+    buttonHeight
   } = props;
 
   const history = useHistory();
@@ -25,25 +27,6 @@ const FavoriteButton = (props) => {
       ? history.push(`/login`)
       : onButtonClick(id, +!isFavorite);
   };
-
-  let buttonClassName = ``;
-  let buttonWidth = ``;
-  let buttonHeight = ``;
-
-  switch (screenType) {
-    case ScreenTypes.MAIN:
-      buttonClassName = `place-card__bookmark`;
-      buttonWidth = FavoriteButtonSizes.MAIN_WIDTH;
-      buttonHeight = FavoriteButtonSizes.MAIN_HEIGHT;
-
-      break;
-    case ScreenTypes.ROOM:
-      buttonClassName = `property__bookmark`;
-      buttonWidth = FavoriteButtonSizes.ROOM_WIDTH;
-      buttonHeight = FavoriteButtonSizes.ROOM_HEIGHT;
-
-      break;
-  }
 
   return (
     <button
@@ -70,7 +53,9 @@ FavoriteButton.propTypes = {
   favorite: PropTypes.bool.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   onButtonClick: PropTypes.func.isRequired,
-  screenType: PropTypes.string.isRequired
+  buttonClassName: PropTypes.string.isRequired,
+  buttonWidth: PropTypes.number.isRequired,
+  buttonHeight: PropTypes.number.isRequired
 };
 
 const mapStateToProps = ({USER}) => ({
