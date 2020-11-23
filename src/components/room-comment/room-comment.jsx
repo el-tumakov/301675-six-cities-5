@@ -16,7 +16,7 @@ const TITLES = [
   `perfect`
 ];
 
-const createRatingFragment = (changeHandler, isDisabled, rating) => {
+const createRatingFragment = (changeHandler, isInputDisabled, rating) => {
   const ratingInputs = [];
 
   for (let i = MAX_RATING; i > 0; i--) {
@@ -29,7 +29,7 @@ const createRatingFragment = (changeHandler, isDisabled, rating) => {
             id={`${i}-stars`}
             type="radio"
             onChange={changeHandler}
-            disabled={isDisabled}
+            disabled={isInputDisabled}
             checked={+rating === i ? `checked` : ``}
           />
           <label htmlFor={`${i}-stars`} className="reviews__rating-label form__rating-label" title={TITLES[i - 1]}>
@@ -49,30 +49,31 @@ const RoomComment = (props) => {
 
   const [comment, setComment] = useState(``);
   const [rating, setRating] = useState(``);
-  const [isDisabled, setDisabled] = useState(false);
+  const [isInputDisabled, setInputDisabled] = useState(false);
+  const [isSubmitDisabled, setSubmitDisabled] = useState(true);
 
   const form = useRef();
-  const input = useRef();
-  const submitButton = useRef();
 
   useEffect(() => {
     setComment(``);
     setRating(``);
-    setDisabled(false);
+    setInputDisabled(false);
+    setSubmitDisabled(true);
   }, [offerId]);
 
   useEffect(() => {
-    if (rating && comment.length >= CommentLength.MIN && !isDisabled) {
-      submitButton.current.disabled = false;
+    if (rating && comment.length >= CommentLength.MIN) {
+      setSubmitDisabled(false);
     } else {
-      submitButton.current.disabled = true;
+      setSubmitDisabled(true);
     }
-  }, [rating, comment, isDisabled]);
+  }, [rating, comment]);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    setDisabled(true);
+    setInputDisabled(true);
+    setSubmitDisabled(true);
 
     onSubmit(
         {
@@ -91,13 +92,15 @@ const RoomComment = (props) => {
 
     setComment(``);
     setRating(``);
-    setDisabled(false);
+    setInputDisabled(false);
+    setSubmitDisabled(true);
   };
 
   const handleError = () => {
     form.current.style.border = `1px solid red`;
 
-    setDisabled(false);
+    setInputDisabled(false);
+    setSubmitDisabled(false);
   };
 
   const handleCommentChange = (evt) => {
@@ -118,7 +121,7 @@ const RoomComment = (props) => {
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {createRatingFragment(handleRatingChange, isDisabled, rating)}
+        {createRatingFragment(handleRatingChange, isInputDisabled, rating)}
       </div>
       <textarea
         className="reviews__textarea form__textarea"
@@ -127,9 +130,8 @@ const RoomComment = (props) => {
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={comment}
         onChange={handleCommentChange}
-        ref={input}
         maxLength={CommentLength.MAX}
-        disabled={isDisabled}
+        disabled={isInputDisabled}
       >
       </textarea>
       <div className="reviews__button-wrapper">
@@ -139,8 +141,7 @@ const RoomComment = (props) => {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled
-          ref={submitButton}
+          disabled={isSubmitDisabled}
         >
           Submit
         </button>
