@@ -97,6 +97,7 @@ describe(`Should CitiesOffers render correctly`, () => {
                   sort={SortTypes.POPULAR}
                   offers={OFFERS}
                   onChangeSort={noop}
+                  city={CITIES[0]}
                 />
               </BrowserRouter>
             </Provider>
@@ -138,6 +139,7 @@ describe(`Should CitiesOffers render correctly`, () => {
                   sort={SortTypes.TO_LOW}
                   offers={OFFERS}
                   onChangeSort={noop}
+                  city={CITIES[1]}
                 />
               </BrowserRouter>
             </Provider>

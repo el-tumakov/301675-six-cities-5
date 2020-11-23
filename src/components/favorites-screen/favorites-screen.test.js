@@ -94,7 +94,7 @@ it(`Should FavoritesScreen render correctly`, () => {
             <BrowserRouter>
               <FavoritesScreen
                 favoriteOffers={OFFERS}
-                loadFavoriteOffers={noop}
+                onLoadFavoriteOffers={noop}
               />
             </BrowserRouter>
           </Provider>

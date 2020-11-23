@@ -90,20 +90,25 @@ it(`Submitting the form will trigger a callback`, () => {
   });
 
   const onSubmit = jest.fn();
+  const onChangeCity = jest.fn();
 
   const wrapper = mount(
       <Provider store={store}>
         <BrowserRouter>
           <LoginScreen
             onSubmit={onSubmit}
+            onChangeCity={onChangeCity}
           />
         </BrowserRouter>
       </Provider>
   );
 
   const loginForm = wrapper.find(`form`);
+  const cityLink = wrapper.find(`.locations__item-link`).at(0);
 
   loginForm.simulate(`submit`, {preventDefault() {}});
-
   expect(onSubmit).toHaveBeenCalledTimes(1);
+
+  cityLink.simulate(`click`, {preventDefault() {}});
+  expect(onChangeCity).toHaveBeenCalledTimes(1);
 });

@@ -14,6 +14,7 @@ exports[`Should CitiesOffers render correctly with popular sort and without auth
   >
     1
      places to stay in 
+    Paris
   </b>
   <form
     action="#"
@@ -229,6 +230,7 @@ exports[`Should CitiesOffers render correctly with to-low sort and with authoriz
   >
     1
      places to stay in 
+    Cologne
   </b>
   <form
     action="#"

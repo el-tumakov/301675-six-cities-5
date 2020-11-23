@@ -94,6 +94,7 @@ it(`Should LoginScreen render correctly`, () => {
             <BrowserRouter>
               <LoginScreen
                 onSubmit={noop}
+                onChangeCity={noop}
               />
             </BrowserRouter>
           </Provider>
