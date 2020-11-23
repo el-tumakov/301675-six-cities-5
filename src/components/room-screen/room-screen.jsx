@@ -2,12 +2,11 @@ import React, {useEffect} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import RoomInfo from "../room-info/room-info";
-import OffersList from "../offers-list/offers-list";
+import OffersListRoom from "../offers-list-room/offers-list-room";
 import Header from "../header/header";
 import {fetchNearbyOffers, fetchReviews} from "../../store/api-actions";
 import {ActionCreator} from "../../store/action";
 import {offersProps} from "../../prop-types";
-import {ScreenTypes} from "../../const";
 
 
 const RoomScreen = (props) => {
@@ -41,10 +40,7 @@ const RoomScreen = (props) => {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <OffersList
-              offers={nearbyOffers}
-              screenType={ScreenTypes.ROOM}
-            />
+            <OffersListRoom />
           </section>
         </div>
       </main>

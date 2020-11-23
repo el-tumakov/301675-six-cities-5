@@ -2,11 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
-import OffersList from "../offers-list/offers-list";
+import OffersListMain from "../offers-list-main/offers-list-main";
 import Sort from "../sort/sort";
 import {sortOffers} from "../../sort";
 import {offersProps} from "../../prop-types";
-import {ScreenTypes} from "../../const";
 
 
 const CitiesOffers = (props) => {
@@ -22,10 +21,7 @@ const CitiesOffers = (props) => {
         activeSort={sort}
         onChangeSort={onChangeSort}
       />
-      <OffersList
-        offers={sortedCityOffers}
-        screenType={ScreenTypes.MAIN}
-      />
+      <OffersListMain offers={sortedCityOffers}/>
     </section>
   );
 };

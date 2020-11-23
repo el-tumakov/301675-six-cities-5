@@ -2,10 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import OffersList from "../offers-list/offers-list";
+import OffersListFavorite from "../offers-list-favorite/offers-list-favorite";
 import {offersProps} from "../../prop-types";
 import {ActionCreator} from "../../store/action";
-import {ScreenTypes} from "../../const";
 
 
 const FavoritesCity = (props) => {
@@ -28,10 +27,7 @@ const FavoritesCity = (props) => {
           </Link>
         </div>
       </div>
-      <OffersList
-        offers={favoritesOffersOfCity}
-        screenType={ScreenTypes.FAVORITE}
-      />
+      <OffersListFavorite offers={favoritesOffersOfCity}/>
     </li>
   );
 };

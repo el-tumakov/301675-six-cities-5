@@ -100,7 +100,7 @@ it(`Should OfferCardMain render correctly`, () => {
                 imageWidth={CardImageSizes.MAIN_WIDTH}
                 imageHeight={CardImageSizes.MAIN_HEIGHT}
                 onHoverOffer={noop}
-                resetHoveredOffer={noop}
+                onResetHoveredOffer={noop}
               />
             </BrowserRouter>
           </Provider>
@@ -140,7 +140,7 @@ it(`Should OfferCardFavorite render correctly`, () => {
                 imageWidth={CardImageSizes.FAVORITE_WIDTH}
                 imageHeight={CardImageSizes.FAVORITE_HEIGHT}
                 onHoverOffer={noop}
-                resetHoveredOffer={noop}
+                onResetHoveredOffer={noop}
               />
             </BrowserRouter>
           </Provider>
@@ -180,7 +180,7 @@ it(`Should OfferCardRoom render correctly`, () => {
                 imageWidth={CardImageSizes.MAIN_WIDTH}
                 imageHeight={CardImageSizes.MAIN_HEIGHT}
                 onHoverOffer={noop}
-                resetHoveredOffer={noop}
+                onResetHoveredOffer={noop}
               />
             </BrowserRouter>
           </Provider>

@@ -2,8 +2,7 @@ import React from "react";
 import {configure, shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import {OfferCard} from "./offer-card";
-import {ScreenTypes} from "../../const";
-
+import {CardImageSizes} from "../../const";
 
 const OFFERS = [
   {
@@ -70,9 +69,13 @@ it(`Should callback be called when mouse enter and leave on OfferCard`, () => {
   const wrapper = shallow(
       <OfferCard
         offer={OFFERS[0]}
+        articleClassName={`cities__place-card`}
+        imageClassName={`cities__image-wrapper`}
+        infoClassName={``}
+        imageWidth={CardImageSizes.MAIN_WIDTH}
+        imageHeight={CardImageSizes.MAIN_HEIGHT}
         onHoverOffer={onHoverOffer}
         onResetHoveredOffer={onResetHoveredOffer}
-        screenType={ScreenTypes.MAIN}
       />
   );
 

@@ -6,7 +6,6 @@ import {ActionCreator} from "../../store/action";
 import FavoriteButtonMain from "../favorite-button-main/favorite-button-main";
 import {getRatingPercent} from "../../utils";
 import {oneOfferProps} from "../../prop-types";
-import {ScreenTypes, CardImageSizes} from "../../const";
 
 
 const OfferCard = (props) => {
@@ -14,7 +13,11 @@ const OfferCard = (props) => {
     offer,
     onHoverOffer,
     onResetHoveredOffer,
-    screenType
+    articleClassName,
+    imageClassName,
+    infoClassName,
+    imageWidth,
+    imageHeight
   } = props;
 
   const {
@@ -41,39 +44,6 @@ const OfferCard = (props) => {
 
     onResetHoveredOffer();
   };
-
-  let articleClassName = ``;
-  let imageClassName = ``;
-  let infoClassName = ``;
-  let imageWidth = ``;
-  let imageHeight = ``;
-
-  switch (screenType) {
-    case ScreenTypes.MAIN:
-      articleClassName = `cities__place-card`;
-      imageClassName = `cities__image-wrapper`;
-      infoClassName = ``;
-      imageWidth = CardImageSizes.MAIN_WIDTH;
-      imageHeight = CardImageSizes.MAIN_HEIGHT;
-
-      break;
-    case ScreenTypes.ROOM:
-      articleClassName = `near-places__card`;
-      imageClassName = `near-places__image-wrapper`;
-      infoClassName = ``;
-      imageWidth = CardImageSizes.MAIN_WIDTH;
-      imageHeight = CardImageSizes.MAIN_HEIGHT;
-
-      break;
-    case ScreenTypes.FAVORITE:
-      articleClassName = `favorites__card`;
-      imageClassName = `favorites__image-wrapper`;
-      infoClassName = `favorites__card-info`;
-      imageWidth = CardImageSizes.FAVORITE_WIDTH;
-      imageHeight = CardImageSizes.FAVORITE_HEIGHT;
-
-      break;
-  }
 
   return (
     <article
@@ -117,9 +87,13 @@ const OfferCard = (props) => {
 
 OfferCard.propTypes = {
   offer: oneOfferProps,
+  articleClassName: PropTypes.string.isRequired,
+  imageClassName: PropTypes.string.isRequired,
+  infoClassName: PropTypes.string.isRequired,
   onHoverOffer: PropTypes.func.isRequired,
   onResetHoveredOffer: PropTypes.func.isRequired,
-  screenType: PropTypes.string.isRequired
+  imageWidth: PropTypes.number.isRequired,
+  imageHeight: PropTypes.number.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({
